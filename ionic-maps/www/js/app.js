@@ -26,7 +26,7 @@ angular
       var latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
       var mapOptions = {
         center: latLng,
-        zoom: 17,
+        zoom: 15,
         mapTypeId: google.maps.MapTypeId.ROADMAP
       };
       $scope.map = new google.maps.Map(document.getElementById("map"), mapOptions);
@@ -42,12 +42,12 @@ angular
         var infoWindow = new google.maps.InfoWindow;
 
         var GeoCoder = new google.maps.Geocoder;
-          var latlng = {lat:parseFloat(position.coords.latitude),lng: parseFloat(position.coords.longitude)};
           GeoCoder.geocode({'location':latLng},function (results, status) {
+            var address = results[1].formatted_address;
             if(status === google.maps.GeocoderStatus.OK){
               if(results[1]){
-                infoWindow.setContent('<div style="width:auto;font-size:25px;">' + 'คุณอยู่ที่... <br>' + results[1].formatted_address);
-                $http.get('http://google.com/controller/value?='+results[1].formatted_address);
+                infoWindow.setContent('<div style="width:auto;font-size:25px;">' + 'คุณอยู่ที่... <br>' + address);
+                // $http.get('http://google.com/controller/value?='+results[1].formatted_address);
                 infoWindow.open($scope.map,marker);
               }else {
                 window.alert('No result');
