@@ -27,8 +27,8 @@
       <file leaf-file-name="app.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ionic-maps/www/js/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="662">
-              <caret line="96" column="0" selection-start-line="96" selection-start-column="0" selection-end-line="96" selection-end-column="0" />
+            <state relative-caret-position="424">
+              <caret line="73" column="57" selection-start-line="73" selection-start-column="57" selection-end-line="73" selection-end-column="57" />
               <folding />
             </state>
           </provider>
@@ -344,12 +344,12 @@
       <workItem from="1462093734160" duration="8922000" />
       <workItem from="1462169881976" duration="30719000" />
       <workItem from="1462266068669" duration="23274000" />
-      <workItem from="1462307842508" duration="1290000" />
+      <workItem from="1462307842508" duration="2045000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="122073000" />
+    <option name="totallyTimeSpent" value="122828000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="560" y="102" width="1363" height="970" extended-state="0" />
@@ -683,8 +683,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/ionic-maps/www/js/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="662">
-          <caret line="96" column="0" selection-start-line="96" selection-start-column="0" selection-end-line="96" selection-end-column="0" />
+        <state relative-caret-position="424">
+          <caret line="73" column="57" selection-start-line="73" selection-start-column="57" selection-end-line="73" selection-end-column="57" />
           <folding />
         </state>
       </provider>
