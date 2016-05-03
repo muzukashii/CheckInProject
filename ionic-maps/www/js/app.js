@@ -73,11 +73,11 @@ angular
     window.CheckIn = function (name) {
       var link =  prompt("Enter ip address to Check in!")
       var res = JSON.stringify(name)
-     $http.get('http://'+link+':8080/mylocation?UserLocate='+res)
+     $http.get('http://'+link+':8080/mylocation?UserLocate='+res,{timeout:3000})
        .then(function () {
          alert("Success to check in");
        }, function (response) {
-         alert("failed " + response);
+         alert("failed " + response.status);
        });
 
     }
