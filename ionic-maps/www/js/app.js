@@ -18,56 +18,116 @@ angular
     $urlRouterProvider.otherwise("/");
 
   })
-  .controller('MapCtrl', function($scope, $state, $cordovaGeolocation , $http) {
+  .controller('MapCtrl', function($scope, $state,$cordovaGeolocation,$http) {
     var options = {timeout: 10000, enableHighAccuracy: true};
 
-    $cordovaGeolocation.getCurrentPosition(options).then(function (position) {
+    var GeoCoder = new google.maps.Geocoder;
 
-      var latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-      var mapOptions = {
-        center: latLng,
-        zoom: 15,
-        mapTypeId: google.maps.MapTypeId.ROADMAP
-      };
-      $scope.map = new google.maps.Map(document.getElementById("map"), mapOptions);
-      ///Wait until the map is loaded
-      google.maps.event.addListenerOnce($scope.map, 'idle', function () {
 
-            var marker = new google.maps.Marker({
-              map: $scope.map,
-              animation: google.maps.Animation.DROP,
-              position: latLng
-            });
+    var map = null;
+    var marker = null;
+    function geocodePosition(pos) {
 
-        var infoWindow = new google.maps.InfoWindow;
-
-        var GeoCoder = new google.maps.Geocoder;
-          GeoCoder.geocode({'location':latLng},function (results, status) {
-            var address = results[1].formatted_address;
-            if(status === google.maps.GeocoderStatus.OK){
-              if(results[1]){
-                infoWindow.setContent('<div style="width:auto;font-size:25px;">' + 'คุณอยู่ที่... <br>' + address);
-                // $http.get('http://google.com/controller/value?='+results[1].formatted_address);
-                infoWindow.open($scope.map,marker);
-              }else {
-                window.alert('No result');
+      GeoCoder.geocode({latLng: pos}, function(responses) {
+        if(responses && responses.length > 0){
+          // alert(responses[0].geometry.location);
+          var locationSearch = responses[0].geometry.location;
+          PlaceID = responses[0].place_id;
+          var service = new google.maps.places.PlacesService(map);
+          service.nearbySearch({
+            location: locationSearch,
+            radius: 150
+          }, function (results, status) {
+            if (status === google.maps.places.PlacesServiceStatus.OK) {
+              for (var i = 0; i < results.length; i++) {
+                createMarker(results[i]);
               }
-            }else{
-              window.alert('Geocoder failed due to:' + status);
             }
           })
+          function createMarker(place) {
+            var placeLoc = place.geometry.location;
 
-
-
-        google.maps.event.addListener(marker, 'click', function () {
-          infoWindow.open($scope.map, marker);
-        });
-
-
-        });
-      }, function (error) {
-        console.log("Could not get location");
+            var infoWindow2 = new google.maps.InfoWindow();
+            var marker2 = new google.maps.Marker({
+              map: map,
+              position:placeLoc
+            });
+            google.maps.event.addListener(marker2, 'click', function() {
+              infoWindow2.setContent(place.name + '<br><input type="submit" value="Check in" ' +
+                'onclick="CheckIn(\'' + place.name + '\')">');
+              infoWindow2.open(map, this);
+            });
+          }
+          service.getDetails({
+            placeId: PlaceID
+          }, function (place,status) {
+            if (status === google.maps.places.PlacesServiceStatus.OK) {
+              updateMarkerAddress(place.name);
+            } else {
+              updateMarkerAddress('Cannot determine address at this location.');
+            }
+          });
+        }
       });
+    }
+    window.CheckIn = function (name) {
+      var link =  prompt("Enter ip address to Check in!")
+      var res = JSON.stringify(name)
+     $http.get('http://'+link+':8080/mylocation?UserLocate='+res)
+       .then(function () {
+         alert("Success to check in");
+       }, function (response) {
+         alert("failed " + response);
+       });
+
+    }
+
+
+    function updateMarkerStatus(str) {
+      infoWindow.setContent(str);
+    }
+
+    function updateMarkerAddress(str) {
+      infoWindow.setContent(str);
+    }
+    var infoWindow = new google.maps.InfoWindow();
+    function initialize() {
+      $cordovaGeolocation.getCurrentPosition(options).then(function (position) {
+        var latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+
+        var mapOptions = {
+          center: latLng,
+          zoom: 17,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        map = new google.maps.Map(document.getElementById("map"), mapOptions);
+        marker = new google.maps.Marker({
+          position: latLng,
+          title: 'Find Place marker',
+          map: map,
+          draggable: true,
+          icon:'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
+        });
+
+        // Update current position info.
+        geocodePosition(latLng);
+
+        // Add dragging event listeners.
+
+        google.maps.event.addListener(marker, 'dragstart', function () {
+          updateMarkerAddress('Dragging...');
+        });
+
+        google.maps.event.addListener(marker, 'dragend', function () {
+          updateMarkerStatus('Drag ended');
+         geocodePosition(marker.getPosition());
+        });
+        google.maps.event.addListener(marker, 'click', function () {
+                infoWindow.open(map, marker);
+              });
+      })
+    }
+    google.maps.event.addDomListener(window, 'load', initialize);
 
 
   })
