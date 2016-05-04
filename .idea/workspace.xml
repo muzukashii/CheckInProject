@@ -2,8 +2,97 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="dc59c446-6139-4b4a-8407-6de5f336075b" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/compiler.xml" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/encodings.xml" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/ionic-maps.iml" afterPath="$PROJECT_DIR$/.idea/ionic-maps.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/watcherTasks.xml" afterPath="$PROJECT_DIR$/.idea/watcherTasks.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ionic-maps/.bowerrc" afterPath="$PROJECT_DIR$/ionic-maps/.bowerrc" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ionic-maps/.editorconfig" afterPath="$PROJECT_DIR$/ionic-maps/.editorconfig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ionic-maps/.gitignore" afterPath="$PROJECT_DIR$/ionic-maps/.gitignore" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ionic-maps/bower.json" afterPath="$PROJECT_DIR$/ionic-maps/bower.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ionic-maps/config.xml" afterPath="$PROJECT_DIR$/ionic-maps/config.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ionic-maps/gulpfile.js" afterPath="$PROJECT_DIR$/ionic-maps/gulpfile.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ionic-maps/hooks/README.md" afterPath="$PROJECT_DIR$/ionic-maps/hooks/README.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ionic-maps/hooks/after_prepare/010_add_platform_class.js" afterPath="$PROJECT_DIR$/ionic-maps/hooks/after_prepare/010_add_platform_class.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ionic-maps/ionic.project" afterPath="$PROJECT_DIR$/ionic-maps/ionic.project" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ionic-maps/package.json" afterPath="$PROJECT_DIR$/ionic-maps/package.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ionic-maps/scss/ionic.app.scss" afterPath="$PROJECT_DIR$/ionic-maps/scss/ionic.app.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ionic-maps/www/css/ionic.app.css" afterPath="$PROJECT_DIR$/ionic-maps/www/css/ionic.app.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ionic-maps/www/css/style.css" afterPath="$PROJECT_DIR$/ionic-maps/www/css/style.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ionic-maps/www/index.html" afterPath="$PROJECT_DIR$/ionic-maps/www/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ionic-maps/www/js/app.js" afterPath="$PROJECT_DIR$/ionic-maps/www/js/app.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ionic-maps/www/lib/angular-animate/.bower.json" afterPath="$PROJECT_DIR$/ionic-maps/www/lib/angular-animate/.bower.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ionic-maps/www/lib/angular-sanitize/.bower.json" afterPath="$PROJECT_DIR$/ionic-maps/www/lib/angular-sanitize/.bower.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ionic-maps/www/lib/angular-ui-router/.bower.json" afterPath="$PROJECT_DIR$/ionic-maps/www/lib/angular-ui-router/.bower.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ionic-maps/www/lib/angular/.bower.json" afterPath="$PROJECT_DIR$/ionic-maps/www/lib/angular/.bower.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ionic-maps/www/lib/ionic-platform-web-client/.bower.json" afterPath="$PROJECT_DIR$/ionic-maps/www/lib/ionic-platform-web-client/.bower.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/css/ionic.css" afterPath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/css/ionic.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/css/ionic.min.css" afterPath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/css/ionic.min.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/fonts/ionicons.svg" afterPath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/fonts/ionicons.svg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/js/angular-ui/angular-ui-router.js" afterPath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/js/angular-ui/angular-ui-router.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/js/angular-ui/angular-ui-router.min.js" afterPath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/js/angular-ui/angular-ui-router.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/js/angular/angular-animate.js" afterPath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/js/angular/angular-animate.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/js/angular/angular-animate.min.js" afterPath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/js/angular/angular-animate.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/js/angular/angular-resource.js" afterPath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/js/angular/angular-resource.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/js/angular/angular-resource.min.js" afterPath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/js/angular/angular-resource.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/js/angular/angular-sanitize.js" afterPath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/js/angular/angular-sanitize.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/js/angular/angular-sanitize.min.js" afterPath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/js/angular/angular-sanitize.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/js/angular/angular.js" afterPath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/js/angular/angular.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/js/angular/angular.min.js" afterPath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/js/angular/angular.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/js/ionic-angular.js" afterPath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/js/ionic-angular.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/js/ionic-angular.min.js" afterPath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/js/ionic-angular.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/js/ionic.bundle.js" afterPath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/js/ionic.bundle.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/js/ionic.bundle.min.js" afterPath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/js/ionic.bundle.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/js/ionic.js" afterPath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/js/ionic.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/js/ionic.min.js" afterPath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/js/ionic.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/scss/_action-sheet.scss" afterPath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/scss/_action-sheet.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/scss/_animations.scss" afterPath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/scss/_animations.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/scss/_backdrop.scss" afterPath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/scss/_backdrop.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/scss/_badge.scss" afterPath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/scss/_badge.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/scss/_bar.scss" afterPath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/scss/_bar.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/scss/_button-bar.scss" afterPath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/scss/_button-bar.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/scss/_button.scss" afterPath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/scss/_button.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/scss/_checkbox.scss" afterPath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/scss/_checkbox.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/scss/_form.scss" afterPath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/scss/_form.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/scss/_grid.scss" afterPath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/scss/_grid.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/scss/_items.scss" afterPath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/scss/_items.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/scss/_list.scss" afterPath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/scss/_list.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/scss/_loading.scss" afterPath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/scss/_loading.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/scss/_menu.scss" afterPath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/scss/_menu.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/scss/_mixins.scss" afterPath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/scss/_mixins.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/scss/_modal.scss" afterPath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/scss/_modal.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/scss/_platform.scss" afterPath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/scss/_platform.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/scss/_popover.scss" afterPath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/scss/_popover.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/scss/_popup.scss" afterPath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/scss/_popup.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/scss/_progress.scss" afterPath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/scss/_progress.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/scss/_radio.scss" afterPath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/scss/_radio.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/scss/_range.scss" afterPath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/scss/_range.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/scss/_refresher.scss" afterPath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/scss/_refresher.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/scss/_reset.scss" afterPath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/scss/_reset.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/scss/_scaffolding.scss" afterPath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/scss/_scaffolding.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/scss/_select.scss" afterPath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/scss/_select.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/scss/_slide-box.scss" afterPath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/scss/_slide-box.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/scss/_slides.scss" afterPath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/scss/_slides.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/scss/_spinner.scss" afterPath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/scss/_spinner.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/scss/_tabs.scss" afterPath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/scss/_tabs.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/scss/_toggle.scss" afterPath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/scss/_toggle.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/scss/_transitions.scss" afterPath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/scss/_transitions.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/scss/_type.scss" afterPath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/scss/_type.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/scss/_util.scss" afterPath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/scss/_util.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/scss/_variables.scss" afterPath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/scss/_variables.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/scss/ionic.scss" afterPath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/scss/ionic.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/scss/ionicons/_ionicons-font.scss" afterPath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/scss/ionicons/_ionicons-font.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/scss/ionicons/_ionicons-icons.scss" afterPath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/scss/ionicons/_ionicons-icons.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/scss/ionicons/_ionicons-variables.scss" afterPath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/scss/ionicons/_ionicons-variables.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/scss/ionicons/ionicons.scss" afterPath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/scss/ionicons/ionicons.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/version.json" afterPath="$PROJECT_DIR$/ionic-maps/www/lib/ionic/version.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ionic-maps/www/lib/ngCordova/.bower.json" afterPath="$PROJECT_DIR$/ionic-maps/www/lib/ngCordova/.bower.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ionic-maps/www/templates/map.html" afterPath="$PROJECT_DIR$/ionic-maps/www/templates/map.html" />
     </list>
     <ignored path="ionic-maps.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -27,8 +116,8 @@
       <file leaf-file-name="app.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ionic-maps/www/js/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="424">
-              <caret line="73" column="57" selection-start-line="73" selection-start-column="57" selection-end-line="73" selection-end-column="57" />
+            <state relative-caret-position="153">
+              <caret line="81" column="26" selection-start-line="81" selection-start-column="26" selection-end-line="81" selection-end-column="26" />
               <folding />
             </state>
           </provider>
@@ -63,8 +152,8 @@
     <detection-done>true</detection-done>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="560" />
-    <option name="y" value="102" />
+    <option name="x" value="534" />
+    <option name="y" value="77" />
     <option name="width" value="1363" />
     <option name="height" value="970" />
   </component>
@@ -93,168 +182,48 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="GoogleMap" />
+              <option name="myItemId" value="CheckInAttend" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="GoogleMap" />
+              <option name="myItemId" value="CheckInAttend" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="GoogleMap" />
+              <option name="myItemId" value="CheckInAttend" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="GoogleMap" />
+              <option name="myItemId" value="CheckInAttend" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="GoogleMap" />
+              <option name="myItemId" value="CheckInAttend" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="ionic-maps" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="GoogleMap" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="GoogleMap" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ionic-maps" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="www" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="GoogleMap" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="GoogleMap" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ionic-maps" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="www" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="templates" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="GoogleMap" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="GoogleMap" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ionic-maps" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="www" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="GoogleMap" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="GoogleMap" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ionic-maps" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="www" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="css" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="GoogleMap" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="GoogleMap" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ionic-maps" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="scss" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="GoogleMap" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="GoogleMap" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ionic-maps" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="resources" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
       <pane id="Scope" />
       <pane id="PackagesPane" />
       <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../ionic-maps(backup)" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="HbShouldOpenHtmlAsHb" value="" />
     <property name="editor.config.accepted" value="true" />
@@ -344,38 +313,41 @@
       <workItem from="1462093734160" duration="8922000" />
       <workItem from="1462169881976" duration="30719000" />
       <workItem from="1462266068669" duration="23274000" />
-      <workItem from="1462307842508" duration="2045000" />
+      <workItem from="1462307842508" duration="2221000" />
+      <workItem from="1462339209441" duration="413000" />
+      <workItem from="1462343059947" duration="2404000" />
+      <workItem from="1462368028507" duration="73000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="122828000" />
+    <option name="totallyTimeSpent" value="125894000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="560" y="102" width="1363" height="970" extended-state="0" />
+    <frame x="534" y="77" width="1363" height="970" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27691165" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33139536" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -394,6 +366,30 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/ionic-maps/www/js/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1479">
+          <caret line="87" column="0" selection-start-line="87" selection-start-column="0" selection-end-line="87" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ionic-maps/www/js/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ionic-maps/www/js/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/ionic-maps/www/js/app.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -683,8 +679,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/ionic-maps/www/js/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="424">
-          <caret line="73" column="57" selection-start-line="73" selection-start-column="57" selection-end-line="73" selection-end-column="57" />
+        <state relative-caret-position="153">
+          <caret line="81" column="26" selection-start-line="81" selection-start-column="26" selection-end-line="81" selection-end-column="26" />
           <folding />
         </state>
       </provider>

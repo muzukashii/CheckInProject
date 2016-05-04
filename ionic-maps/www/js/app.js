@@ -36,7 +36,7 @@ angular
           var service = new google.maps.places.PlacesService(map);
           service.nearbySearch({
             location: locationSearch,
-            radius: 150
+            radius: 400
           }, function (results, status) {
             if (status === google.maps.places.PlacesServiceStatus.OK) {
               for (var i = 0; i < results.length; i++) {
@@ -70,6 +70,7 @@ angular
         }
       });
     }
+
     window.CheckIn = function (name) {
       var link =  prompt("Enter ip address to Check in!")
       if(link!==null&&link!==null){
@@ -85,12 +86,12 @@ angular
     }
 
 
-    function updateMarkerStatus(str) {
-      infoWindow.setContent(str);
-    }
+    // function updateMarkerStatus(str) {
+    //   infoWindow.setContent(str);
+    // }
 
     function updateMarkerAddress(str) {
-      infoWindow.setContent(str);
+      infoWindow.setContent("คุณอยู่ที่นี่.."+ '<br>' + str);
     }
     var infoWindow = new google.maps.InfoWindow();
     function initialize() {
@@ -103,12 +104,18 @@ angular
           mapTypeId: google.maps.MapTypeId.ROADMAP
         };
         map = new google.maps.Map(document.getElementById("map"), mapOptions);
+
+        var icon = {
+          url:"http://icons.iconarchive.com/icons/icons-land/vista-map-markers/256/Map-Marker-Flag-1-Right-Azure-icon.png",
+          scaledSize: new google.maps.Size(50, 50), // scaled size
+          origin: new google.maps.Point(0,0), // origin
+          anchor: new google.maps.Point(0, 0) // anchor
+        };
         marker = new google.maps.Marker({
           position: latLng,
-          title: 'Find Place marker',
+          title: 'You are here',
           map: map,
-          draggable: true,
-          icon:'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
+          icon: icon
         });
 
         // Update current position info.
@@ -116,14 +123,14 @@ angular
 
         // Add dragging event listeners.
 
-        google.maps.event.addListener(marker, 'dragstart', function () {
-          updateMarkerAddress('Dragging...');
-        });
-
-        google.maps.event.addListener(marker, 'dragend', function () {
-          updateMarkerStatus('Drag ended');
-         geocodePosition(marker.getPosition());
-        });
+        // google.maps.event.addListener(marker, 'dragstart', function () {
+        //   updateMarkerAddress('Dragging...');
+        // });
+        //
+        // google.maps.event.addListener(marker, 'dragend', function () {
+        //   updateMarkerStatus('Drag ended');
+        //  geocodePosition(marker.getPosition());
+        // });
         google.maps.event.addListener(marker, 'click', function () {
                 infoWindow.open(map, marker);
               });
