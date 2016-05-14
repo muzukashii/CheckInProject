@@ -3,160 +3,87 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
+// 'starter.controllers' is found in controllers.js
+angular.module('starter', ['ionic','ionic.service.core', 'starter.controllers','ngCordova'])
 
-angular
-  .module('starter', ['ionic', 'ngCordova'])
-  .config(function ($stateProvider, $urlRouterProvider) {
+.run(function($ionicPlatform) {
+  $ionicPlatform.ready(function() {
+    // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
+    // for form inputs)
+    if (window.cordova && window.cordova.plugins.Keyboard) {
+      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+      cordova.plugins.Keyboard.disableScroll(true);
 
-    $stateProvider
-      .state('map', {
-        url: '/',
-        templateUrl: 'templates/map.html',
-        controller: 'MapCtrl'
-      });
+    }
+    if (window.StatusBar) {
+      // org.apache.cordova.statusbar required
+      StatusBar.styleDefault();
+    }
+  });
+})
+.config(function($stateProvider, $urlRouterProvider) {
+  $stateProvider
 
-    $urlRouterProvider.otherwise("/");
-
+    .state('app', {
+    url: '/app',
+    abstract: true,
+    templateUrl: 'templates/menu.html',
+    controller: 'AppCtrl'
   })
-  .controller('MapCtrl', function($scope, $state,$cordovaGeolocation,$http) {
-    var options = {timeout: 10000, enableHighAccuracy: true};
-
-    var GeoCoder = new google.maps.Geocoder;
-
-
-    var map = null;
-    var marker = null;
-    function geocodePosition(pos) {
-
-      GeoCoder.geocode({latLng: pos}, function(responses) {
-        if(responses && responses.length > 0){
-          // alert(responses[0].geometry.location);
-          var locationSearch = responses[0].geometry.location;
-          PlaceID = responses[0].place_id;
-          var service = new google.maps.places.PlacesService(map);
-          service.nearbySearch({
-            location: locationSearch,
-            radius: 400
-          }, function (results, status) {
-            if (status === google.maps.places.PlacesServiceStatus.OK) {
-              for (var i = 0; i < results.length; i++) {
-                createMarker(results[i]);
-              }
-            }
-          })
-          function createMarker(place) {
-            var placeLoc = place.geometry.location;
-
-            var infoWindow2 = new google.maps.InfoWindow();
-            var marker2 = new google.maps.Marker({
-              map: map,
-              position:placeLoc
-            });
-            google.maps.event.addListener(marker2, 'click', function() {
-              infoWindow2.setContent(place.name + '<br><input type="submit" value="Check in" ' +
-                'onclick="CheckIn(\'' + place.name + '\')">');
-              infoWindow2.open(map, this);
-            });
-          }
-          service.getDetails({
-            placeId: PlaceID
-          }, function (place,status) {
-            if (status === google.maps.places.PlacesServiceStatus.OK) {
-              updateMarkerAddress(place.name);
-            } else {
-              updateMarkerAddress('Cannot determine address at this location.');
-            }
-          });
+    .state('app.home', {
+      url: '/home',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/Home.html'
         }
-      });
-    }
+      }
+    })
 
-    window.CheckIn = function (name) {
-      var link =  prompt("Enter ip address to Check in!")
-      if(link!==null&&link!==null){
-      var res = JSON.stringify(name)
-     $http.get('http://'+link+':8080/mylocation?UserLocate='+res,{timeout:3000})
-       .then(function () {
-         alert("Success to check in");
-       }, function (response) {
-         alert("failed " + response.status);
-       });
-      }else{
+  .state('app.shop', {
+    url: '/shop',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/Shop.html'
       }
     }
-
-
-    // function updateMarkerStatus(str) {
-    //   infoWindow.setContent(str);
-    // }
-
-    function updateMarkerAddress(str) {
-      infoWindow.setContent("คุณอยู่ที่นี่.."+ '<br>' + str);
-    }
-    var infoWindow = new google.maps.InfoWindow();
-    function initialize() {
-      $cordovaGeolocation.getCurrentPosition(options).then(function (position) {
-        var latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-
-        var mapOptions = {
-          center: latLng,
-          zoom: 17,
-          mapTypeId: google.maps.MapTypeId.ROADMAP
-        };
-        map = new google.maps.Map(document.getElementById("map"), mapOptions);
-
-        var icon = {
-          url:"http://icons.iconarchive.com/icons/icons-land/vista-map-markers/256/Map-Marker-Flag-1-Right-Azure-icon.png",
-          scaledSize: new google.maps.Size(50, 50), // scaled size
-          origin: new google.maps.Point(0,0), // origin
-          anchor: new google.maps.Point(0, 0) // anchor
-        };
-        marker = new google.maps.Marker({
-          position: latLng,
-          title: 'You are here',
-          map: map,
-          icon: icon
-        });
-
-        // Update current position info.
-        geocodePosition(latLng);
-
-        // Add dragging event listeners.
-
-        // google.maps.event.addListener(marker, 'dragstart', function () {
-        //   updateMarkerAddress('Dragging...');
-        // });
-        //
-        // google.maps.event.addListener(marker, 'dragend', function () {
-        //   updateMarkerStatus('Drag ended');
-        //  geocodePosition(marker.getPosition());
-        // });
-        google.maps.event.addListener(marker, 'click', function () {
-                infoWindow.open(map, marker);
-              });
-      })
-    }
-    google.maps.event.addDomListener(window, 'load', initialize);
-
-
   })
 
-  .run(function ($ionicPlatform) {
-    $ionicPlatform.ready(function () {
-      if (window.cordova && window.cordova.plugins.Keyboard) {
-        // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-        // for form inputs)
-        cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-
-        // Don't remove this line unless you know what you are doing. It stops the viewport
-        // from snapping when text inputs are focused. Ionic handles this internally for
-        // a much nicer keyboard experience.
-        cordova.plugins.Keyboard.disableScroll(true);
+  .state('app.Map', {
+      url: '/Map',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/Map.html',
+          controller:'MapCtrl'
+        }
       }
-      if (window.StatusBar) {
-        StatusBar.styleDefault();
+    })
+    .state('app.AboutUs', {
+      url: '/AboutUs',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/AboutUs.html',
+          controller: 'DeveloperListsCtrl'
+        }
       }
-    });
-  })
+    })
 
-
+  .state('app.single', {
+    url: '/AboutUs/:playlistId',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/devlist.html',
+        controller: 'DeveloperListCtrl'
+      }
+    }
+  });
+  // if none of the above states are matched, use this as the fallback
+  $urlRouterProvider.otherwise('/app/home');
+})
+  .config( [
+     '$compileProvider',
+     function( $compileProvider )
+     {
+    $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|chrome-extension):/);
+  $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|local|data):/);
+ }
+ ]);
