@@ -34,29 +34,30 @@ angular.module('starter', ['ionic','ionic.service.core', 'starter.controllers','
       url: '/home',
       views: {
         'menuContent': {
-          templateUrl: 'templates/Home.html'
-        }
-      }
-    })
-
-  .state('app.shop', {
-    url: '/shop',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/Shop.html'
-      }
-    }
-  })
-
-  .state('app.Map', {
-      url: '/Map',
-      views: {
-        'menuContent': {
-          templateUrl: 'templates/Map.html',
+          templateUrl: 'templates/Home.html',
           controller:'MapCtrl'
         }
       }
     })
+
+  .state('app.history', {
+    url: '/history',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/history.html'
+      }
+    }
+  })
+
+  // .state('app.Map', {
+  //     url: '/Map',
+  //     views: {
+  //       'menuContent': {
+  //         templateUrl: 'templates/Map.html',
+  //         controller:'MapCtrl'
+  //       }
+  //     }
+  //   })
     .state('app.AboutUs', {
       url: '/AboutUs',
       views: {
