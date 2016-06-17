@@ -17,7 +17,6 @@ public class Image {
     byte[] content;
     String contentType;
 
-
     String  created;
 
     public Image() {
@@ -55,12 +54,12 @@ public class Image {
         this.contentType = contentType;
     }
 
-    public String  getCreated() {
+    public String getCreated() {
         return created;
     }
 
-    public void setCreated(String  create) {
-        this.created = create;
+    public void setCreated(String created) {
+        this.created = created;
     }
 
     public Image(String fileName, byte[] content, String contentType, String  created) {

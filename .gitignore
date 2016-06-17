@@ -4,7 +4,7 @@ node_modules/
 bower_components/
 tmp
 .DS_Store
-.idea
+.idea/
 *.iml
 target/
 .iml

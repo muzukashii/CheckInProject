@@ -1,0 +1,22 @@
+<ion-view view-title="Staff List">
+  <ion-nav-buttons side="secondary">
+    <button class="button" ng-click="popover.show($event)">Filter</button>
+  </ion-nav-buttons>
+  <ion-content>
+    <ion-item>
+      <div class="list" ng-repeat="(key,value) in stafflist | groupBy : 'companyrole':true">
+        <div class="item item-divider">
+          {{choose}} : {{key}}
+        </div>
+        <a class="item item-avatar" ng-repeat="staff in value">
+            <img src="../img/ionic.png" ng-src="data:{{staff.images[0].contentType}};base64,{{staff.images[0].content}}">
+          <h2>{{staff.name}}</h2>
+          <hr class="style-six">
+          <div ng-repeat="time in staff.checkins | orderBy:'time':true | limitTo:1 ">
+            Latest Checkin : {{time.time | date:'yyyy-MM-dd HH:mm:ss Z'}} | At : {{time.location}} | Type : {{time.type}}
+          </div>
+        </a>
+      </div>
+    </ion-item>
+  </ion-content>
+</ion-view>

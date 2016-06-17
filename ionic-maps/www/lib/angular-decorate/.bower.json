@@ -1,0 +1,31 @@
+{
+  "name": "angular-decorate",
+  "main": "angular-decorate.js",
+  "version": "0.1.1",
+  "homepage": "https://github.com/damienklinnert/angular-decorate",
+  "authors": [
+    "Damien Klinnert <mail@damienklinnert.de>"
+  ],
+  "description": "Use AngularJS' decorate function with ease",
+  "keywords": [
+    "angular",
+    "decorate"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "_release": "0.1.1",
+  "_resolution": {
+    "type": "version",
+    "tag": "0.1.1",
+    "commit": "5eb2a01b1b876fade39ab8785df1ef64217e2ac7"
+  },
+  "_source": "https://github.com/damienklinnert/angular-decorate.git",
+  "_target": "~0.1.1",
+  "_originalSource": "angular-decorate"
+}

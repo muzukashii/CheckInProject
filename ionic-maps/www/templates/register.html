@@ -1,0 +1,133 @@
+<ion-view view-title="Register" ng-controller="registerController" flow-init>
+  <ion-nav-bar class="bar-dark">
+    <ion-nav-back-button class="button-clear"
+                         ng-click="closeRegister();">
+      <i class="ion-arrow-left-b"></i>Back
+    </ion-nav-back-button>
+    <ion-nav-buttons side="secondary">
+      <button class="button" ng-click="resetForm()">Reset</button>
+    </ion-nav-buttons>
+  </ion-nav-bar>
+  <ion-content>
+    <form id="registerform" name="registerform" novalidate>
+      <div class="form-group card-panel blue-grey darken-2" style="margin:0 !important;"
+           ng-class="{'no-errors': pic!=false,'optionalClass':$flow.files.length==0,'has-errors': ($flow.files.length!=0)}">
+        <div class="col col-100 col-center"
+             style="text-align: center;vertical-align: middle;padding-top: 20px;color: whitesmoke">
+          <span style="text-align: center;font-size: 30px;">Photo</span><br>
+          <span>(Optional : You can add a photo later)</span><br>
+          <span>Limit size : 1 MB</span>
+        </div>
+
+        <div class="col upload"
+             style="left: 50%;right: 50%;position: relative;transform: translate(-50%,-50%); margin-top: 40px"
+             ng-hide="$flow.getSize()!=0">
+          <input type="file" class="button button-positive" style="margin-bottom: 10px"
+                 ng-hide="$flow.getSize()!=0"
+                 flow-btn>
+        </div>
+        <div class="transfer-box col" style="text-align: center!important;" ng-repeat="file in $flow.files">
+          <div class="resizeImage responsive-img">
+            <img style="margin: 20px" flow-img="$flow.files[{{$index}}]">
+            <br>
+            <a class="button button-positive" style="margin: 10px" ng-click="validate(file)">
+              <ion-icon class="ion-arrow-right-a"></ion-icon>
+              Validate File Size! </a>
+            <a class="button button-assertive" style="margin: 10px" ng-click="$flow.cancel();recheck()">
+              <ion-icon class="ion-close-circled"></ion-icon>
+              Cancel </a>
+          </div>
+          <div style="text-align: center!important;margin-bottom: 10px!important;color: white"
+               ng-repeat="error in errors">
+            {{error.error}} - {{error.file.name}}
+          </div>
+          <div style="text-align: center!important;margin: 20px!important;">
+            <span style="border-left: 5px solid #3d8b3d!important;
+  border-right: 5px solid #3d8b3d!important;padding-left: 3px!important;padding-right: 3px!important; color: whitesmoke"
+                  class="label label-info">Size: {{$flow.getSize()/1000}} KB</span>
+          </div>
+        </div>
+      </div>
+      <div class="list" style="margin-bottom: 10px!important;">
+        <div class="item item-divider">
+          Personal information
+        </div>
+        <label class="item item-input" style="padding-right: 15px"
+               ng-class="{'has-errors' : registerform.emailR.$invalid && !registerform.emailR.$pristine,'no-errors' : registerform.emailR.$valid}">
+          <input placeholder="E-mail..." type="email" autocomplete="off" name="emailR" ng-model="user.email" required/>
+        </label>
+        <div class="padding" ng-show="registerform.emailR.$invalid && !registerform.emailR.$pristine"
+             style="background-color: #ef473a;color:white">
+          <ion-icon class="ion-close-circled"></ion-icon>
+          <span ng-show="registerform.emailR.$invalid"> Wrong Email Format!</span>
+        </div>
+        <label class="item item-input" style="padding-right: 15px"
+               ng-class="{'has-errors' : registerform.nameR.$invalid && !registerform.nameR.$pristine && registerform.nameR.$error ,'no-errors' : registerform.nameR.$valid}">
+          <input placeholder="Full name..." type="text" name="nameR" ng-minlength="6" ng-model="user.name"
+                 autocomplete="off" required/>
+        </label>
+        <label class="item item-input" style="padding-right: 15px"
+               ng-class="{'has-errors' : registerform.tel.$invalid && !registerform.tel.$pristine && registerform.tel.$error ,'no-errors' : registerform.tel.$valid}">
+          <input placeholder="Telephone number..." type="tel" name="tel" ng-minlength="10" ng-maxlength="10" ng-model="user.tel"
+                 autocomplete="off" required/>
+        </label>
+        <label class="item item-input" style="padding-right: 15px"
+               ng-class="{'has-errors' : registerform.usernameR.$invalid && !registerform.usernameR.$pristine && registerform.usernameR.$error ,'no-errors' : registerform.usernameR.$valid}">
+          <input placeholder="User name..." type="text" autocomplete="off" ng-minlength="6" name="usernameR"
+                 ng-model="user.username" required/>
+        </label>
+        <div class="padding"
+             ng-show="registerform.usernameR.$invalid && !registerform.usernameR.$pristine && registerform.usernameR.$error"
+             style="background-color: #ef473a;color:white">
+          <ion-icon class="ion-close-circled"></ion-icon>
+            <span
+              ng-show="registerform.usernameR.$error"> The username must be longer than 6 characters</span>
+        </div>
+        <label class="item item-input" style="padding-right: 15px"
+               ng-class="{'has-errors' : registerform.password.$invalid && !registerform.password.$pristine && registerform.password.$error,'no-errors' : registerform.password.$valid}">
+          <input placeholder="Password..." type="password" autocomplete="off" ng-minlength="6" id="password"
+                 name="password"
+                 ng-model="user.password"
+                 required/>
+        </label>
+        <div class="padding"
+             ng-show="registerform.password.$invalid && !registerform.password.$pristine && registerform.password.$error"
+             style="background-color: #ef473a;color:white">
+          <ion-icon class="ion-close-circled"></ion-icon>
+            <span
+              ng-show="registerform.password.$error"> The password must be longer than 6 characters</span>
+        </div>
+        <label class="item item-input" style="padding-right: 15px"
+               ng-class="{'has-errors' : !registerform.passwordR2.$pristine && registerform.passwordR2.$invalid  && registerform.passwordR2.$error,'no-errors' : registerform.passwordR2.$valid}">
+          <input placeholder="Confirm Password..." type="password" autocomplete="off" ng-minlength="6" id="passwordR2"
+                 name="passwordR2"
+                 ng-model="Check" wj-validation-error="Check != user.password"
+                 required/>
+        </label>
+        <div class="padding"
+             ng-show="registerform.passwordR2.$invalid && !registerform.passwordR2.$pristine && registerform.passwordR2.$error"
+             style="background-color: #ef473a;color:white">
+          <ion-icon class="ion-close-circled"></ion-icon>
+          <span ng-show="registerform.passwordR2.$invalid && !registerform.passwordR2.$pristine"> The passwords do not match</span>
+        </div>
+        <div class="item item-divider">
+          Position: <span style="color: darkgreen;font-weight: 500">{{ user.companyrole }}</span>
+        </div>
+
+        <ion-radio ng-repeat="item in rolelist"
+                   ng-value="item.companyrole"
+                   ng-model="user.companyrole">
+          {{item.companyrole}}
+        </ion-radio>
+        <label class="item">
+          <span style="color: red;font-weight: 600" ng-hide="rolelist.length>0">Please Check your internet connection!</span>
+          <button class="button button-block button-full button-positive"
+                  ng-disabled="(((registerform.$invalid||pic!=true)&&(registerform.$invalid||!$flow.files.length==0)||(rolelist.length!=0))?true:false)"
+                  type="submit" ng-click="sendRegister($flow)">Register
+          </button>
+        </label>
+      </div>
+    </form>
+  </ion-content>
+
+</ion-view>

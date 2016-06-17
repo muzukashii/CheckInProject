@@ -16,10 +16,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.security.web.csrf.CsrfFilter;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-import org.springframework.web.filter.CorsFilter;
 
 /**
  * Created by Dto on 4/18/2015.
@@ -53,10 +49,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .and()
                 .authorizeRequests()
                     .antMatchers(HttpMethod.OPTIONS,"/**").permitAll()
-                    .antMatchers(HttpMethod.POST, "/product/**").hasAuthority("Admin")//.access("hasRole('admin')")
-                    .antMatchers(HttpMethod.PUT, "/product/**").hasAuthority("Admin")
-                    .antMatchers(HttpMethod.DELETE, "/product/**").hasAuthority("Admin")
-                    .antMatchers("/shoppingcart/**").permitAll()
+//                    .antMatchers(HttpMethod.POST, "/product/**").hasAuthority("Admin")//.access("hasRole('admin')")
+//                    .antMatchers(HttpMethod.PUT, "/product/**").hasAuthority("Admin")
+//                    .antMatchers(HttpMethod.DELETE, "/product/**").hasAuthority("Admin")
                 .and()
                 .addFilterBefore(authenticationTokenProcessingFilter, UsernamePasswordAuthenticationFilter.class)
         ;

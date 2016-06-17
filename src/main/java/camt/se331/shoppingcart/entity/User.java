@@ -1,7 +1,6 @@
 package camt.se331.shoppingcart.entity;
 
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
@@ -14,36 +13,117 @@ import java.util.Set;
  * Created by Dto on 4/19/2015.
  */
 @Entity
+@Table(uniqueConstraints = {@UniqueConstraint(columnNames = {"username"})})
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String username;
-    private String name;
     private String email;
+    private String name;
+    private String tel;
+    private String username;
     private String password;
-//    private Date dob;
+    private String companyrole;
+    private Date dob;
     @ManyToMany(fetch= FetchType.EAGER)
     // Cascade and CascadeType must be the org.hibernate.annotation
     @Cascade(CascadeType.ALL)
     private Set<Role> roles = new HashSet<>();
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(fetch = FetchType.EAGER)
+    @Cascade(org.hibernate.annotations.CascadeType.ALL)
+    Set<Image> images = new HashSet<>();
+
+    @OneToMany(fetch = FetchType.EAGER)
     @Cascade(CascadeType.ALL)
-    @JsonManagedReference
-    private Set<ShoppingCart> shoppingCarts;
-    public User() {
+    Set<Checkin> checkins = new HashSet<>();
+
+    public Set<Image> getImages() {
+        return images;
+    }
+
+    public void setImages(Set<Image> images) {
+        this.images = images;
+    }
+
+    public Set<Checkin> getCheckins() {
+        return checkins;
+    }
+
+    public void setCheckins(Set<Checkin> checkins) {
+        this.checkins = checkins;
+    }
+
+    public User(Long id, String email, String name, String tel, String username, String password, String companyrole, Checkin checkin, Date dob, Image image) {
+        this.id = id;
+        this.email = email;
+        this.name = name;
+        this.tel = tel;
+        this.username = username;
+        this.password = password;
+        this.dob = dob;
+        this.checkins.add(checkin);
+        this.images.add(image) ;
+        this.companyrole = companyrole;
+    }
+    public User(Long id, String email, String name, String tel, String username, String password, String companyrole, Date dob, Image image) {
+        this.id = id;
+        this.email = email;
+        this.name = name;
+        this.tel = tel;
+        this.username = username;
+        this.password = password;
+        this.dob = dob;
+        this.images.add(image) ;
+        this.companyrole = companyrole;
+    }
+    public User(Long id, String email, String name, String tel, String username, String password, String companyrole, Checkin checkin, Image image) {
+        this.id = id;
+        this.email = email;
+        this.name = name;
+        this.tel = tel;
+        this.username = username;
+        this.password = password;
+        this.images.add(image) ;
+        this.checkins.add(checkin);
+        this.companyrole = companyrole;
+    }
+    public User(Long id, String email, String name, String tel, String username, String password, String companyrole, Image image) {
+        this.id = id;
+        this.email = email;
+        this.name = name;
+        this.tel = tel;
+        this.username = username;
+        this.password = password;
+        this.images.add(image) ;
+        this.companyrole = companyrole;
+    }
+
+    public User(Long id, String email, String name, String tel, String username, String password, String companyrole, Checkin checkin, Date dob) {
+        this.id = id;
+        this.email = email;
+        this.name = name;
+        this.tel = tel;
+        this.username = username;
+        this.password = password;
+        this.dob = dob;
+        this.checkins.add(checkin);
+        this.companyrole = companyrole;
+    }
+
+    public User(Long id, String email, String name, String tel, String username, String password, String companyrole, Date dob) {
+        this.id = id;
+        this.email = email;
+        this.name = name;
+        this.tel = tel;
+        this.username = username;
+        this.password = password;
+        this.dob = dob;
+        this.companyrole = companyrole;
     }
 
 
-
-    public Set<ShoppingCart> getShoppingCarts() {
-        return shoppingCarts;
-    }
-
-    public void setShoppingCarts(Set<ShoppingCart> shoppingCarts) {
-        this.shoppingCarts = shoppingCarts;
-    }
+    public User(){}
 
     @Override
     public boolean equals(Object o) {
@@ -57,8 +137,8 @@ public class User {
         if (name != null ? !name.equals(user.name) : user.name != null) return false;
         if (email != null ? !email.equals(user.email) : user.email != null) return false;
         if (password != null ? !password.equals(user.password) : user.password != null) return false;
-//        if (dob != null ? !dob.equals(user.dob) : user.dob != null) return false;
-        return !(roles != null ? !roles.equals(user.roles) : user.roles != null);
+        if (dob != null ? !dob.equals(user.dob) : user.dob != null) return false;
+        return !(companyrole != null ? !companyrole.equals(user.companyrole) : user.companyrole != null);
 
     }
 
@@ -69,8 +149,8 @@ public class User {
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (email != null ? email.hashCode() : 0);
         result = 31 * result + (password != null ? password.hashCode() : 0);
-//        result = 31 * result + (dob != null ? dob.hashCode() : 0);
-        result = 31 * result + (roles != null ? roles.hashCode() : 0);
+        result = 31 * result + (dob != null ? dob.hashCode() : 0);
+        result = 31 * result + (companyrole != null ? companyrole.hashCode() : 0);
         return result;
     }
 
@@ -83,26 +163,16 @@ public class User {
         this.username = username;
     }
 
-    public User(Long id, String name,String username, String email, String password) {
-        this.id = id;
-        this.name = name;
-        this.username = username;
-
-        this.email = email;
-        this.password = password;
-//        this.dob = dob;
-    }
-    public User(User user) {
-        user.id = id;
-        user.name = name;
-        user.username = username;
-        user.email = email;
-        user.password = password;
-//        this.dob = dob;
-    }
-
     public Long getId() {
         return id;
+    }
+
+    public String getTel() {
+        return tel;
+    }
+
+    public void setTel(String tel) {
+        this.tel = tel;
     }
 
     public void setId(Long id) {
@@ -133,13 +203,13 @@ public class User {
         this.password = password;
     }
 
-//    public Date getDob() {
-//        return dob;
-//    }
+    public Date getDob() {
+        return dob;
+    }
 
-//    public void setDob(Date dob) {
-//        this.dob = dob;
-//    }
+    public void setDob(Date dob) {
+        this.dob = dob;
+    }
 
     public Set<Role> getRoles() {
         return roles;
@@ -149,6 +219,14 @@ public class User {
         this.roles = roles;
     }
 
+    public String getCompanyrole() {
+        return companyrole;
+    }
+
+    public void setCompanyrole(String companyrole) {
+        this.companyrole = companyrole;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -156,8 +234,11 @@ public class User {
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
-//                ", dob=" + dob +
+                ", dob=" + dob +
                 ", roles=" + roles +
+                ", companyrole=" + companyrole +
+                ", checkin=" + checkins +
                 '}';
     }
+
 }

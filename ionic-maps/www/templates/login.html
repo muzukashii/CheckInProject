@@ -1,25 +1,41 @@
-<ion-modal-view>
-  <ion-header-bar>
-    <h1 class="title">Login</h1>
-    <div class="buttons">
-      <button class="button button-clear" ng-click="closeLogin()">Close</button>
+<ion-view view-title="Login" hide-back-button="true">
+  <ion-nav-bar class="bar-dark">
+    <ion-nav-buttons side="secondary">
+      <button class="button button-stable" ng-click="register()">Register Here</button>
+    </ion-nav-buttons>
+  </ion-nav-bar>
+  <ion-content ng-controller="LoginController as login">
+    <div>
+      <form id="loginform" name="loginform" novalidate>
+        <div class="list">
+          <label class="item" style="background-color: transparent;border-color: transparent">
+            <span class="input-label"
+                  style="padding-left: 7px;color: white;left: 50%;right: 50%;position: relative;transform: translate(-50%,-50%);
+                   margin-top: 40px;text-align: center;font-size:25px"> Welcome !</span>
+          </label>
+          <label class="item item-input" style="border-color:transparent;padding-right: 16px;
+    border-radius: 10px;
+    margin: 10px 75px 10px 75px;"
+                 ng-class="{'has-errors' : loginform.username.$invalid && !loginform.username.$pristine,'no-errors' : loginform.username.$valid}">
+            <input class="tooltip" ng-minlength="4" placeholder="Username..." id="mytextbox1" type="text" autocomplete="off"
+                   name="username" ng-model="login.username" required/>
+          </label>
+          <label class="item item-input" style="border-color:transparent;padding-right: 16px;
+    border-radius: 10px;
+    margin: 10px 75px 10px 75px;"
+                 ng-class="{'has-errors' : loginform.password.$invalid && !loginform.password.$pristine,'no-errors' : loginform.password.$valid}">
+            <input type="password" ng-minlength="6" placeholder="Password..." id="mytextbox2" autocomplete="off" name="password"
+                   ng-model="login.password" required/>
+          </label>
+          <label class="item" style="background-color:transparent;border-color:transparent;padding-right: 16px;
+    border-radius: 10px;
+    margin: 10px 75px 10px 75px;">
+            <button class="button button-block button-full button-light" ng-disabled="loginform.$invalid"
+                    type="submit" ng-click="login.doLogin()">Log in
+            </button>
+          </label>
+        </div>
+      </form>
     </div>
-  </ion-header-bar>
-  <ion-content>
-    <form ng-submit="doLogin()">
-      <div class="list">
-        <label class="item item-input">
-          <span class="input-label">Username</span>
-          <input type="text" ng-model="loginData.username">
-        </label>
-        <label class="item item-input">
-          <span class="input-label">Password</span>
-          <input type="password" ng-model="loginData.password">
-        </label>
-        <label class="item">
-          <button class="button button-block button-positive" type="submit">Log in</button>
-        </label>
-      </div>
-    </form>
   </ion-content>
-</ion-modal-view>
+</ion-view>

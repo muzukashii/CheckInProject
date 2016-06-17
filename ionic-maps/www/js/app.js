@@ -1,90 +1,317 @@
-// Ionic Starter App
+(function () {
+  'use strict';
+  var API_PREFIX = 'http://localhost:8080';
+  angular.module('ngResource+apiPrefix', ['ngResource'])
+  angular.module('starter.controllers', [])
+  angular.module('starter.services', [])
+  angular.module('starter', ['ionic', 'ionic.service.core', 'ngCordova', 'ngResource',
+    'ngCookies', 'starter.controllers', 'starter.services', 'flow', 'ngRoute', 'ui.router',
+    'http-auth-interceptor', 'LocalStorageModule', 'cgBusy', 'ngAnimate', 'angular.filter'])
 
-// angular.module is a global place for creating, registering and retrieving Angular modules
-// 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
-// the 2nd parameter is an array of 'requires'
-// 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic','ionic.service.core', 'starter.controllers','ngCordova'])
+    .config(configFailRequestRedirect)
 
-.run(function($ionicPlatform) {
-  $ionicPlatform.ready(function() {
-    // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-    // for form inputs)
-    if (window.cordova && window.cordova.plugins.Keyboard) {
-      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-      cordova.plugins.Keyboard.disableScroll(true);
+    .config(configFlowFactoryProvider)
 
-    }
-    if (window.StatusBar) {
-      // org.apache.cordova.statusbar required
-      StatusBar.styleDefault();
-    }
-  });
-})
-.config(function($stateProvider, $urlRouterProvider) {
-  $stateProvider
-
-    .state('app', {
-    url: '/app',
-    abstract: true,
-    templateUrl: 'templates/menu.html',
-    controller: 'AppCtrl'
-  })
-    .state('app.home', {
-      url: '/home',
-      views: {
-        'menuContent': {
-          templateUrl: 'templates/Home.html',
-          controller:'MapCtrl'
-        }
+    .decorate('$resource', function ($delegate) {
+      return function decoratedResource() {
+        arguments[0] = API_PREFIX + arguments[0];
+        return $delegate.apply(this, arguments);
       }
     })
 
-  .state('app.history', {
-    url: '/history',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/history.html'
-      }
-    }
-  })
+    .config(['$compileProvider', function ($compileProvider) {
+      $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|chrome-extension):/);
+      $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|local|data):/);
+    }])
 
-  // .state('app.Map', {
-  //     url: '/Map',
-  //     views: {
-  //       'menuContent': {
-  //         templateUrl: 'templates/Map.html',
-  //         controller:'MapCtrl'
-  //       }
-  //     }
-  //   })
-    .state('app.AboutUs', {
-      url: '/AboutUs',
-      views: {
-        'menuContent': {
-          templateUrl: 'templates/AboutUs.html',
-          controller: 'DeveloperListsCtrl'
+    .run(function ($ionicPlatform) {
+      $ionicPlatform.ready(function () {
+        // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
+        // for form inputs)
+        if (window.cordova && window.cordova.plugins.Keyboard) {
+          cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+          cordova.plugins.Keyboard.disableScroll(true);
+
+        }
+        if (window.StatusBar) {
+          // org.apache.cordova.statusbar required
+          StatusBar.styleDefault();
+        }
+      });
+    })
+
+    .run(function ($rootScope, $state, $location, $cookies, $ionicPopup, $ionicLoading, $timeout, $ionicHistory, UserService) {
+      var removeErrorMsg = $rootScope.$on('$viewContentLoaded', function () {
+        delete $rootScope.error;
+      });
+      removeErrorMsg();
+
+      $rootScope.logout = function () {
+        var confirmPopup = $ionicPopup.confirm({
+          title: 'Are you sure?',
+          template: 'I need to ask again for confirmation'
+        });
+        confirmPopup.then(function (res) {
+          if (res) {
+            console.log("He need to log out");
+            $ionicLoading.show({
+              template: '<ion-spinner class="spinner-balanced"></ion-spinner><p style="color:white">Log Out...</p>'
+            });
+            delete $rootScope.user;
+            window.localStorage.clear();
+            $timeout(function () {
+              $ionicHistory.clearHistory();
+              $ionicHistory.clearCache();
+              $ionicHistory.nextViewOptions({
+                disableBack: true,
+                historyRoot: true
+              })
+            }, 2000);
+            $state.go('login')
+            $timeout(function () {
+              window.location.reload(true)
+              $ionicLoading.hide();
+            }, 2000)
+          } else {
+            console.log("not log out")
+          }
+        });
+
+      };
+
+      $rootScope.hasRole = function (role) {
+        if ($rootScope.user == undefined) {
+          return false
+        } else if ($rootScope.user.companyrole == role) {
+          return true
+        } else {
+          return false;
+        }
+      }
+
+      $rootScope.$on('$ionicView.loaded',function (event, data) {
+        var userLocalStorage = window.localStorage.getItem("Cookies");
+        if(data.stateName!='register'){
+          if($rootScope.user==null||userLocalStorage==null){
+            event.preventDefault();
+            $state.go('login')
+          }
+        }
+      })
+
+
+      var userLocalStorage = window.localStorage.getItem("Cookies");
+      if (userLocalStorage !== undefined && userLocalStorage !== null) {
+        window.localStorage.clear();
+        UserService.get({username: userLocalStorage}, function (user) {
+          $rootScope.user = user;
+          $ionicHistory.clearHistory();
+          $ionicHistory.clearCache();
+          $ionicHistory.nextViewOptions({
+            disableBack: true,
+            historyRoot: true
+          })
+          window.localStorage.setItem("Cookies", user.username);
+          $ionicLoading.show({
+            template: '<ion-spinner class="spinner-balanced"></ion-spinner><p style="color:white">Loading...</p>'
+          })
+          $timeout(function () {
+            $ionicLoading.hide();
+            $state.go('app.map')
+          }, 5000)
+        })
+      } else {
+        $ionicLoading.hide();
+        $state.go('login')
+      }
+
+    })
+
+    .config(function ($ionicConfigProvider) {
+      $ionicConfigProvider.navBar.alignTitle('center')
+    })
+
+    .config(function ($stateProvider,$urlRouterProvider) {
+      $stateProvider
+
+        .state('login', {
+          url: '/login',
+          cache: false,
+          templateUrl: 'templates/login.html',
+          controller: 'LoginController'
+        })
+
+        .state('register', {
+          url: '/register',
+          cache: false,
+          templateUrl: 'templates/register.html',
+          controller: 'registerController'
+        })
+
+        .state('app', {
+          url: '/app',
+          cache: false,
+          templateUrl: 'templates/menu.html',
+          controller: 'MenuCtrl'
+        })
+
+        .state('app.map', {
+          url: '/home',
+          cache: false,
+          views: {
+            'menuContent': {
+              templateUrl: 'templates/Home.html',
+              controller: 'MapCtrl'
+            }
+          }
+        })
+
+        .state('app.admin', {
+          url: '/admin',
+          views: {
+            'menuContent': {
+              templateUrl: 'templates/admin.html'
+            }
+          }
+        })
+
+        .state('app.stafflist', {
+          url: '/stafflist',
+          cache:false,
+          views: {
+            'menuContent': {
+              templateUrl: 'templates/stafflist.html',
+              controller: 'StafflistController'
+            }
+          }
+        })
+
+        .state('app.Contactlist', {
+          url: '/Contactlist',
+          cache:false,
+          views: {
+            'menuContent': {
+              templateUrl: 'templates/Contactlist.html',
+              controller: 'StafflistController'
+            }
+          }
+        })
+
+        .state('app.manageAccount', {
+          url: '/manageAccount',
+          views: {
+            'menuContent': {
+              templateUrl: 'templates/manageAccount.html'
+
+            }
+          }
+        })
+
+        .state('app.editAccount', {
+          url: '/editAccount',
+          cache:false,
+          views: {
+            'menuContent': {
+              templateUrl: 'templates/editAccount.html',
+              controller: 'editAccountController'
+            }
+          }
+        })
+
+        .state('app.history', {
+          url: '/history',
+          cache:false,
+          views: {
+            'menuContent': {
+              templateUrl: 'templates/history.html'
+            }
+          }
+        })
+
+        .state('app.AboutUs', {
+          url: '/AboutUs',
+          views: {
+            'menuContent': {
+              templateUrl: 'templates/AboutUs.html',
+              controller: 'DeveloperListsCtrl'
+            }
+          }
+        })
+
+      // if none of the above states are matched, use this as the fallback
+      $urlRouterProvider.otherwise("/login");
+
+    })
+
+
+
+
+  /** @ngInject */
+  function configFlowFactoryProvider(flowFactoryProvider) {
+    flowFactoryProvider.defaults = {
+      target: '',
+      permanentErrors: [500, 501],
+      maxChunkRetries: 1,
+      chunkRetryInterval: 5000,
+      simultaneousUploads: 4,
+      singleFile: true
+    };
+
+
+    // flowFactoryProvider.on('catchAll', function ($log) {
+    //   console.log('catchAll', arguments);
+    // });
+    // Can be used with different implementations of Flow.js
+    // flowFactoryProvider.factory = fustyFlowFactory;
+  }
+
+
+  function configFailRequestRedirect($httpProvider) {
+    /* Register error provider that shows message on failed requests or redirects to login page on
+     * unauthenticated requests */
+    $httpProvider.interceptors.push(function ($q, $rootScope, $location) {
+      return {
+        'responseError': function (rejection) {
+          var status = rejection.status;
+          var config = rejection.config;
+          var method = config.method;
+          var url = config.url;
+
+          if (status == 401) {
+            $location.path("/login");
+          } else {
+            $rootScope.error = method + " on " + url + " failed with status " + status;
+          }
+          return $q.reject(rejection);
+        }
+      }
+    });
+
+    /* Registers auth token interceptor, auth token is either passed by header or by query parameter
+     * as soon as there is an authenticated user */
+    var exampleAppConfig = {
+      /* When set to false a query parameter is used to pass on the auth token.
+       * This might be desirable if headers don't work correctly in some
+       * environments and is still secure when using https. */
+      useAuthTokenHeader: true
+    };
+
+    $httpProvider.interceptors.push(function ($q, $rootScope) {
+      return {
+        'request': function (config) {
+          if (angular.isDefined($rootScope.authToken)) {
+            var authToken = $rootScope.authToken;
+            if (exampleAppConfig.useAuthTokenHeader) {
+              config.headers['X-Auth-Token'] = authToken;
+            } else {
+              config.url = config.url + "?token=" + authToken;
+            }
+          }
+          return config || $q.when(config);
         }
       }
     })
+  }
 
-  .state('app.single', {
-    url: '/AboutUs/:playlistId',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/devlist.html',
-        controller: 'DeveloperListCtrl'
-      }
-    }
-  });
-  // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/home');
-})
-  .config( [
-     '$compileProvider',
-     function( $compileProvider )
-     {
-    $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|chrome-extension):/);
-  $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|local|data):/);
- }
- ]);
+
+})();

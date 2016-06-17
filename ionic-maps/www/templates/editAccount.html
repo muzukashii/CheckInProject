@@ -1,0 +1,71 @@
+<ion-view view-title="Change Information">
+  <ion-content>
+    <form id="editform" name="editform" ng-controller="editAccountController" flow-init novalidate>
+      <div class="form-group card-panel blue-grey darken-2" style="margin:0 !important;"
+           ng-class="{'no-errors': pic!=false,'optionalClass':$flow.files.length==0,'has-errors': ($flow.files.length!=0)}">
+        <div class="col col-100 col-center"
+             style="text-align: center;vertical-align: middle;padding-top: 20px;color: whitesmoke">
+          <span style="text-align: center;font-size: 30px;">Photo</span><br>
+          <span>Limit size : 1 MB</span>
+        </div>
+        <div class="col upload"
+             style="left: 50%;right: 50%;position: relative;transform: translate(-50%,-50%); margin-top: 40px"
+             ng-hide="$flow.getSize()!=0">
+          <input type="file" class="button button-positive" style="margin-bottom: 10px"
+                 ng-hide="$flow.getSize()!=0"
+                 flow-btn>
+        </div>
+        <div class="transfer-box col" style="text-align: center!important;" ng-repeat="file in $flow.files">
+          <div class="resizeImage responsive-img">
+            <img style="margin: 20px" flow-img="$flow.files[{{$index}}]">
+            <br>
+            <a class="button button-positive" style="margin: 10px" ng-click="validate(file)">
+              <ion-icon class="ion-arrow-right-a"></ion-icon>
+              Validate File Size! </a>
+            <a class="button button-assertive" style="margin: 10px" ng-click="$flow.cancel();recheck()">
+              <ion-icon class="ion-close-circled"></ion-icon>
+              Cancel </a>
+          </div>
+          <div style="text-align: center!important;margin: 20px!important;">
+            <span style="border-left: 5px solid #3d8b3d!important;
+  border-right: 5px solid #3d8b3d!important;padding-left: 3px!important;padding-right: 3px!important; color: whitesmoke"
+                  class="label label-info">Size: {{$flow.getSize()/1000}} KB</span>
+          </div>
+          <div style="text-align: center!important;margin-bottom: 10px!important;color: white"
+               ng-repeat="error in errors">
+            {{error.error}} - {{error.file.name}}
+          </div>
+        </div>
+      </div>
+      <div class="list" style="margin-bottom: 10px!important;">
+        <label class="item item-input" style="padding-right: 15px"
+               ng-class="{'has-errors' : editform.nameR.$invalid && !editform.nameR.$pristine && editform.nameR.$error ,'no-errors' : editform.nameR.$valid}">
+          <input placeholder="Full name..." type="text" name="nameR" ng-minlength="6" ng-model="usernew.name"
+                 autocomplete="off" required/>
+        </label>
+        <label class="item item-input" style="padding-right: 15px"
+               ng-class="{'has-errors' : editform.emailR.$invalid && !editform.emailR.$pristine,'no-errors' : editform.emailR.$valid}">
+          <input placeholder="E-mail..." type="email" autocomplete="off" name="emailR" ng-model="usernew.email" required/>
+        </label>
+        <div class="padding" ng-show="editform.emailR.$invalid && !editform.emailR.$pristine"
+             style="background-color: #ef473a;color:white">
+          <ion-icon class="ion-close-circled"></ion-icon>
+          <span ng-show="editform.emailR.$invalid"> Wrong Email Format!</span>
+        </div>
+        <label class="item item-input" style="padding-right: 15px"
+               ng-class="{'has-errors' : !editform.passwordR2.$pristine && editform.passwordR2.$invalid  && editform.passwordR2.$error,'no-errors' : editform.passwordR2.$valid}">
+          <input placeholder="Confirm Password..." type="password" autocomplete="off" ng-minlength="6" id="passwordR2"
+                 name="passwordR2"
+                 ng-model="Check"
+                 required/>
+        </label>
+        <label class="item">
+          <button class="button button-block button-full button-positive"
+                  ng-disabled="(((registerform.$invalid||pic!=true)&&(registerform.$invalid||!$flow.files.length==0))?true:false)"
+                  type="submit" ng-click="updateInfo($flow)">Update Information
+          </button>
+        </label>
+      </div>
+    </form>
+  </ion-content>
+</ion-view>

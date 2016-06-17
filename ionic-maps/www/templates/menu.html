@@ -14,22 +14,51 @@
     <ion-nav-view name="menuContent"></ion-nav-view>
   </ion-side-menu-content>
 
-  <ion-side-menu side="left">
-    <ion-header-bar class="bar-stable">
-      <h1 class="title">Menu</h1>
+  <ion-side-menu side="left" ng-controller="MenuCtrl" flow-init>
+    <ion-header-bar style="height: 150px!important;margin: 0!important;padding: 0!important;">
+      <ion-list style="width: 275px!important;">
+        <ion-item class="bar bar-dark" style="left: 0;right: 0">
+          <h1 class="title menu-side" style="left: 0!important;right: 0!important;">Menu</h1>
+        </ion-item>
+        <ion-item class="item bar bar-dark" style="height: 100%!important;">
+          <div class="circular" style="text-align: center;">
+            <img src="../img/ionic.png" ng-src="data:{{user.images[0].contentType}};base64, {{user.images[0].content}}" flow-btn/>
+          </div>
+        </ion-item>
+        <ion-item class="bar bar-dark" style="text-align: center;height: 100%!important;">
+          <span>{{user.name}}</span>
+        </ion-item>
+        <ion-item class="bar bar-dark" style="text-align: center;height: 100%!important;">
+          <span>{{user.email}}</span>
+        </ion-item>
+      </ion-list>
     </ion-header-bar>
-    <ion-content>
+    <ion-content style="top: 337px!important;">
       <ion-list>
-        <ion-item id="menuB" menu-close ng-click="login()">
-          Login
+        <ion-item style="height: 100%!important;background-color: firebrick;color: white"
+                  ng-click="logout()">
+          <i class="icon" ng-class="'ion-power'"></i>
+          &nbsp;
+          Log out
+        </ion-item>
+        <ion-item menu-close ng-show="hasRole('Admin')" ui-sref="app.admin" ng-click="toggleLeft()">
+          <i class="icon" ng-class="'ion-ios-briefcase'"></i>
+          &nbsp;
+          Admin Page
         </ion-item>
         <ion-item menu-close href="#/app/home">
-          Home
+          <i class="icon" ng-class="'ion-map'"></i>
+          &nbsp;
+          <span>Map</span>
         </ion-item>
-        <ion-item menu-close href="#/app/history">
-          History
-        </ion-item>
+        <ion-item menu-close ui-sref="app.manageAccount" ng-click="toggleLeft()">
+            <i class="icon" ng-class="'ion-person'"></i>
+            &nbsp;
+            Manage Account
+          </ion-item>
         <ion-item menu-close href="#/app/AboutUs">
+          <i class="icon" ng-class="'ion-information-circled'"></i>
+          &nbsp;
           About Us
         </ion-item>
       </ion-list>

@@ -1,0 +1,22 @@
+{
+  "name": "angular-decorate",
+  "main": "angular-decorate.js",
+  "version": "0.1.0",
+  "homepage": "https://github.com/damienklinnert/angular-decorate",
+  "authors": [
+    "Damien Klinnert <mail@damienklinnert.de>"
+  ],
+  "description": "Use AngularJS' decorate function with ease",
+  "keywords": [
+    "angular",
+    "decorate"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

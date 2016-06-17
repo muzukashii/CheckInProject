@@ -4,15 +4,14 @@ package camt.se331.shoppingcart.config;
 import camt.se331.shoppingcart.common.SerializableResourceBundleMessageSource;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.*;
-import org.springframework.web.multipart.MultipartResolver;
-import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.LocaleResolver;
-import org.springframework.web.servlet.config.annotation.*;
+import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
-import org.springframework.web.servlet.view.JstlView;
-import org.springframework.web.servlet.view.UrlBasedViewResolver;
 
 import java.util.Locale;
 
