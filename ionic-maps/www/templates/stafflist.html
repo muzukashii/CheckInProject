@@ -1,17 +1,38 @@
 <ion-view view-title="Staff List">
-  <ion-nav-buttons side="secondary">
-    <button class="button" ng-click="popover.show($event)">Filter</button>
-  </ion-nav-buttons>
   <ion-content>
     <ion-item>
-      <div class="list" ng-repeat="(key,value) in stafflist | groupBy : 'companyrole':true">
+      <div class="list">
+        <div class="item">
+          <form>
+            <h2>Search for staff</h2>
+            <div class="input-field col s6">
+              <i class="icon ion-ios-search-outline"></i>
+              <input placeholder="Search..." ng-model="UserSearch" type="text">
+            </div>
+            <h2>Sort By</h2>
+            <p>
+              <input name="group1" type="radio" id="test1" ng-click="MySelected('companyrole')" checked/>
+              <label for="test1">Position</label>
+            </p>
+            <p>
+              <input name="group1" type="radio" id="test2" ng-click="MySelected('id')" />
+              <label for="test2">ID</label>
+            </p>
+          </form>
+      </div>
+      </div>
+      <div class="list" ng-repeat="(key,value) in stafflist | groupBy : Filter"
+           ng-hide="key==user.companyrole||key==user.id">
         <div class="item item-divider">
-          {{choose}} : {{key}}
+          {{choose}} : {{key}} <a ng-hide="Filter=='id'">({{value.length}})</a>
         </div>
-        <a class="item item-avatar" ng-repeat="staff in value">
+        <a class="item item-avatar" ng-repeat="staff in value | filter:UserSearch" ng-show="staff.username!=user.username">
             <img src="../img/ionic.png" ng-src="data:{{staff.images[0].contentType}};base64,{{staff.images[0].content}}">
           <h2>{{staff.name}}</h2>
+          <button ng-hide="staff.companyrole=='Admin'||staff.roles[0].roleName=='Admin'" class="waves-effect waves-light btn" ng-click="Addadminrole(staff.id,staff)">Add to admin level</button>
+          <button ng-show="staff.companyrole=='Admin'||staff.roles[0].roleName=='Admin'" class="waves-effect red lighten-2 btn" ng-click="Removeadminrole(staff.id,staff.roles[0].id)">Remove from admin level</button>
           <hr class="style-six">
+          <h3 ng-hide="staff.checkins.length>0">Not checked in yet..</h3>
           <div ng-repeat="time in staff.checkins | orderBy:'time':true | limitTo:1 ">
             Latest Checkin : {{time.time | date:'yyyy-MM-dd HH:mm:ss Z'}} | At : {{time.location}} | Type : {{time.type}}
           </div>

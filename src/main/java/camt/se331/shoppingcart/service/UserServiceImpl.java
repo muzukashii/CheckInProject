@@ -59,10 +59,6 @@ public class UserServiceImpl implements UserService {
         return userRepository.save(user);
     }
 
-    @Override
-    public User ChangeRoleUserToAdmin(User user) {
-        return userRepository.save(user);
-    }
 
     @Override
     public User removeImage(User user, Long id) {
@@ -82,6 +78,30 @@ public class UserServiceImpl implements UserService {
         user.getCheckins().add(checkin);
         return userRepository.save(user);
     }
+
+    @Override
+    public User addRoletoUser(User user) {
+        Role adminRole = new Role("Admin");
+        Set<Role> roles = new HashSet<>();
+        roles.add(adminRole);
+        user.setRoles(roles);
+        return userRepository.save(user);
+    }
+
+    @Override
+    public User RemoveRole(User user, Long roleid) {
+        Iterator<Role> roleitr = user.getRoles().iterator();
+        while(roleitr.hasNext()){
+            Role role = roleitr.next();
+            if(role.getId().intValue() == roleid.intValue()){
+                user.getRoles().remove(role);
+            }
+
+        }
+        userRepository.save(user);
+        return user;
+    }
+
 
     @Override
     public User addUser(User user) {

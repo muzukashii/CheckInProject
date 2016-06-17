@@ -8,6 +8,8 @@
     .factory('RemoveImageService', RemoveImageService)
     .factory('CompanyRoleService', CompanyRoleService)
     .factory('AuthenticateService',AuthenticateService)
+    .factory('AddRoleService',AddRoleService)
+    .factory('RemoveRoleService',RemoveRoleService)
 
 
   /** @ngInject */
@@ -56,6 +58,24 @@
   };
 
   /** @ngInject */
+  function AddRoleService($resource) {
+    return $resource('/role/:id', {id: '@_id'}, {
+      update: {
+        method: 'PUT' // this method issues a PUT request
+      }
+    });
+  }
+
+  /** @ngInject */
+  function RemoveRoleService($resource) {
+    return $resource('/role:id', {id: '@_id'}, {
+      update: {
+        method: 'DELETE' // this method issues a PUT request
+      }
+    });
+  }
+
+  /** @ngInject */
   function AuthenticateService($resource) {
     return $resource('/user/:action', {},
       {
@@ -64,7 +84,7 @@
           params: {'action': 'authenticate'},
           header: {'Content-Type': 'application/x-www-form-urlencoded'}
         }
-      })
-  }
+      });
+  };
 
 })();

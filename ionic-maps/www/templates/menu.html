@@ -35,13 +35,13 @@
     </ion-header-bar>
     <ion-content style="top: 337px!important;">
       <ion-list>
-        <ion-item style="height: 100%!important;background-color: firebrick;color: white"
+        <ion-item style="height: 100%!important;background-color: #ff2525;color: white"
                   ng-click="logout()">
           <i class="icon" ng-class="'ion-power'"></i>
           &nbsp;
           Log out
         </ion-item>
-        <ion-item menu-close ng-show="hasRole('Admin')" ui-sref="app.admin" ng-click="toggleLeft()">
+        <ion-item menu-close ng-show="user.companyrole=='Admin'||user.roles[0].roleName=='Admin'" ui-sref="app.admin" ng-click="toggleLeft()">
           <i class="icon" ng-class="'ion-ios-briefcase'"></i>
           &nbsp;
           Admin Page

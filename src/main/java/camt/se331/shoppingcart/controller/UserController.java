@@ -29,12 +29,12 @@ public class UserController {
     }
 
     @RequestMapping(value = "login",method = RequestMethod.GET)
-    public  User getListByName(@RequestParam("username")String username){
+    public  User getUserbyUsername(@RequestParam("username")String username){
         return userService.findByUserName(username);
     }
 
     @RequestMapping(value = "userControl/{id}",method = RequestMethod.GET)
-    public  User getUser(@PathVariable("id") Long id){
+    public  User getUserbyId(@PathVariable("id") Long id){
         return userService.getUser(id);
     }
 
@@ -42,6 +42,19 @@ public class UserController {
     public  User edit(@PathVariable("id") Long id,@RequestBody User user, BindingResult bindingResult){
         return userService.updateUser(user);
     }
+
+    @RequestMapping(value = "role/{id}",method = RequestMethod.PUT)
+    public  User addrole(@PathVariable("id") Long userId,@RequestBody User user){
+        return userService.addRoletoUser(user);
+    }
+
+    @RequestMapping(value = "role",method = RequestMethod.DELETE)
+    @ResponseBody
+    public  User delete(@RequestParam("userid") Long userId,@RequestParam("roleid") Long roleid){
+        User user = userService.getUser(userId);
+        return userService.RemoveRole(user,roleid);
+    }
+
 //    //not use yet
 //    @RequestMapping(value = "changera/{id}",method = RequestMethod.PUT)
 //    public @ResponseBody User update(@RequestBody User user, BindingResult bindingResult){

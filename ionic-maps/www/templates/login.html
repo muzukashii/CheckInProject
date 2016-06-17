@@ -17,20 +17,28 @@
     border-radius: 10px;
     margin: 10px 75px 10px 75px;"
                  ng-class="{'has-errors' : loginform.username.$invalid && !loginform.username.$pristine,'no-errors' : loginform.username.$valid}">
-            <input class="tooltip" ng-minlength="4" placeholder="Username..." id="mytextbox1" type="text" autocomplete="off"
+            <i class="small material-icons ion-ios-contact-outline"></i>
+            <div class="input-field col s12">
+            <input style="margin-left: 10px" class="tooltip" ng-minlength="4" id="mytextbox1" type="text" autocomplete="off"
                    name="username" ng-model="login.username" required/>
+              <label for="mytextbox1">Username</label>
+            </div>
           </label>
           <label class="item item-input" style="border-color:transparent;padding-right: 16px;
     border-radius: 10px;
     margin: 10px 75px 10px 75px;"
                  ng-class="{'has-errors' : loginform.password.$invalid && !loginform.password.$pristine,'no-errors' : loginform.password.$valid}">
-            <input type="password" ng-minlength="6" placeholder="Password..." id="mytextbox2" autocomplete="off" name="password"
+            <i class="small material-icons ion-ios-locked-outline"></i>
+            <div class="input-field col s12">
+            <input style="margin-left: 10px" type="password" ng-minlength="6" id="mytextbox2" autocomplete="off" name="password"
                    ng-model="login.password" required/>
+              <label for="mytextbox2">Password</label>
+            </div>
           </label>
           <label class="item" style="background-color:transparent;border-color:transparent;padding-right: 16px;
     border-radius: 10px;
     margin: 10px 75px 10px 75px;">
-            <button class="button button-block button-full button-light" ng-disabled="loginform.$invalid"
+            <button class="waves-effect waves-light btn button-full" ng-disabled="loginform.$invalid"
                     type="submit" ng-click="login.doLogin()">Log in
             </button>
           </label>

@@ -81,12 +81,14 @@
 
       $rootScope.hasRole = function (role) {
         if ($rootScope.user == undefined) {
-          return false
-        } else if ($rootScope.user.companyrole == role) {
-          return true
-        } else {
           return false;
         }
+
+        if ($rootScope.user.roles[role] == undefined) {
+          return false;
+        }
+
+        return $rootScope.user.roles[role];
       }
 
       $rootScope.$on('$ionicView.loaded',function (event, data) {
@@ -102,6 +104,9 @@
 
       var userLocalStorage = window.localStorage.getItem("Cookies");
       if (userLocalStorage !== undefined && userLocalStorage !== null) {
+        $ionicLoading.show({
+          template: '<ion-spinner class="spinner-balanced"></ion-spinner><p style="color:white">Loading...</p>'
+        })
         window.localStorage.clear();
         UserService.get({username: userLocalStorage}, function (user) {
           $rootScope.user = user;
@@ -112,9 +117,6 @@
             historyRoot: true
           })
           window.localStorage.setItem("Cookies", user.username);
-          $ionicLoading.show({
-            template: '<ion-spinner class="spinner-balanced"></ion-spinner><p style="color:white">Loading...</p>'
-          })
           $timeout(function () {
             $ionicLoading.hide();
             $state.go('app.map')
@@ -150,7 +152,6 @@
 
         .state('app', {
           url: '/app',
-          cache: false,
           templateUrl: 'templates/menu.html',
           controller: 'MenuCtrl'
         })
@@ -177,7 +178,6 @@
 
         .state('app.stafflist', {
           url: '/stafflist',
-          cache:false,
           views: {
             'menuContent': {
               templateUrl: 'templates/stafflist.html',
@@ -188,7 +188,6 @@
 
         .state('app.Contactlist', {
           url: '/Contactlist',
-          cache:false,
           views: {
             'menuContent': {
               templateUrl: 'templates/Contactlist.html',

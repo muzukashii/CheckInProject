@@ -16,7 +16,8 @@ public interface UserService {
      User findUserByEmail(String username);
      User login(String email, String password);
      User updateUser(User user);
-     User ChangeRoleUserToAdmin(User user);
      User removeImage(User user, Long id);
      User Checkin(User user, Checkin checkin);
+     User addRoletoUser(User user);
+     User RemoveRole(User user, Long roleid);
 }
