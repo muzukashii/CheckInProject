@@ -22,7 +22,8 @@
         </ion-item>
         <ion-item class="item bar bar-dark" style="height: 100%!important;">
           <div class="circular" style="text-align: center;">
-            <img src="../img/ionic.png" ng-src="data:{{user.images[0].contentType}};base64, {{user.images[0].content}}" flow-btn/>
+            <img src="../img/ionic.png" ng-src="data:{{user.images[0].contentType}};base64, {{user.images[0].content}}"
+                 flow-btn/>
           </div>
         </ion-item>
         <ion-item class="bar bar-dark" style="text-align: center;height: 100%!important;">
@@ -41,7 +42,7 @@
           &nbsp;
           Log out
         </ion-item>
-        <ion-item menu-close ng-show="user.companyrole=='Admin'||user.roles[0].roleName=='Admin'" ui-sref="app.admin" ng-click="toggleLeft()">
+        <ion-item menu-close ng-show="user.roles[0].roleName=='Admin'" ui-sref="app.admin" ng-click="toggleLeft()">
           <i class="icon" ng-class="'ion-ios-briefcase'"></i>
           &nbsp;
           Admin Page
@@ -52,10 +53,10 @@
           <span>Map</span>
         </ion-item>
         <ion-item menu-close ui-sref="app.manageAccount" ng-click="toggleLeft()">
-            <i class="icon" ng-class="'ion-person'"></i>
-            &nbsp;
-            Manage Account
-          </ion-item>
+          <i class="icon" ng-class="'ion-person'"></i>
+          &nbsp;
+          Manage Account
+        </ion-item>
         <ion-item menu-close href="#/app/AboutUs">
           <i class="icon" ng-class="'ion-information-circled'"></i>
           &nbsp;

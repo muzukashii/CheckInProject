@@ -91,10 +91,10 @@
         return $rootScope.user.roles[role];
       }
 
-      $rootScope.$on('$ionicView.loaded',function (event, data) {
+      $rootScope.$on('$ionicView.loaded', function (event, data) {
         var userLocalStorage = window.localStorage.getItem("Cookies");
-        if(data.stateName!='register'){
-          if($rootScope.user==null||userLocalStorage==null){
+        if (data.stateName != 'register') {
+          if ($rootScope.user == null || userLocalStorage == null) {
             event.preventDefault();
             $state.go('login')
           }
@@ -121,8 +121,25 @@
             $ionicLoading.hide();
             $state.go('app.map')
           }, 5000)
+        }, function (error) {
+          window.localStorage.clear();
+          delete $rootScope.user;
+          $ionicHistory.clearHistory;
+          $ionicHistory.clearCache();
+          $ionicHistory.nextViewOptions({
+            disableBack: true,
+            historyRoot: true
+          })
+          console.log(error)
+          $ionicLoading.hide();
+          $state.go('login')
         })
       } else {
+        $ionicHistory.nextViewOptions({
+          disableBack: true,
+          historyRoot: true
+        })
+        $ionicHistory.clearHistory();
         $ionicLoading.hide();
         $state.go('login')
       }
@@ -133,7 +150,7 @@
       $ionicConfigProvider.navBar.alignTitle('center')
     })
 
-    .config(function ($stateProvider,$urlRouterProvider) {
+    .config(function ($stateProvider, $urlRouterProvider) {
       $stateProvider
 
         .state('login', {
@@ -208,7 +225,7 @@
 
         .state('app.editAccount', {
           url: '/editAccount',
-          cache:false,
+          cache: false,
           views: {
             'menuContent': {
               templateUrl: 'templates/editAccount.html',
@@ -219,7 +236,7 @@
 
         .state('app.history', {
           url: '/history',
-          cache:false,
+          cache: false,
           views: {
             'menuContent': {
               templateUrl: 'templates/history.html'
@@ -241,8 +258,6 @@
       $urlRouterProvider.otherwise("/login");
 
     })
-
-
 
 
   /** @ngInject */

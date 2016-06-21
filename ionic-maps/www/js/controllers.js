@@ -93,30 +93,30 @@
     .controller('LoginController', function ($scope, $location, $cookies, $ionicPopup, $rootScope, $ionicModal, $state, $ionicLoading, $timeout, $ionicHistory, UserService) {
       var vm = this;
 
-      function serializeData( data ) {
+      function serializeData(data) {
         // If this is not an object, defer to native stringification.
-        if ( ! angular.isObject( data ) ) {
-          return( ( data == null ) ? "" : data.toString() );
+        if (!angular.isObject(data)) {
+          return ( ( data == null ) ? "" : data.toString() );
         }
 
         var buffer = [];
 
         // Serialize each key in the object.
-        for ( var name in data ) {
-          if ( ! data.hasOwnProperty( name ) ) {
+        for (var name in data) {
+          if (!data.hasOwnProperty(name)) {
             continue;
           }
 
-          var value = data[ name ];
+          var value = data[name];
 
           buffer.push(
-            encodeURIComponent( name ) + "=" + encodeURIComponent( ( value == null ) ? "" : value )
+            encodeURIComponent(name) + "=" + encodeURIComponent(( value == null ) ? "" : value)
           );
         }
 
         // Serialize the buffer and clean it up for transportation.
-        var source = buffer.join( "&" ).replace( /%20/g, "+" );
-        return( source );
+        var source = buffer.join("&").replace(/%20/g, "+");
+        return ( source );
       }
 
 
@@ -124,18 +124,14 @@
         $ionicLoading.show({
           template: '<ion-spinner class="spinner-spiral"></ion-spinner><p style="color:white">Loading...</p>'
         });
-        console.log(vm.username)
-        console.log(vm.password)
         UserService.get({username: vm.username}
           , function (user) {
-            console.log(user)
             var key, count = 0;
             for (key in user) {
               if (user.hasOwnProperty(key)) {
                 count++;
               }
             }
-            console.log(count);
             if (count > 2) {
               if (vm.password == user.password) {
                 $rootScope.user = user;
@@ -271,7 +267,7 @@
         controlText.style.lineHeight = '38px';
         controlText.style.paddingLeft = '5px';
         controlText.style.paddingRight = '5px';
-        controlText.innerHTML = '<i class="icon ion-ios-locate-outline"></i> Recall my location';
+        controlText.innerHTML = '<i class="icon ion-location"></i> Recall my location';
         controlUI.appendChild(controlText);
 
         // Setup the click event listeners: simply set the map to Chicago.
@@ -444,7 +440,6 @@
       $scope.form = document.getElementById("registerform");
       $scope.pic = false;
       $scope.user = {};
-      $scope.user = {companyrole: 'Chairman'}
 
       $scope.$on('$ionicView.enter', function () {
         $ionicLoading.show({
@@ -458,6 +453,7 @@
 
       $scope.queryPromise = CompanyRoleService.query(function (data) {
         $scope.rolelist = data;
+        $scope.user = {companyrole: 'Chairman'}
       })
 
 
@@ -550,16 +546,18 @@
 
 
     /** @ngInject */
-    .controller('editAccountController', function (CompanyRoleService,$ionicHistory, RemoveImageService, $timeout, UserService, $scope, $rootScope, $ionicPopup, UserControlService, $ionicLoading) {
+    .controller('editAccountController', function (CompanyRoleService, $ionicHistory, RemoveImageService, $timeout, UserService, $scope, $rootScope, $ionicPopup, UserControlService, $ionicLoading) {
 
 
       $scope.usernew = {}
-      $scope.usernew.name = $rootScope.user.name;
-      $scope.usernew.email = $rootScope.user.email;
-      $scope.usernew.tel = $rootScope.user.tel;
       $scope.Check = null;
       $scope.pic = false;
-      $scope.user = {companyrole: 'Chairman'}
+
+      $scope.usernew.email = $rootScope.user.email;
+      $scope.usernew.tel = $rootScope.user.tel;
+      $scope.usernew.companyrole = $rootScope.user.companyrole;
+      $scope.usernew.name = $rootScope.user.name;
+
 
       $scope.$on('$ionicView.enter', function () {
         $ionicLoading.show({
@@ -573,7 +571,6 @@
           $ionicLoading.hide()
         }, 2000)
       });
-
 
 
       $scope.validate = function (file) {
@@ -605,8 +602,8 @@
             email: $scope.usernew.email,
             password: $rootScope.user.password,
             roles: $rootScope.user.roles,
-            tel:$scope.usernew.tel,
-            companyrole:$scope.usernew.companyrole
+            tel: $scope.usernew.tel,
+            companyrole: $scope.usernew.companyrole
           }
           console.log($scope.usernew);
           $ionicLoading.show({
@@ -702,7 +699,7 @@
 
 
     /**@ngInject */
-    .controller('StafflistController', function (RemoveRoleService,AddRoleService, $ionicPopover, $ionicPopup, $state, $scope, $rootScope, UserControlService, $ionicHistory, $ionicLoading, $timeout) {
+    .controller('StafflistController', function (RemoveRoleService, AddRoleService, $ionicPopover, $ionicPopup, $state, $scope, $rootScope, UserControlService, $ionicHistory, $ionicLoading, $timeout) {
 
       $scope.$on('$ionicView.enter', function () {
         $ionicLoading.show({
@@ -712,6 +709,7 @@
         if ($rootScope.user != null) {
           UserControlService.query(function (data) {
             $scope.stafflist = data;
+            $ionicLoading.hide()
           }, function (error) {
             $ionicPopup.alert({
               title: 'Failed!',
@@ -731,42 +729,22 @@
           $ionicHistory.clearHistory()
           $state.go('login')
         }
-        $timeout(function () {
-          $ionicLoading.hide()
-        }, 1000)
+
       });
 
-        $scope.Filter = 'companyrole';
-        $scope.choose = 'Position';
-
-
-      $scope.MySelected = function (select) {
-        $scope.Filter = select;
-        console.log("First..." + $scope.Filter)
-        if (select == 'companyrole') {
-          $scope.Filter = select;
-          $scope.choose = 'Position'
-          console.log($scope.Filter)
-        } else if (select == 'id') {
-          $scope.Filter = select;
-          $scope.choose = 'Staff ID'
-          console.log($scope.Filter)
-        }
-      }
-
-      $scope.Addadminrole = function (userid,user) {
+      $scope.Addadminrole = function (userid, user) {
         $scope.staff = user
         $ionicLoading.show({
           content: '<i class="icon ion-loading"></i>',
           template: '<ion-spinner class="spinner-balanced"></ion-spinner><p style="color: white">Loading..</p>'
         });
-        AddRoleService.update({id: userid},$scope.staff).$promise.then(function (res) {
+        AddRoleService.update({id: userid}, $scope.staff).$promise.then(function (res) {
           $timeout(function () {
             UserControlService.query(function (data) {
               $scope.stafflist = data;
             })
             $ionicLoading.hide();
-          },1500)
+          }, 1500)
 
         }, function (error) {
           console.log(error);
@@ -781,15 +759,15 @@
           content: '<i class="icon ion-loading"></i>',
           template: '<ion-spinner class="spinner-balanced"></ion-spinner><p style="color: white">Loading..</p>'
         });
-        RemoveRoleService.delete({userid:userid , roleid:roleid}).$promise.then(function (res) {
+        RemoveRoleService.delete({userid: userid, roleid: roleid}).$promise.then(function (res) {
           $timeout(function () {
             UserControlService.query(function (data) {
               $scope.stafflist = data;
               console.log(res)
             })
             $ionicLoading.hide();
-          },1500)
-        },function (error) {
+          }, 1500)
+        }, function (error) {
           console.log(error)
           $ionicLoading.hide();
         })

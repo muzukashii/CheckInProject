@@ -78,7 +78,7 @@
           </div>
         </label>
         <div class="item item-divider">
-          Position: <span style="color: darkgreen;font-weight: 500">{{ user.companyrole }}</span>
+          Position: <span style="color: darkgreen;font-weight: 500">{{usernew.companyrole}}</span>
         </div>
         <ion-radio ng-repeat="item in rolelist"
                    ng-value="item.companyrole"
@@ -87,7 +87,7 @@
         </ion-radio>
         <label class="item">
           <button class="button button-block button-full button-positive"
-                  ng-disabled="(((registerform.$invalid||pic!=true)&&(registerform.$invalid||!$flow.files.length==0))?true:false)"
+                  ng-disabled="(((registerform.$invalid||pic!=true||rolelist==undefined)&&(registerform.$invalid||!$flow.files.length==0||rolelist==undefined))?true:false)"
                   type="submit" ng-click="updateInfo($flow)">Update Information
           </button>
         </label>

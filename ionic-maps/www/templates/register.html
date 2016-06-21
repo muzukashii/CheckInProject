@@ -146,9 +146,9 @@
         </ion-radio>
         <label class="item">
           <span style="color: red;font-weight: 600"
-                ng-hide="rolelist.length>0">Please Check your internet connection!</span>
+                ng-hide="rolelist!=undefined">Please Check your internet connection!</span>
           <button class="button button-block button-full button-positive"
-                  ng-disabled="(((registerform.$invalid||pic!=true)&&(registerform.$invalid||!$flow.files.length==0)||(rolelist.length==0))?true:false)"
+                  ng-disabled="(((registerform.$invalid||pic!=true||rolelist==undefined)&&(registerform.$invalid||!$flow.files.length==0||rolelist==undefined))?true:false)"
                   type="submit" ng-click="sendRegister($flow)">Register
           </button>
         </label>

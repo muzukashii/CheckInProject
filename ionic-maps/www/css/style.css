@@ -82,8 +82,8 @@ div.upload {
   border-right: 5px solid #3d8b3d!important;
 }
 .optionalClass {
-  border-left: 5px solid #e3e214 !important;
-  border-right: 5px solid #e3e214 !important;
+  border-left: 5px solid transparent !important;
+  border-right: 5px solid transparent !important;
 }
  div.upload input {
        display: block !important;
