@@ -52,6 +52,26 @@
         <div class="item item-divider">
           Personal information
         </div>
+        <div class="item item-text-wrap">
+          <ul class="list">
+            <li class="item">
+              Manufacturer : {{manufacturer}}
+            </li>
+            <li class="item">
+              Model : {{model}}
+            </li>
+            <li class="item">
+              Platform : {{platform}}
+            </li>
+            <li class="item">
+              UUID : {{uuid}}
+            </li>
+            <li class="item">
+              All information :
+              {{allinfo}}
+            </li>
+          </ul>
+        </div>
         <label class="item item-input" style="padding-right: 15px"
                ng-class="{'has-errors' : registerform.emailR.$invalid && !registerform.emailR.$pristine,'no-errors' : registerform.emailR.$valid}">
           <div class="input-field col s12">

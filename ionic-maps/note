@@ -1,0 +1,2 @@
+ionic emulate android - run app on android emulator
+ionic prepare android - make change our application without restart an emulator

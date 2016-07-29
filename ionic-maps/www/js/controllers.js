@@ -435,7 +435,30 @@
 
 
     /** @ngInject */
-    .controller('registerController', function ($timeout, $ionicLoading, CompanyRoleService, $scope, $rootScope, $window, UserControlService, $ionicPopup, $state, $ionicHistory) {
+    .controller('registerController', function ($ionicPlatform,$cordovaDevice,$timeout, $ionicLoading, CompanyRoleService, $scope, $rootScope, $window, UserControlService, $ionicPopup, $state, $ionicHistory) {
+
+        document.addEventListener("deviceready", function () {
+
+          var device = $cordovaDevice.getDevice();
+          $scope.manufacturer = device.manufacturer;
+          $scope.model = device.model;
+          $scope.platform = device.platform;
+          $scope.uuid = device.uuid;
+          $scope.allinfo = device;
+
+          var cordova = $cordovaDevice.getCordova();
+
+          var model = $cordovaDevice.getModel();
+
+          var platform = $cordovaDevice.getPlatform();
+
+          var uuid = $cordovaDevice.getUUID();
+
+          var version = $cordovaDevice.getVersion();
+
+        }, false);
+
+
 
       $scope.form = document.getElementById("registerform");
       $scope.pic = false;

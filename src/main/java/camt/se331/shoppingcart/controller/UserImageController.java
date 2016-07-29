@@ -51,7 +51,7 @@ public class UserImageController {
 
     @RequestMapping(value = "/remove",method = RequestMethod.DELETE)
     @ResponseBody
-    public  User edit(@RequestParam("userid") Long userId,@RequestParam("imageid") Long imageid){
+    public  User removeImage(@RequestParam("userid") Long userId,@RequestParam("imageid") Long imageid){
         User user = userService.getUser(userId);
         //System.out.println("----------- " + productId + " --------" + imageid);
         return userService.removeImage(user,imageid);
