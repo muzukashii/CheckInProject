@@ -1,10 +1,17 @@
 package camt.se331.shoppingcart.controller;
+import camt.se331.shoppingcart.entity.Image;
 import camt.se331.shoppingcart.entity.User;
 import camt.se331.shoppingcart.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -29,8 +36,13 @@ public class UserController {
     }
 
     @RequestMapping(value = "login",method = RequestMethod.GET)
-    public  User getUserbyUsername(@RequestParam("username")String username){
-        return userService.findByUserName(username);
+    public  User Login(@RequestParam("username") String username,@RequestParam("password")String password){
+        return userService.Login(username,password);
+    }
+
+    @RequestMapping(value = "ValidateEmail",method = RequestMethod.POST)
+    public @ResponseBody boolean ValidateEmail(@RequestParam("email")String email){
+        return userService.ValidateEmail(email);
     }
 
     @RequestMapping(value = "userControl/{id}",method = RequestMethod.GET)
@@ -38,28 +50,60 @@ public class UserController {
         return userService.getUser(id);
     }
 
+    @RequestMapping(value = "autoLogin",method = RequestMethod.GET)
+    public  User autoLogin(@RequestParam("username") String username){
+        return userService.autoLogin(username);
+    }
+
     @RequestMapping(value = "userControl/{id}",method = RequestMethod.PUT)
     public  User edit(@PathVariable("id") Long id,@RequestBody User user, BindingResult bindingResult){
         return userService.updateUser(user);
     }
 
-    @RequestMapping(value = "role/{id}",method = RequestMethod.PUT)
-    public  User addrole(@PathVariable("id") Long userId,@RequestBody User user){
+    @RequestMapping(value = "role",method = RequestMethod.PUT)
+    public  User addRole(@RequestBody User user){
         return userService.addRoletoUser(user);
     }
 
     @RequestMapping(value = "role",method = RequestMethod.DELETE)
-    @ResponseBody
-    public  User delete(@RequestParam("userid") Long userId,@RequestParam("roleid") Long roleid){
+    @ResponseBody public  User deleteRole(@RequestParam("userid") Long userId,@RequestParam("roleid") Long roleId){
         User user = userService.getUser(userId);
-        return userService.RemoveRole(user,roleid);
+        return userService.RemoveRole(user,roleId);
     }
 
-//    //not use yet
-//    @RequestMapping(value = "changera/{id}",method = RequestMethod.PUT)
-//    public @ResponseBody User update(@RequestBody User user, BindingResult bindingResult){
-//        return userService.ChangeRoleUserToAdmin(user);
-//    }
+    @RequestMapping(value = "/userimage/add", method = RequestMethod.POST)
+    @ResponseBody public User addImage(HttpServletRequest request,
+                         HttpServletResponse response, @RequestParam("UserId") Long UserId) {
+        MultipartHttpServletRequest mRequest;
+        User user = userService.getUser(UserId);
+        try {
+            mRequest = (MultipartHttpServletRequest) request;
+            Iterator<String> itr = mRequest.getFileNames();
+            while (itr.hasNext()) {
+                MultipartFile multipartFile = mRequest.getFile(itr.next());
+                Image image2 = new Image();
+                image2.setFileName(multipartFile.getOriginalFilename());
+                image2.setContentType(multipartFile.getContentType());
+                image2.setContent(multipartFile.getBytes());
+                image2.setCreated("");
+                userService.addImage(user,image2);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+        return user;
+    }
+
+    @RequestMapping(value = "/userimage/remove",method = RequestMethod.DELETE)
+    @ResponseBody
+    public  User removeImage(@RequestParam("userid") Long userId,@RequestParam("imageid") Long imageid){
+        User user = userService.getUser(userId);
+        //System.out.println("----------- " + productId + " --------" + imageid);
+        return userService.removeImage(user,imageid);
+    }
+
 
 
 }

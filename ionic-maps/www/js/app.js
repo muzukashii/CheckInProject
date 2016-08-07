@@ -1,12 +1,12 @@
 (function () {
   'use strict';
-  var API_PREFIX = 'http://10.74.20.33:8080';
+  var API_PREFIX = 'http://localhost:8080';
   angular.module('ngResource+apiPrefix', ['ngResource'])
   angular.module('starter.controllers', [])
   angular.module('starter.services', [])
   angular.module('starter', ['ionic', 'ionic.service.core', 'ngCordova', 'ngResource',
     'ngCookies', 'starter.controllers', 'starter.services', 'flow', 'ngRoute', 'ui.router',
-    'http-auth-interceptor', 'LocalStorageModule', 'cgBusy', 'ngAnimate', 'angular.filter'])
+    'http-auth-interceptor', 'LocalStorageModule', 'cgBusy', 'ngAnimate', 'angular.filter','ionic-modal-select'])
 
     .config(configFailRequestRedirect)
 
@@ -40,7 +40,7 @@
       });
     })
 
-    .run(function ($rootScope, $state, $location, $cookies, $ionicPopup, $ionicLoading, $timeout, $ionicHistory, UserService) {
+    .run(function ($rootScope, $state, $location, $cookies, $ionicPopup, $ionicLoading, $timeout, $ionicHistory, UserService,AutoLoginService) {
       var removeErrorMsg = $rootScope.$on('$viewContentLoaded', function () {
         delete $rootScope.error;
       });
@@ -108,7 +108,8 @@
           template: '<ion-spinner class="spinner-balanced"></ion-spinner><p style="color:white">Loading...</p>'
         })
         window.localStorage.clear();
-        UserService.get({username: userLocalStorage}, function (user) {
+        AutoLoginService.get({username: userLocalStorage}
+        , function (user) {
           $rootScope.user = user;
           $ionicHistory.clearHistory();
           $ionicHistory.clearCache();

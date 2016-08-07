@@ -4,7 +4,7 @@
       <button class="button button-stable" ng-click="register()">Register Here</button>
     </ion-nav-buttons>
   </ion-nav-bar>
-  <ion-content ng-controller="LoginController as login">
+  <ion-content ng-controller="LoginController">
     <div>
       <form id="loginform" name="loginform" novalidate>
         <div class="list">
@@ -19,8 +19,8 @@
                  ng-class="{'has-errors' : loginform.username.$invalid && !loginform.username.$pristine,'no-errors' : loginform.username.$valid}">
             <i class="small material-icons ion-ios-contact-outline"></i>
             <div class="input-field col s12">
-            <input style="margin-left: 10px" class="tooltip" ng-minlength="4" id="mytextbox1" type="text" autocomplete="off"
-                   name="username" ng-model="login.username" required/>
+            <input style="margin-left: 10px" class="tooltip" ng-minlength="4" id="mytextbox1" type="email" autocomplete="off"
+                   name="username" ng-model="username" required/>
               <label for="mytextbox1">Username</label>
             </div>
           </label>
@@ -31,7 +31,7 @@
             <i class="small material-icons ion-ios-locked-outline"></i>
             <div class="input-field col s12">
             <input style="margin-left: 10px" type="password" ng-minlength="6" id="mytextbox2" autocomplete="off" name="password"
-                   ng-model="login.password" required/>
+                   ng-model="password" required/>
               <label for="mytextbox2">Password</label>
             </div>
           </label>
@@ -39,7 +39,7 @@
     border-radius: 10px;
     margin: 10px 75px 10px 75px;">
             <button class="waves-effect waves-light btn button-full" ng-disabled="loginform.$invalid"
-                    type="submit" ng-click="login.doLogin()">Log in
+                    type="submit" ng-click="Login()">Log in
             </button>
           </label>
         </div>

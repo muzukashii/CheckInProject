@@ -11,12 +11,11 @@
   <ion-content>
     <form id="registerform" name="registerform" novalidate>
       <div class="form-group card-panel blue-grey darken-2" style="margin:0 !important;"
-           ng-class="{'no-errors': pic!=false,'optionalClass':$flow.files.length==0,'has-errors': ($flow.files.length!=0)}">
+           ng-class="{'optionalClass':$flow.files.length==0,'no-errors': ($flow.files.length!=0)}">
         <div class="col col-100 col-center"
              style="text-align: center;vertical-align: middle;padding-top: 20px;color: whitesmoke">
           <span style="text-align: center;font-size: 30px;">Photo</span><br>
           <span>(Optional : You can add a photo later)</span><br>
-          <span>Limit size : 1 MB</span>
         </div>
 
         <div class="col upload"
@@ -29,22 +28,10 @@
         <div class="transfer-box col" style="text-align: center!important;" ng-repeat="file in $flow.files">
           <div class="resizeImage responsive-img">
             <img style="margin: 20px" flow-img="$flow.files[{{$index}}]">
-            <br>
-            <a class="button button-positive" style="margin: 10px" ng-click="validate(file)">
-              <ion-icon class="ion-arrow-right-a"></ion-icon>
-              Validate File Size! </a>
-            <a class="button button-assertive" style="margin: 10px" ng-click="$flow.cancel();recheck()">
+            <hr>
+            <a class="button button-assertive" style="margin: 10px" ng-click="$flow.cancel()">
               <ion-icon class="ion-close-circled"></ion-icon>
               Cancel </a>
-          </div>
-          <div style="text-align: center!important;margin-bottom: 10px!important;color: white"
-               ng-repeat="error in errors">
-            {{error.error}} - {{error.file.name}}
-          </div>
-          <div style="text-align: center!important;margin: 20px!important;">
-            <span style="border-left: 5px solid #3d8b3d!important;
-  border-right: 5px solid #3d8b3d!important;padding-left: 3px!important;padding-right: 3px!important; color: whitesmoke"
-                  class="label label-info">Size: {{$flow.getSize()/1000}} KB</span>
           </div>
         </div>
       </div>
@@ -52,30 +39,32 @@
         <div class="item item-divider">
           Personal information
         </div>
-        <div class="item item-text-wrap">
-          <ul class="list">
-            <li class="item">
-              Manufacturer : {{manufacturer}}
-            </li>
-            <li class="item">
-              Model : {{model}}
-            </li>
-            <li class="item">
-              Platform : {{platform}}
-            </li>
-            <li class="item">
-              UUID : {{uuid}}
-            </li>
-            <li class="item">
-              All information :
-              {{allinfo}}
-            </li>
-          </ul>
-        </div>
+        <!--<div class="item item-text-wrap">-->
+          <!--<ul class="list">-->
+            <!--<li class="item">-->
+              <!--Manufacturer : {{manufacturer}}-->
+            <!--</li>-->
+            <!--<li class="item">-->
+              <!--Model : {{model}}-->
+            <!--</li>-->
+            <!--<li class="item">-->
+              <!--Platform : {{platform}}-->
+            <!--</li>-->
+            <!--<li class="item">-->
+              <!--UUID : {{uuid}}-->
+            <!--</li>-->
+            <!--<li class="item">-->
+              <!--All information :-->
+              <!--{{allinfo}}-->
+            <!--</li>-->
+          <!--</ul>-->
+        <!--</div>-->
+
         <label class="item item-input" style="padding-right: 15px"
                ng-class="{'has-errors' : registerform.emailR.$invalid && !registerform.emailR.$pristine,'no-errors' : registerform.emailR.$valid}">
-          <div class="input-field col s12">
-            <input type="email" id="box1" autocomplete="off" name="emailR" ng-model="user.email"
+      id}">
+iv class="input-field col s12">
+            <input type="email" id="box1" autocomplete="off" name="emailR" ng-model="user.username"
                    required/>
             <label for="box1">E-mail</label>
           </div>
@@ -106,21 +95,6 @@
              style="background-color: #ef473a;color:white">
           <ion-icon class="ion-close-circled"></ion-icon>
           <span ng-show="registerform.tel.$invalid"> 10Digit and number only!</span>
-        </div>
-        <label class="item item-input" style="padding-right: 15px"
-               ng-class="{'has-errors' : registerform.usernameR.$invalid && !registerform.usernameR.$pristine && registerform.usernameR.$error ,'no-errors' : registerform.usernameR.$valid}">
-          <div class="input-field col s12">
-          <input id="box4" type="text" autocomplete="off" ng-minlength="6" name="usernameR"
-                 ng-model="user.username" required/>
-            <label for="box4">User name</label>
-          </div>
-        </label>
-        <div class="padding"
-             ng-show="registerform.usernameR.$invalid && !registerform.usernameR.$pristine && registerform.usernameR.$error"
-             style="background-color: #ef473a;color:white">
-          <ion-icon class="ion-close-circled"></ion-icon>
-            <span
-              ng-show="registerform.usernameR.$error"> The username must be longer than 6 characters</span>
         </div>
         <label class="item item-input" style="padding-right: 15px"
                ng-class="{'has-errors' : registerform.password.$invalid && !registerform.password.$pristine && registerform.password.$error,'no-errors' : registerform.password.$valid}">
@@ -168,7 +142,7 @@
           <span style="color: red;font-weight: 600"
                 ng-hide="rolelist!=undefined">Please Check your internet connection!</span>
           <button class="button button-block button-full button-positive"
-                  ng-disabled="(((registerform.$invalid||pic!=true||rolelist==undefined)&&(registerform.$invalid||!$flow.files.length==0||rolelist==undefined))?true:false)"
+                  ng-disabled="(((registerform.$invalid||rolelist==undefined)&&(registerform.$invalid||!$flow.files.length==0||rolelist==undefined))?true:false)"
                   type="submit" ng-click="sendRegister($flow)">Register
           </button>
         </label>

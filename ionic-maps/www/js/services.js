@@ -7,9 +7,9 @@
     .factory('UserControlService', UserControlService)
     .factory('RemoveImageService', RemoveImageService)
     .factory('CompanyRoleService', CompanyRoleService)
-    .factory('AuthenticateService',AuthenticateService)
-    .factory('AddRoleService',AddRoleService)
-    .factory('RemoveRoleService',RemoveRoleService)
+    .factory('AutoLoginService',AutoLoginService)
+    .factory('UserRoleService',UserRoleService)
+    .factory('ValidateService',ValidateService)
 
 
   /** @ngInject */
@@ -31,10 +31,19 @@
   };
 
   /** @ngInject */
+  function ValidateService($resource) {
+    return $resource('/ValidateEmail', {}, {
+      update: {
+        method: 'POST' // this method issues a PUT request
+      }
+    });
+  };
+
+  /** @ngInject */
   function UserService($resource) {
     return $resource('/login', {}, {
       update: {
-        method: 'GET' // this method issues a PUT request
+        method: 'POST' // this method issues a PUT request
       }
     });
   };
@@ -58,7 +67,7 @@
   };
 
   /** @ngInject */
-  function AddRoleService($resource) {
+  function UserRoleService($resource) {
     return $resource('/role/:id', {id: '@_id'}, {
       update: {
         method: 'PUT' // this method issues a PUT request
@@ -67,22 +76,10 @@
   }
 
   /** @ngInject */
-  function RemoveRoleService($resource) {
-    return $resource('/role:id', {id: '@_id'}, {
-      update: {
-        method: 'DELETE' // this method issues a PUT request
-      }
-    });
-  }
-
-  /** @ngInject */
-  function AuthenticateService($resource) {
-    return $resource('/user/:action', {},
-      {
-        authenticate: {
-          method: 'POST',
-          params: {'action': 'authenticate'},
-          header: {'Content-Type': 'application/x-www-form-urlencoded'}
+  function AutoLoginService($resource) {
+    return $resource('/autoLogin', {}, {
+        update: {
+          method: 'GET' // this method issues a PUT request
         }
       });
   };

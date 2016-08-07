@@ -22,24 +22,9 @@
           $scope.imgId = $scope.userMenu.images[0].id;
           $timeout(function () {
             RemoveImageService.delete({userid: $scope.usId, imageid: $scope.imgId}).$promise.then(function () {
-              $timeout(function () {
-                var UserId = $scope.userMenu.id;
-                // set location
-                flowFiles.opts.target = 'http://localhost:8080/userimage/add';
-                flowFiles.opts.testChunks = false;
-                flowFiles.opts.query = {UserId: UserId};
-                flowFiles.upload();
-                $timeout(function () {
-                  UserService.get({username: $scope.userMenu.username}
-                    , function (user1) {
-                      $rootScope.user = user1;
-                      $ionicLoading.hide();
-                    })
-                }, 1500)
-              }, 2500)
             })
           }, 2000)
-        } else {
+        }
           $timeout(function () {
             var UserId = $scope.userMenu.id;
             // set location
@@ -57,7 +42,7 @@
                 })
             }, 1500)
           }, 2000)
-        }
+
       }
 
       $scope.$on('flow::fileAdded', function (event, $flow, flowFile) {
@@ -91,56 +76,55 @@
 
     /** @ngInject */
     .controller('LoginController', function ($scope, $location, $cookies, $ionicPopup, $rootScope, $ionicModal, $state, $ionicLoading, $timeout, $ionicHistory, UserService) {
-      var vm = this;
 
-      function serializeData(data) {
-        // If this is not an object, defer to native stringification.
-        if (!angular.isObject(data)) {
-          return ( ( data == null ) ? "" : data.toString() );
-        }
+      // function serializeData(data) {
+      //   // If this is not an object, defer to native stringification.
+      //   if (!angular.isObject(data)) {
+      //     return ( ( data == null ) ? "" : data.toString() );
+      //   }
+      //
+      //   var buffer = [];
+      //
+      //   // Serialize each key in the object.
+      //   for (var name in data) {
+      //     if (!data.hasOwnProperty(name)) {
+      //       continue;
+      //     }
+      //
+      //     var value = data[name];
+      //
+      //     buffer.push(
+      //       encodeURIComponent(name) + "=" + encodeURIComponent(( value == null ) ? "" : value)
+      //     );
+      //   }
+      //
+      //   // Serialize the buffer and clean it up for transportation.
+      //   var source = buffer.join("&").replace(/%20/g, "+");
+      //   return ( source );
+      // }
 
-        var buffer = [];
 
-        // Serialize each key in the object.
-        for (var name in data) {
-          if (!data.hasOwnProperty(name)) {
-            continue;
-          }
-
-          var value = data[name];
-
-          buffer.push(
-            encodeURIComponent(name) + "=" + encodeURIComponent(( value == null ) ? "" : value)
-          );
-        }
-
-        // Serialize the buffer and clean it up for transportation.
-        var source = buffer.join("&").replace(/%20/g, "+");
-        return ( source );
-      }
-
-
-      vm.doLogin = function () {
+      $scope.Login = function () {
         $ionicLoading.show({
           template: '<ion-spinner class="spinner-spiral"></ion-spinner><p style="color:white">Loading...</p>'
         });
-        UserService.get({username: vm.username}
+        UserService.get({username: $scope.username, password: $scope.password}
           , function (user) {
+            console.log(user)
             var key, count = 0;
             for (key in user) {
               if (user.hasOwnProperty(key)) {
                 count++;
               }
             }
-            if (count > 2) {
-              if (vm.password == user.password) {
+              if (count > 2) {
                 $rootScope.user = user;
-                window.localStorage.setItem("Cookies", user.username);
-                $timeout(function () {
-                  $ionicLoading.hide();
-                  $ionicHistory.clearHistory();
-                  $state.go('app.map')
-                }, 5000)
+                    window.localStorage.setItem("Cookies", user.username);
+                    $timeout(function () {
+                      $ionicLoading.hide();
+                      $ionicHistory.clearHistory();
+                      $state.go('app.map')
+                    }, 5000)
               } else {
                 $ionicLoading.hide();
                 $ionicPopup.alert({
@@ -153,17 +137,10 @@
                   }, 1500)
                 })
               }
-            } else {
-              $ionicLoading.hide();
-              $ionicPopup.alert({
-                title: 'Failed!',
-                template: 'Username or Password is incorrect...'
-              }).then(function () {
-                $timeout(function () {
-                  $ionicHistory.clearHistory();
-                  $ionicHistory.clearCache();
-                }, 1500)
-              })
+          }, // unsuccess connection
+          function (error) {
+            if (error.status == "401") {
+              $rootScope.error = "Please check your internet connection";
             }
           })
       }
@@ -435,34 +412,33 @@
 
 
     /** @ngInject */
-    .controller('registerController', function ($ionicPlatform,$cordovaDevice,$timeout, $ionicLoading, CompanyRoleService, $scope, $rootScope, $window, UserControlService, $ionicPopup, $state, $ionicHistory) {
+    .controller('registerController', function ($ionicPlatform, $cordovaDevice, $timeout, $ionicLoading, CompanyRoleService, $scope, $rootScope, $window, UserControlService, $ionicPopup, $state, $ionicHistory ,ValidateService) {
 
-        document.addEventListener("deviceready", function () {
+      document.addEventListener("deviceready", function () {
 
-          var device = $cordovaDevice.getDevice();
-          $scope.manufacturer = device.manufacturer;
-          $scope.model = device.model;
-          $scope.platform = device.platform;
-          $scope.uuid = device.uuid;
-          $scope.allinfo = device;
+        var device = $cordovaDevice.getDevice();
+        $scope.manufacturer = device.manufacturer;
+        $scope.model = device.model;
+        $scope.platform = device.platform;
+        $scope.uuid = device.uuid;
+        $scope.allinfo = device;
 
-          var cordova = $cordovaDevice.getCordova();
+        var cordova = $cordovaDevice.getCordova();
 
-          var model = $cordovaDevice.getModel();
+        var model = $cordovaDevice.getModel();
 
-          var platform = $cordovaDevice.getPlatform();
+        var platform = $cordovaDevice.getPlatform();
 
-          var uuid = $cordovaDevice.getUUID();
+        var uuid = $cordovaDevice.getUUID();
 
-          var version = $cordovaDevice.getVersion();
+        var version = $cordovaDevice.getVersion();
 
-        }, false);
-
-
+      }, false);
 
       $scope.form = document.getElementById("registerform");
       $scope.pic = false;
       $scope.user = {};
+
 
       $scope.$on('$ionicView.enter', function () {
         $ionicLoading.show({
@@ -480,20 +456,27 @@
       })
 
 
+
+
       $scope.sendRegister = function (flowFiles) {
         console.log($scope.user.companyrole)
-        console.log($scope.user);
         UserControlService.save($scope.user, function (data) {
           var UserId = data.id;
           // set location
-          flowFiles.opts.target = 'http://localhost:8080/userimage/add';
-          flowFiles.opts.testChunks = false;
-          flowFiles.opts.query = {UserId: UserId};
-          flowFiles.upload();
           $ionicLoading.show({
             content: '<i class="icon ion-loading"></i>',
             template: '<ion-spinner class="spinner-balanced"></ion-spinner><p style="color: white">Loading...</p>'
           });
+          if (flowFiles.files.length != 0) {
+            $timeout(function () {
+              flowFiles.opts.target = 'http://localhost:8080/userimage/add';
+              flowFiles.opts.testChunks = false;
+              flowFiles.opts.query = {UserId: UserId};
+              flowFiles.upload();
+            }, 3000)
+
+          }
+
           $timeout(function () {
             $ionicLoading.hide();
             $ionicPopup.alert({
@@ -517,28 +500,10 @@
           }, 3500)
 
         })
-      }
-      $scope.validate = function (file) {
-        console.log(file)
-        $scope.errors = [];
-        if ((file.size / 1000) > 1024) {
-          $scope.errors.push({file: file, error: "File is too big"});
-          $scope.pic = false;
-          return false;
-        }
-        $scope.errors.push({file: file, error: "Passed"});
-        $scope.pic = true;
-        return true;
-      }
 
-      $scope.recheck = function () {
-        $scope.pic = false;
-        $scope.errors.splice(0, 1);
-        return false
       }
 
       $scope.resetForm = function () {
-        console.log("Hap")
         $ionicHistory.clearCache().then(function () {
           $state.go($state.current, {}, {reload: true})
         })
@@ -550,6 +515,19 @@
           $ionicHistory.goBack();
         })
       };
+
+      $scope.ValidateEmail = function (InputEmail) {
+        ValidateService.save({email:InputEmail},function (result) {
+          console.log(result)
+          alert("haha")
+          // var result1 = JSON.parse(result)
+          // console.log(result1)
+        },function (error) {
+          console.log("Error******")
+          console.log(error)
+          alert("Failed")
+        })
+      }
 
     })
 
@@ -722,7 +700,7 @@
 
 
     /**@ngInject */
-    .controller('StafflistController', function (RemoveRoleService, AddRoleService, $ionicPopover, $ionicPopup, $state, $scope, $rootScope, UserControlService, $ionicHistory, $ionicLoading, $timeout) {
+    .controller('StafflistController', function (UserRoleService, $ionicPopover, $ionicPopup, $state, $scope, $rootScope, UserControlService, $ionicHistory, $ionicLoading, $timeout) {
 
       $scope.$on('$ionicView.enter', function () {
         $ionicLoading.show({
@@ -755,13 +733,13 @@
 
       });
 
-      $scope.Addadminrole = function (userid, user) {
+      $scope.Addadminrole = function (user) {
         $scope.staff = user
         $ionicLoading.show({
           content: '<i class="icon ion-loading"></i>',
           template: '<ion-spinner class="spinner-balanced"></ion-spinner><p style="color: white">Loading..</p>'
         });
-        AddRoleService.update({id: userid}, $scope.staff).$promise.then(function (res) {
+        UserRoleService.update($scope.staff).$promise.then(function (res) {
           $timeout(function () {
             UserControlService.query(function (data) {
               $scope.stafflist = data;
@@ -775,14 +753,14 @@
         })
       }
 
-      $scope.Removeadminrole = function (userid, roleid) {
-        console.log(userid)
-        console.log(roleid)
+      $scope.Removeadminrole = function (userId, roleId) {
+        console.log(userId)
+        console.log(roleId)
         $ionicLoading.show({
           content: '<i class="icon ion-loading"></i>',
           template: '<ion-spinner class="spinner-balanced"></ion-spinner><p style="color: white">Loading..</p>'
         });
-        RemoveRoleService.delete({userid: userid, roleid: roleid}).$promise.then(function (res) {
+        UserRoleService.delete({userid: userId, roleid: roleId}).$promise.then(function (res) {
           $timeout(function () {
             UserControlService.query(function (data) {
               $scope.stafflist = data;

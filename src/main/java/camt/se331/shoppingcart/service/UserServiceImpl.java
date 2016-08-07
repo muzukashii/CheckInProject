@@ -39,19 +39,25 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User autoLogin(String username) {
+        return userRepository.findByUsername(username);
+    }
+
+    @Override
     @Transactional
     public User findByUserName(String username) {
         return userRepository.findByUsername(username);
     }
 
     @Override
-    public User findUserByEmail(String username) {
-        return null;
-    }
-
-    @Override
-    public User login(String email, String password) {
-        return null;
+    public User Login(String username, String password) {
+        User user = userRepository.findByUsername(username);
+        String PassUserFromDB = user.getPassword();
+        if(PassUserFromDB.equals(password)){
+            return user;
+        }else{
+         return null;
+        }
     }
 
     @Override
@@ -100,6 +106,22 @@ public class UserServiceImpl implements UserService {
         }
         userRepository.save(user);
         return user;
+    }
+
+    @Override
+    public boolean ValidateEmail(String username) {
+        if(emailExist(username)){
+            return true;
+        }
+        return false;
+    }
+
+    private boolean emailExist(String username){
+        User user = userRepository.findByUsername(username);
+        if(user!=null){
+            return true;
+        }
+        return false;
     }
 
 

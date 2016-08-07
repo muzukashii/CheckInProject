@@ -14,19 +14,19 @@
       </div>
       <div class="list" ng-repeat="(key,value) in stafflist | groupBy : 'companyrole'">
         <div class="item item-divider">
-          {{choose}} : {{key}} ({{value.length}})
+          Position : {{key}} ({{value.length}})
         </div>
         <a class="item item-avatar" ng-repeat="staff in value | filter:UserSearch">
           <img src="../img/ionic.png" ng-src="data:{{staff.images[0].contentType}};base64,{{staff.images[0].content}}">
           <h2>{{staff.name}}</h2>
           <button ng-hide="staff.roles[0].roleName=='Admin'" class="waves-effect waves-light btn"
-                  ng-click="Addadminrole(staff.id,staff)">Add to admin level
+                  ng-click="Addadminrole(staff)">Add to admin level
           </button>
           <button ng-show="staff.roles[0].roleName=='Admin'" class="waves-effect red lighten-2 btn"
                   ng-click="Removeadminrole(staff.id,staff.roles[0].id)">Remove from admin level
           </button>
           <hr class="style-six">
-          <h3 ng-hide="staff.checkins.length>0">Not checked in yet..</h3>
+          <h3 ng-hide="staff.checkins.length>0">Not check in yet..</h3>
           <div ng-repeat="time in staff.checkins | orderBy:'time':true | limitTo:1 ">
             Latest Checkin : {{time.time | date:'yyyy-MM-dd HH:mm:ss Z'}} | At : {{time.location}} | Type :
             {{time.type}}

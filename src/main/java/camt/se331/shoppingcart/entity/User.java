@@ -54,9 +54,8 @@ public class User {
         this.checkins = checkins;
     }
 
-    public User(Long id, String email, String name, String tel, String username, String password, String companyrole, Checkin checkin, Date dob, Image image) {
+    public User(Long id, String name, String tel, String username, String password, String companyrole, Checkin checkin, Date dob, Image image) {
         this.id = id;
-        this.email = email;
         this.name = name;
         this.tel = tel;
         this.username = username;
@@ -66,9 +65,8 @@ public class User {
         this.images.add(image) ;
         this.companyrole = companyrole;
     }
-    public User(Long id, String email, String name, String tel, String username, String password, String companyrole, Date dob, Image image) {
+    public User(Long id, String name, String tel, String username, String password, String companyrole, Date dob, Image image) {
         this.id = id;
-        this.email = email;
         this.name = name;
         this.tel = tel;
         this.username = username;
@@ -77,9 +75,8 @@ public class User {
         this.images.add(image) ;
         this.companyrole = companyrole;
     }
-    public User(Long id, String email, String name, String tel, String username, String password, String companyrole, Checkin checkin, Image image) {
+    public User(Long id, String name, String tel, String username, String password, String companyrole, Checkin checkin, Image image) {
         this.id = id;
-        this.email = email;
         this.name = name;
         this.tel = tel;
         this.username = username;
@@ -88,9 +85,8 @@ public class User {
         this.checkins.add(checkin);
         this.companyrole = companyrole;
     }
-    public User(Long id, String email, String name, String tel, String username, String password, String companyrole, Image image) {
+    public User(Long id, String name, String tel, String username, String password, String companyrole, Image image) {
         this.id = id;
-        this.email = email;
         this.name = name;
         this.tel = tel;
         this.username = username;
@@ -99,9 +95,8 @@ public class User {
         this.companyrole = companyrole;
     }
 
-    public User(Long id, String email, String name, String tel, String username, String password, String companyrole, Checkin checkin, Date dob) {
+    public User(Long id, String name, String tel, String username, String password, String companyrole, Checkin checkin, Date dob) {
         this.id = id;
-        this.email = email;
         this.name = name;
         this.tel = tel;
         this.username = username;
@@ -111,9 +106,8 @@ public class User {
         this.companyrole = companyrole;
     }
 
-    public User(Long id, String email, String name, String tel, String username, String password, String companyrole, Date dob) {
+    public User(Long id, String name, String tel, String username, String password, String companyrole, Date dob) {
         this.id = id;
-        this.email = email;
         this.name = name;
         this.tel = tel;
         this.username = username;
