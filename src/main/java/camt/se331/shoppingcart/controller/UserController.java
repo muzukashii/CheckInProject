@@ -40,11 +40,6 @@ public class UserController {
         return userService.Login(username,password);
     }
 
-    @RequestMapping(value = "ValidateEmail",method = RequestMethod.POST)
-    public @ResponseBody boolean ValidateEmail(@RequestParam("email")String email){
-        return userService.ValidateEmail(email);
-    }
-
     @RequestMapping(value = "userControl/{id}",method = RequestMethod.GET)
     public  User getUserbyId(@PathVariable("id") Long id){
         return userService.getUser(id);

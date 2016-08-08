@@ -17,12 +17,13 @@
           Position : {{key}} ({{value.length}})
         </div>
         <a class="item item-avatar" ng-repeat="staff in value | filter:UserSearch">
-          <img src="../img/ionic.png" ng-src="data:{{staff.images[0].contentType}};base64,{{staff.images[0].content}}">
+          <img src="../img/ionic.png"
+               ng-src="data:{{staff.images[0].contentType}};base64,{{staff.images[0].content}}">
           <h2>{{staff.name}}</h2>
           <button ng-hide="staff.roles[0].roleName=='Admin'" class="waves-effect waves-light btn"
                   ng-click="Addadminrole(staff)">Add to admin level
           </button>
-          <button ng-show="staff.roles[0].roleName=='Admin'" class="waves-effect red lighten-2 btn"
+          <button ng-hide="staff.name==user.name" ng-show="staff.roles[0].roleName=='Admin'" class="waves-effect red lighten-2 btn"
                   ng-click="Removeadminrole(staff.id,staff.roles[0].id)">Remove from admin level
           </button>
           <hr class="style-six">
@@ -32,6 +33,7 @@
             {{time.type}}
           </div>
         </a>
+
       </div>
     </ion-item>
   </ion-content>

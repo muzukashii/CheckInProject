@@ -21,5 +21,4 @@ public interface UserService {
      User Checkin(User user, Checkin checkin);
      User addRoletoUser(User user);
      User RemoveRole(User user, Long roleid);
-     boolean ValidateEmail(String email);
 }

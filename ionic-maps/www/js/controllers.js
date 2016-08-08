@@ -733,6 +733,23 @@
 
       });
 
+      $scope.Filter = 'companyrole';
+      $scope.choose = 'Position';
+      $scope.MySelected = function (select) {
+        $scope.Filter = select;
+        console.log("First..." + $scope.Filter)
+        if (select == 'companyrole') {
+          $scope.Filter = select;
+          $scope.choose = 'Position'
+          console.log($scope.Filter)
+        } else if (select == 'id') {
+          $scope.Filter = select;
+          $scope.choose = 'Staff ID'
+          console.log($scope.Filter)
+        }
+      }
+
+
       $scope.Addadminrole = function (user) {
         $scope.staff = user
         $ionicLoading.show({

@@ -1,6 +1,7 @@
 package camt.se331.shoppingcart.service;
 
 import camt.se331.shoppingcart.config.DatabaseInitializationBean;
+import camt.se331.shoppingcart.dao.UserDao;
 import camt.se331.shoppingcart.entity.*;
 import camt.se331.shoppingcart.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,119 +16,73 @@ import java.util.Set;
 
 @Service
 public class UserServiceImpl implements UserService {
+
     @Autowired
-    private UserRepository userRepository;
+    private UserDao userDao;
 
     @Override
     @Transactional
     public List<User> findAll() {
-        return userRepository.findAll();
+        return userDao.findAll();
     }
 
     @Override
     @Transactional
     public User addImage(User user, Image image) {
-        image=ImageUtil.resizeImage(image,200);
-        user.getImages().add(image);
-        userRepository.save(user);
-        return user;
+        return userDao.addImage(user,image);
     }
 
     @Override
     public User getUser(Long id) {
-        return userRepository.findOne(id);
+        return userDao.getUser(id);
     }
 
     @Override
     public User autoLogin(String username) {
-        return userRepository.findByUsername(username);
+        return userDao.autoLogin(username);
     }
 
     @Override
     @Transactional
     public User findByUserName(String username) {
-        return userRepository.findByUsername(username);
+        return userDao.findByUserName(username);
     }
 
     @Override
     public User Login(String username, String password) {
-        User user = userRepository.findByUsername(username);
-        String PassUserFromDB = user.getPassword();
-        if(PassUserFromDB.equals(password)){
-            return user;
-        }else{
-         return null;
-        }
+        return userDao.Login(username,password);
     }
 
     @Override
     public User updateUser(User user) {
-        return userRepository.save(user);
+        return userDao.updateUser(user);
     }
 
 
     @Override
     public User removeImage(User user, Long id) {
-        Iterator<Image> imgitr = user.getImages().iterator();
-        while (imgitr.hasNext()) {
-            Image img = imgitr.next();
-            if( img.getId().intValue() == id.intValue() ) {
-                user.getImages().remove(img);
-            }
-        }
-        userRepository.save(user);
-        return user;
+        return userDao.removeImage(user,id);
     }
 
     @Override
     public User Checkin(User user, Checkin checkin) {
-        user.getCheckins().add(checkin);
-        return userRepository.save(user);
+        return userDao.Checkin(user,checkin);
     }
 
     @Override
     public User addRoletoUser(User user) {
-        Role adminRole = new Role("Admin");
-        Set<Role> roles = new HashSet<>();
-        roles.add(adminRole);
-        user.setRoles(roles);
-        return userRepository.save(user);
+        return userDao.addRoletoUser(user);
     }
 
     @Override
     public User RemoveRole(User user, Long roleid) {
-        Iterator<Role> roleitr = user.getRoles().iterator();
-        while(roleitr.hasNext()){
-            Role role = roleitr.next();
-            if(role.getId().intValue() == roleid.intValue()){
-                user.getRoles().remove(role);
-            }
-
-        }
-        userRepository.save(user);
-        return user;
-    }
-
-    @Override
-    public boolean ValidateEmail(String username) {
-        if(emailExist(username)){
-            return true;
-        }
-        return false;
-    }
-
-    private boolean emailExist(String username){
-        User user = userRepository.findByUsername(username);
-        if(user!=null){
-            return true;
-        }
-        return false;
+        return userDao.RemoveRole(user,roleid);
     }
 
 
     @Override
     public User addUser(User user) {
-        return userRepository.save(user);
+        return userDao.addUser(user);
     }
 
 }
