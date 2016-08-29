@@ -56,6 +56,16 @@ public class UserController {
         return userService.autoLogin(username);
     }
 
+    @RequestMapping(value = "verifyEmail",method = RequestMethod.GET)
+    public ResponseEntity<Object> verifyEmail(@RequestParam("username") String username){
+        User user = userService.verifyEmail(username);
+        if(user!=null){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        }else{
+            return ResponseEntity.ok(null);
+        }
+    }
+
     @RequestMapping(value = "userControl/{id}",method = RequestMethod.PUT)
     public  User edit(@PathVariable("id") Long id,@RequestBody User user, BindingResult bindingResult){
         return userService.updateUser(user);

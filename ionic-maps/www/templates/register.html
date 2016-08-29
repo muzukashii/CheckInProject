@@ -46,15 +46,13 @@
             <!--</li>-->
           <!--</ul>-->
         <!--</div>-->
-
+        <button ng-disabled="registerform.emailR.$invalid" type="submit" class="card-panel cyan darken-4" style="float: right;color: white" ng-click="verifyEmail(user.username)">Verify Email</button>
         <label class="item item-input" style="padding-right: 15px"
                ng-class="{'has-errors' : registerform.emailR.$invalid && !registerform.emailR.$pristine,'no-errors' : registerform.emailR.$valid}">
           <div class="input-field col s12">
-            <input type="email" id="box1" autocomplete="off" name="emailR" ng-model="user.username"
+            <input type="email" id="box1" autocomplete="off" name="emailR" ng-model="user.username" ng-change="resetVerify()"
                    required/>
-            <!--<button class="btn btn-primary" style="float: left" ng-click="VerifyEmail(user.username)">Test</button>-->
             <label for="box1">E-mail</label>
-
           </div>
         </label>
         <div class="padding" ng-show="registerform.emailR.$invalid && !registerform.emailR.$pristine"
@@ -130,7 +128,7 @@
           <span style="color: red;font-weight: 600"
                 ng-hide="rolelist!=undefined">Please Check your internet connection!</span>
           <button class="button button-block button-full button-positive"
-                  ng-disabled="(((registerform.$invalid||rolelist==undefined)&&(registerform.$invalid||!$flow.files.length==0||rolelist==undefined))?true:false)"
+                  ng-disabled="(((registerform.$invalid||rolelist==undefined||verifyEmailResult==false)&&(registerform.$invalid||!$flow.files.length==0||rolelist==undefined||verifyEmailResult==false))?true:false)"
                   type="submit" ng-click="sendRegister($flow)">Register
           </button>
         </label>

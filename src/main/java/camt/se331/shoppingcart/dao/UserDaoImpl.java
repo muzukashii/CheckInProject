@@ -118,6 +118,16 @@ public class UserDaoImpl implements UserDao {
         return user;
     }
 
+    @Override
+    public User verifyEmail(String username) {
+        User user = userRepository.findByUsername(username);
+        if(user!=null){
+            return user;
+        }else {
+            return null;
+        }
+    }
+
 //    @Override
 //    public boolean ValidateEmail(String username) {
 //        if(emailExist(username)){

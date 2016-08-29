@@ -79,6 +79,11 @@ public class UserServiceImpl implements UserService {
         return userDao.RemoveRole(user,roleid);
     }
 
+    @Override
+    public User verifyEmail(String username) {
+        return userDao.verifyEmail(username);
+    }
+
 
     @Override
     public User addUser(User user) {

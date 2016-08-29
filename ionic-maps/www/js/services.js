@@ -9,7 +9,7 @@
     .factory('DepartmentService', DepartmentService)
     .factory('AutoLoginService',AutoLoginService)
     .factory('UserRoleService',UserRoleService)
-    .factory('ValidateService',ValidateService)
+    .factory('verifyEmailService',verifyEmailService)
 
 
   /** @ngInject */
@@ -31,10 +31,10 @@
   };
 
   /** @ngInject */
-  function ValidateService($resource) {
-    return $resource('/ValidateEmail', {}, {
+  function verifyEmailService($resource) {
+    return $resource('/verifyEmail', {}, {
       update: {
-        method: 'POST' // this method issues a PUT request
+        method: 'GET' // this method issues a PUT request
       }
     });
   };
@@ -43,7 +43,7 @@
   function UserService($resource) {
     return $resource('/login', {}, {
       update: {
-        method: 'GET' // this method issues a PUT request
+        method: 'GE' // this method issues a PUT request
       }
     });
   };

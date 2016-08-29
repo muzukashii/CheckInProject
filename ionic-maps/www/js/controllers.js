@@ -375,33 +375,35 @@
 
 
     /** @ngInject */
-    .controller('registerController', function ($ionicPlatform, $cordovaDevice, $timeout, $ionicLoading, DepartmentService, $scope, $rootScope, $window, UserControlService, $ionicPopup, $state, $ionicHistory, ValidateService) {
+    .controller('registerController', function ($ionicPlatform, $cordovaDevice, $timeout, $ionicLoading, DepartmentService, $scope, $rootScope, $window, UserControlService, $ionicPopup, $state, $ionicHistory, verifyEmailService) {
 
-      document.addEventListener("deviceready", function () {
-        $scope.user = {};
-        var device = $cordovaDevice.getDevice();
-        $scope.manufacturer = device.manufacturer;
-        $scope.model = device.model;
-        $scope.platform = device.platform;
-        $scope.uuid = device.uuid;
+      $scope.verifyEmailResult = false;
+      try{
+        document.addEventListener("deviceready", function () {
+          $scope.user = {};
+          var device = $cordovaDevice.getDevice();
+          $scope.manufacturer = device.manufacturer;
+          $scope.model = device.model;
+          $scope.platform = device.platform;
+          $scope.uuid = device.uuid;
 
-        var cordova = $cordovaDevice.getCordova();
+          var cordova = $cordovaDevice.getCordova();
 
-        var model = $cordovaDevice.getModel();
+          var model = $cordovaDevice.getModel();
 
-        var platform = $cordovaDevice.getPlatform();
+          var platform = $cordovaDevice.getPlatform();
 
-        var uuid = $cordovaDevice.getUUID();
+          var uuid = $cordovaDevice.getUUID();
 
-        var version = $cordovaDevice.getVersion();
+          var version = $cordovaDevice.getVersion();
 
-      }, false);
+        }, false);
+      }catch(error) {
+        console.log(error)
+      }
 
       $scope.form = document.getElementById("registerform");
       $scope.pic = false;
-
-
-
 
       $scope.$on('$ionicView.enter', function () {
         $ionicLoading.show({
@@ -480,17 +482,22 @@
         })
       };
 
-      $scope.VerifyEmail = function (InputUsername) {
-        // ValidateService.save({email: InputUsername}, function (result) {
-        //   console.log(result)
-        //   alert("haha")
-        //   // var result1 = JSON.parse(result)
-        //   // console.log(result1)
-        // }, function (error) {
-        //   console.log("Error******")
-        //   console.log(error)
-        //   alert("Failed")
-        // })
+      $scope.resetVerify = function () {
+        $scope.verifyEmailResult=false;
+      }
+
+      $scope.verifyEmail = function (Email) {
+        console.log(Email)
+        verifyEmailService.get({username: $scope.user.username}, function (result) {
+          console.log(result)
+          $scope.verifyEmailResult = true;
+          alert("You can use this email")
+        }, function (error) {
+          $scope.verifyEmailResult = false;
+          console.log("Error******")
+          console.log(error)
+          alert("Email is already existed")
+        })
       }
 
     })
