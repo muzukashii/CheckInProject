@@ -57,12 +57,17 @@ public class UserDaoImpl implements UserDao {
     @Override
     public User Login(String username, String password) {
         User user = userRepository.findByUsername(username);
-        String PassUserFromDB = user.getPassword();
-        if(PassUserFromDB.equals(password)){
-            return user;
+        if(user != null){
+            String PassUserFromDB = user.getPassword();
+            if(PassUserFromDB.equals(password)){
+                return user;
+            }else{
+                return null;
+            }
         }else{
             return null;
         }
+
     }
 
     @Override
@@ -134,4 +139,18 @@ public class UserDaoImpl implements UserDao {
     public User addUser(User user) {
         return userRepository.save(user);
     }
+
+//    public User Login(User userInput) {
+//        User user = userRepository.findByUsername(userInput.getUsername());
+//        if(user != null){
+//            String PassUserFromDB = user.getPassword();
+//            if(PassUserFromDB.equals(userInput.getPassword())){
+//                return user;
+//            }else{
+//                return null;
+//            }
+//        }else{
+//            return null;
+//        }
+//    }
 }

@@ -19,7 +19,7 @@ import java.util.*;
 public class DatabaseInitializationBean implements InitializingBean {
 
     @Autowired
-    CompanyRoleRepository companyRoleRepository;
+    DepartmentRepository departmentRepository;
 
     @Autowired
     UserRepository userRepository;
@@ -27,21 +27,21 @@ public class DatabaseInitializationBean implements InitializingBean {
     @Override
     public void afterPropertiesSet() throws Exception {
 
-        CompanyRole[] companyRoles = {
-                new CompanyRole(1l, "Chairman"),
-                new CompanyRole(2l, "President"),
-                new CompanyRole(3l, "Senior Advisor"),
-                new CompanyRole(4l, "Research and Development Manager"),
-                new CompanyRole(5l, "Human Resource"),
-                new CompanyRole(6l, "Manufacturing Manager"),
-                new CompanyRole(7l, "Technical Manager"),
-                new CompanyRole(8l, "Production Control Manager"),
-                new CompanyRole(9l, "Assurance Manager"),
-                new CompanyRole(10l, "Finance Manager"),
-                new CompanyRole(10l, "Marketing Manager")
+        Department[] departments = {
+                new Department(1l, "Chairman"),
+                new Department(2l, "President"),
+                new Department(3l, "Senior Advisor"),
+                new Department(4l, "Research and Development Manager"),
+                new Department(5l, "Human Resource"),
+                new Department(6l, "Manufacturing Manager"),
+                new Department(7l, "Technical Manager"),
+                new Department(8l, "Production Control Manager"),
+                new Department(9l, "Assurance Manager"),
+                new Department(10l, "Finance Manager"),
+                new Department(10l, "Marketing Manager")
         };
 
-        companyRoleRepository.save(Arrays.asList(companyRoles));
+        departmentRepository.save(Arrays.asList(departments));
 
 
         Role adminRole = new Role("Admin");
@@ -52,7 +52,7 @@ public class DatabaseInitializationBean implements InitializingBean {
         admin.setUsername("admin@gmail.com");
         admin.setPassword("123456");
         admin.setTel("0946553200");
-        admin.setCompanyrole("Human Resource");
+        admin.setDepartment("Human Resource");
         admin.getImages().add(ImageUtil.getImage("pic/apocalypse.png"));
         Set<Role> roles = new HashSet<>();
         roles.add(adminRole);

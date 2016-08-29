@@ -93,7 +93,7 @@ div.upload {
        overflow: hidden !important;
      }
  .scroll-content{
-       background-color: #455a64 !important;
+       background-color: #ffffff !important;
        -webkit-background-size: cover;
        -moz-background-size: cover;
        -o-background-size: cover;
@@ -126,13 +126,7 @@ card-panel blue-grey darken-2
 .circular>input {
   display: none;
 }
-.item-select {
-  width: 75%; /* Or whatever you'd like the width to be */
-}
 
-.item-select select {
-  left: 0;
-}
 
 
 

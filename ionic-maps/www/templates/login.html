@@ -1,5 +1,5 @@
 <ion-view view-title="Login" hide-back-button="true">
-  <ion-nav-bar class="bar-dark">
+  <ion-nav-bar class="bar bar-stable">
     <ion-nav-buttons side="secondary">
       <button class="button button-stable" ng-click="register()">Register Here</button>
     </ion-nav-buttons>
@@ -8,37 +8,33 @@
     <div>
       <form id="loginform" name="loginform" novalidate>
         <div class="list">
-          <label class="item" style="background-color: transparent;border-color: transparent">
+          <label class="item cyan darken-4" style="border-color: transparent">
             <span class="input-label"
-                  style="padding-left: 7px;color: white;left: 50%;right: 50%;position: relative;transform: translate(-50%,-50%);
+                  style="padding-left: 7px;color: whitesmoke;left: 50%;right: 50%;position: relative;transform: translate(-50%,-50%);
                    margin-top: 40px;text-align: center;font-size:25px"> Welcome !</span>
           </label>
-          <label class="item item-input" style="border-color:transparent;padding-right: 16px;
-    border-radius: 10px;
-    margin: 10px 75px 10px 75px;"
+          <label class="item item-input" style="border-color:transparent;padding-right: 16px;"
                  ng-class="{'has-errors' : loginform.username.$invalid && !loginform.username.$pristine,'no-errors' : loginform.username.$valid}">
             <i class="small material-icons ion-ios-contact-outline"></i>
             <div class="input-field col s12">
-            <input style="margin-left: 10px" class="tooltip" ng-minlength="4" id="mytextbox1" type="email" autocomplete="off"
-                   name="username" ng-model="username" required/>
+              <input style="margin-left: 10px" class="tooltip" ng-minlength="4" id="mytextbox1" type="email"
+                     autocomplete="off"
+                     name="username" ng-model="user.username" required/>
               <label for="mytextbox1">Username</label>
             </div>
           </label>
-          <label class="item item-input" style="border-color:transparent;padding-right: 16px;
-    border-radius: 10px;
-    margin: 10px 75px 10px 75px;"
+          <label class="item item-input" style="border-color:transparent;padding-right: 16px;"
                  ng-class="{'has-errors' : loginform.password.$invalid && !loginform.password.$pristine,'no-errors' : loginform.password.$valid}">
             <i class="small material-icons ion-ios-locked-outline"></i>
             <div class="input-field col s12">
-            <input style="margin-left: 10px" type="password" ng-minlength="6" id="mytextbox2" autocomplete="off" name="password"
-                   ng-model="password" required/>
+              <input style="margin-left: 10px" type="password" ng-minlength="6" id="mytextbox2" autocomplete="off"
+                     name="password"
+                     ng-model="user.password" required/>
               <label for="mytextbox2">Password</label>
             </div>
           </label>
-          <label class="item" style="background-color:transparent;border-color:transparent;padding-right: 16px;
-    border-radius: 10px;
-    margin: 10px 75px 10px 75px;">
-            <button class="waves-effect waves-light btn button-full" ng-disabled="loginform.$invalid"
+          <label class="item" style="border-color:transparent;padding-right: 16px;">
+            <button class="cyan darken-4 btn button-full" ng-disabled="loginform.$invalid"
                     type="submit" ng-click="Login()">Log in
             </button>
           </label>

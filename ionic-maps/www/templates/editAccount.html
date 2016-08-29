@@ -46,17 +46,6 @@
           </div>
         </label>
         <label class="item item-input" style="padding-right: 15px"
-               ng-class="{'has-errors' : editform.emailR.$invalid && !editform.emailR.$pristine,'no-errors' : editform.emailR.$valid}">
-          <div class="input-field col s12">
-          <input placeholder="E-mail.." type="email" autocomplete="off" name="emailR" ng-model="usernew.email" required/>
-          </div>
-        </label>
-        <div class="padding" ng-show="editform.emailR.$invalid && !editform.emailR.$pristine"
-             style="background-color: #ef473a;color:white">
-          <ion-icon class="ion-close-circled"></ion-icon>
-          <span ng-show="editform.emailR.$invalid"> Wrong Email Format!</span>
-        </div>
-        <label class="item item-input" style="padding-right: 15px"
                ng-class="{'has-errors' : editform.tel.$invalid && !editform.tel.$pristine && editform.tel.$error ,'no-errors' : editform.tel.$valid}">
           <div class="input-field col s12">
           <input placeholder="Telephone number..." type="tel" name="tel" ng-minlength="10" ng-maxlength="10" ng-model="usernew.tel"
@@ -78,12 +67,12 @@
           </div>
         </label>
         <div class="item item-divider">
-          Position: <span style="color: darkgreen;font-weight: 500">{{usernew.companyrole}}</span>
+          Position: <span style="color: darkgreen;font-weight: 500">{{usernew.department}}</span>
         </div>
         <ion-radio ng-repeat="item in rolelist"
-                   ng-value="item.companyrole"
-                   ng-model="usernew.companyrole">
-          {{item.companyrole}}
+                   ng-value="item.department"
+                   ng-model="usernew.department">
+          {{item.department}}
         </ion-radio>
         <label class="item">
           <button class="button button-block button-full button-positive"

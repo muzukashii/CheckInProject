@@ -6,7 +6,7 @@
     .factory('locationService', locationService)
     .factory('UserControlService', UserControlService)
     .factory('RemoveImageService', RemoveImageService)
-    .factory('CompanyRoleService', CompanyRoleService)
+    .factory('DepartmentService', DepartmentService)
     .factory('AutoLoginService',AutoLoginService)
     .factory('UserRoleService',UserRoleService)
     .factory('ValidateService',ValidateService)
@@ -43,14 +43,14 @@
   function UserService($resource) {
     return $resource('/login', {}, {
       update: {
-        method: 'POST' // this method issues a PUT request
+        method: 'GET' // this method issues a PUT request
       }
     });
   };
 
   /** @ngInject */
-  function CompanyRoleService($resource) {
-    return $resource('/companyrole/:id', {id: '@_id'}, {
+  function DepartmentService($resource) {
+    return $resource('/department/:id', {id: '@_id'}, {
       update: {
         method: 'GET' // this method issues a PUT request
       }

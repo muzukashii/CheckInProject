@@ -11,7 +11,7 @@
             </div>
             <h2>Sort By</h2>
             <p>
-              <input name="group1" type="radio" id="test1" ng-click="MySelected('companyrole')" checked/>
+              <input name="group1" type="radio" id="test1" ng-click="MySelected('department')" checked/>
               <label for="test1">Position</label>
             </p>
             <p>
@@ -22,7 +22,7 @@
         </div>
       </div>
       <div class="list" ng-repeat="(key,value) in stafflist | groupBy : Filter"
-           ng-hide="key==user.companyrole||key==user.id">
+           ng-hide="key==user.department||key==user.id">
         <div class="item item-divider">
           {{choose}} : {{key}} <a ng-hide="Filter=='id'">({{value.length}})</a>
         </div>

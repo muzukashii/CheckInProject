@@ -3,11 +3,12 @@ import camt.se331.shoppingcart.entity.Image;
 import camt.se331.shoppingcart.entity.User;
 import camt.se331.shoppingcart.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -36,8 +37,13 @@ public class UserController {
     }
 
     @RequestMapping(value = "login",method = RequestMethod.GET)
-    public  User Login(@RequestParam("username") String username,@RequestParam("password")String password){
-        return userService.Login(username,password);
+    public ResponseEntity<User> Login(@RequestParam("username") String username, @RequestParam("password")String password){
+        User user = userService.Login(username,password);
+        if (user != null) {
+            return ResponseEntity.ok(user);
+        }else{
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        }
     }
 
     @RequestMapping(value = "userControl/{id}",method = RequestMethod.GET)

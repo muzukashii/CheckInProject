@@ -2,7 +2,14 @@
     <ion-nav-buttons side="left">
       <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
     </ion-nav-buttons>
+  <div class="bar bar-subheader bar-balanced">
+    <h2 class="title">Account Name : {{user.name}}<br></h2>
+  </div>
+
     <ion-content ng-controller="MapCtrl">
       <div id="map" data-tap-disabled="true"></div>
     </ion-content>
-</ion-view>s
+  <ion-footer-bar class="bar-balanced">
+    <h2 class="title">Near by : CAMT</h2>
+  </ion-footer-bar>
+</ion-view>

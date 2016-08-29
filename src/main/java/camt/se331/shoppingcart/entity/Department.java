@@ -8,7 +8,7 @@ import javax.persistence.Id;
  * Created by Bitee on 6/14/2016.
  */
 @Entity
-public class CompanyRole {
+public class Department {
     @Id
     @GeneratedValue
     private Long id;
@@ -18,11 +18,11 @@ public class CompanyRole {
         return id;
     }
 
-    public String getCompanyrole() {
+    public String getDepartment() {
         return rolename;
     }
 
-    public void setCompanyrole(String rolename) {
+    public void setDepartment(String rolename) {
         this.rolename = rolename;
     }
 
@@ -32,16 +32,16 @@ public class CompanyRole {
         this.id = id;
     }
 
-    public CompanyRole(Long id, String rolename){
+    public Department(Long id, String rolename){
         this.id=id;
         this.rolename=rolename;
     }
 
-    public CompanyRole(String rolename){
+    public Department(String rolename){
         this.rolename=rolename;
     }
 
-    public CompanyRole(){
+    public Department(){
 
     }
 }
