@@ -39,17 +39,35 @@ public class Lab11ApplicationTests {
 	public void testLogin() {
         UserDaoImpl userDao = mock(UserDaoImpl.class);
         User user = new User("user@gmail.com","123456");
-        when(userDao.Login("user@gmail.com","123456")).thenReturn(null);
         {
             User returnMock = new User(2l, "HelloWorld CallOpop", "0875404521", "user@gmail.com", "123456", "Senior Advisor");
             when(userDao.Login(user.getUsername(),user.getPassword())).thenReturn(returnMock);
         }
-        User result = userDao.Login(user.getUsername(),user.getPassword());
-        assertEquals(user.getUsername(),result.getUsername());
-        assertNotNull(result);
-        System.out.print(result);
+        User resultSuccess = userDao.Login(user.getUsername(),user.getPassword());
+        assertEquals(user.getUsername(),resultSuccess.getUsername());
+        assertNotNull(resultSuccess);
+        System.out.println(resultSuccess);
+
+        System.out.println("=================================================");
+        System.out.println("In case of user input wrong password...");
+        User user1 = new User("user@gmail.com","123456789");
+        when(userDao.Login(user1.getUsername(),user1.getPassword())).thenReturn(null);
+        User resultFailed1 = userDao.Login(user1.getUsername(),user1.getPassword());
+        assertNull(resultFailed1);
+        System.out.println(resultFailed1);
+
+        System.out.println("=================================================");
+        System.out.println("In case of user input wrong email...");
+        User user2 = new User("user5678@gmail.com","123456");
+        when(userDao.Login(user2.getUsername(),user2.getPassword())).thenReturn(null);
+        User resultFailed2 = userDao.Login(user2.getUsername(),user2.getPassword());
+        assertNull(resultFailed2);
+        System.out.println(resultFailed2);
+
 
     }
+
+
 
     @Test
     public void testAddImage() throws IOException {
