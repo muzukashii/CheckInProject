@@ -59,7 +59,7 @@
 
   /** @ngInject */
   function RemoveImageService($resource) {
-    return $resource('/userimage/remove:id', {id: '@_id'}, {
+    return $resource('/userImage/remove:id', {id: '@_id'}, {
       update: {
         method: 'DELETE' // this method issues a PUT request
       }

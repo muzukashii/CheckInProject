@@ -82,8 +82,9 @@ public class UserController {
         return userService.RemoveRole(user,roleId);
     }
 
-    @RequestMapping(value = "/userimage/add", method = RequestMethod.POST)
-    @ResponseBody public User addImage(HttpServletRequest request,
+    @RequestMapping(value = "/userImage/add", method = RequestMethod.POST)
+    @ResponseBody
+    public User addImage(HttpServletRequest request,
                          HttpServletResponse response, @RequestParam("UserId") Long UserId) {
         MultipartHttpServletRequest mRequest;
         User user = userService.getUser(UserId);
@@ -102,19 +103,14 @@ public class UserController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-
         return user;
     }
 
-    @RequestMapping(value = "/userimage/remove",method = RequestMethod.DELETE)
+    @RequestMapping(value = "/userImage/remove",method = RequestMethod.DELETE)
     @ResponseBody
-    public  User removeImage(@RequestParam("userid") Long userId,@RequestParam("imageid") Long imageid){
+    public  User removeImage(@RequestParam("imageid") Long imageid,@RequestParam("userid") Long userId){
         User user = userService.getUser(userId);
-        //System.out.println("----------- " + productId + " --------" + imageid);
         return userService.removeImage(user,imageid);
     }
-
-
 
 }

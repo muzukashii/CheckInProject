@@ -5,7 +5,6 @@ import camt.se331.shoppingcart.entity.Image;
 import camt.se331.shoppingcart.entity.User;
 
 import java.util.List;
-import java.util.StringJoiner;
 
 
 public interface UserService {
@@ -18,7 +17,7 @@ public interface UserService {
      User Login(String username,String password);
      User updateUser(User user);
      User removeImage(User user, Long id);
-     User Checkin(User user, Checkin checkin);
+     String Checkin(User user, Checkin checkin);
      User addRoletoUser(User user);
      User RemoveRole(User user, Long roleid);
      User verifyEmail(String username);
