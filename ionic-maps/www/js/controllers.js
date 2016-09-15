@@ -292,7 +292,11 @@
 
       var map;
 
-      $rootScope.call = initialize();
+      $rootScope.call = function () {
+        $state.transitionTo($state.current, $stateParams, {
+          reload: true, inherit: false, notify: true
+        });
+      }
       function initialize() {
         var mapOptions = {
           center: new google.maps.LatLng(15.8700320, 100.9925410),

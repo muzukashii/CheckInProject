@@ -27,6 +27,10 @@ public class Checkin {
     private String time;
     private String type;
 
+    public Checkin(String location) {
+        this.location = location;
+    }
+
     public Checkin(String location, String day, int year, int month, int date, String time, String type) {
         this.location = location;
         this.day = day;
