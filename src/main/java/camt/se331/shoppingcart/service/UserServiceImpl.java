@@ -188,6 +188,54 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public String dailyCheck(Long id) {
+        User user = userRepository.findOne(id);
+
+        DateTimeFormatter dayFormat = DateTimeFormat
+                .forPattern("E");
+        DateTimeFormatter yearFormat = DateTimeFormat
+                .forPattern("Y");
+        DateTimeFormatter monthFormat = DateTimeFormat
+                .forPattern("M");
+        DateTimeFormatter dateFormat = DateTimeFormat
+                .forPattern("d");
+        DateTimeFormatter timeFormat = DateTimeFormat
+                .forPattern("h:m a");
+        LocalDate localDate = new LocalDate();
+        LocalDateTime localDateTime = new LocalDateTime();
+        String day = localDate.toString(dayFormat);
+        String time = timeFormat.print(localDateTime);
+        Set<Checkin> LatestCheckin = new HashSet<Checkin>();
+        LatestCheckin = user.getCheckins();
+        System.out.println(LatestCheckin);
+        for (Checkin s : LatestCheckin) {
+            int year = s.getYear();
+            int currentYear = Integer.parseInt(yearFormat.print(localDateTime));
+            if (year == currentYear) {
+                int month = s.getMonth();
+                int currentMonth = Integer.parseInt(monthFormat.print(localDateTime));
+                if (month == currentMonth) {
+                    int date = s.getDate();
+                    int currentDate = Integer.parseInt(dateFormat.print(localDateTime));
+                    if (date == currentDate) {
+                        String type = s.getType();
+                        if (type.equals("Clock in")) {
+                            System.out.println("Clock out =======================");
+                            return new String("Clock out");
+                        } else if (type.equals("Clock out")) {
+                            System.out.println("Failed =======================");
+                            return new String("Failed");
+                        }
+                    }
+                }
+            }
+        }
+        System.out.println("Clock in =======================");
+        return new String("Clock in");
+
+    }
+
+    @Override
     public User addUser(User user) {
         return userRepository.save(user);
     }

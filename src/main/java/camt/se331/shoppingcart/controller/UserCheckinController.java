@@ -38,4 +38,22 @@ public class UserCheckinController {
         }
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
     }
+
+    @RequestMapping(value = "dailyCheck",method = RequestMethod.GET)
+    public @ResponseBody
+    ResponseEntity<JSONObject> dailyCheck(@RequestParam("UserId")Long UserId){
+        String result = userService.dailyCheck(UserId);
+        JSONObject obj = new JSONObject();
+        if(result.equals("Clock in")){
+            obj.put("result","Clock in");
+            return ResponseEntity.ok(obj);
+        }else if (result.equals("Clock out")){
+            obj.put("result","Clock out");
+            return ResponseEntity.ok(obj);
+        }else if(result.equals("Failed")){
+            obj.put("result","Can not check in(already Clock in & Clock out");
+            return ResponseEntity.ok(obj);
+        }
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+    }
 }

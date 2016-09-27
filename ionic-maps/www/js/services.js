@@ -10,6 +10,7 @@
     .factory('AutoLoginService',AutoLoginService)
     .factory('UserRoleService',UserRoleService)
     .factory('verifyEmailService',verifyEmailService)
+    .factory('DailyCheckService',DailyCheckService)
 
 
   /** @ngInject */
@@ -17,6 +18,15 @@
     return $resource('/checkin/:id', {id: '@_id'}, {
       update: {
         method: 'PUT' // this method issues a PUT request
+      }
+    });
+  };
+
+  /** @ngInject */
+  function DailyCheckService($resource) {
+    return $resource('/dailyCheck/:id', {id: '@_id'}, {
+      update: {
+        method: 'GET' // this method issues a PUT request
       }
     });
   };
@@ -82,6 +92,6 @@
           method: 'GET' // this method issues a PUT request
         }
       });
-  };
+  }
 
 })();

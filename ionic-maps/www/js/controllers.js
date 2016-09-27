@@ -93,16 +93,16 @@
             }, 4000)
           }, // unsuccess connection
           function (error) {
-              $ionicLoading.hide();
-              $ionicPopup.alert({
-                title: 'Failed!',
-                template: 'Username or Password is incorrect <br> or <br> No internet connection'
-              }).then(function () {
-                $timeout(function () {
-                  $ionicHistory.clearHistory();
-                  $ionicHistory.clearCache();
-                }, 1500)
-              })
+            $ionicLoading.hide();
+            $ionicPopup.alert({
+              title: 'Failed!',
+              template: 'Username or Password is incorrect <br> or <br> No internet connection'
+            }).then(function () {
+              $timeout(function () {
+                $ionicHistory.clearHistory();
+                $ionicHistory.clearCache();
+              }, 1500)
+            })
 
           })
       }
@@ -115,7 +115,7 @@
 
 
     /** @ngInject */
-    .controller('MapCtrl', function ($ionicSideMenuDelegate, $scope, $rootScope, $ionicBackdrop, $state, $cordovaGeolocation, $http, $ionicPopup, locationService, $ionicLoading, $ionicHistory, $timeout) {
+    .controller('MapCtrl', function ($ionicSideMenuDelegate, DailyCheckService, $scope, $rootScope, $ionicBackdrop, $stateParams, $state, $cordovaGeolocation, $http, $ionicPopup, locationService, $ionicLoading, $ionicHistory, $timeout) {
 
       $scope.$on('$ionicView.enter', function () {
         $ionicSideMenuDelegate.canDragContent(false);
@@ -131,63 +131,85 @@
 
       window.CheckIn = function (name) {
         var confirmPopup = $ionicPopup.confirm({
-            title: 'Please submit...',
-            template: 'Are you sure you want to check in?'
-          });
+          title: 'Please submit...',
+          template: 'Are you sure you want to check in?'
+        });
 
-          confirmPopup.then(function(res) {
-            if(res) {
-              $ionicLoading.show({
-                content: '<i class="icon ion-loading"></i>',
-                template: '<ion-spinner class="spinner-balanced"></ion-spinner><p style="color: white">Please wait...</p>'
-              });
-              $scope.usercheck = $rootScope.user;
-              console.log($scope.usercheck)
-              $scope.checkinData = {};
-              $scope.checkinData.location = name;
-              console.log($scope.checkinData)
-              locationService.save({UserId: $scope.usercheck.id}, $scope.checkinData, function (data) {
-                $ionicLoading.hide();
-                $ionicPopup.alert({
-                  title: 'Result!',
-                  template: data.result
-                })
-              }, function (error) {
-                $ionicLoading.hide();
-                $ionicPopup.alert({
-                  title: 'Failed!',
-                  template: 'Please check your internet connection'
-                })
+        confirmPopup.then(function (res) {
+          if (res) {
+            $ionicLoading.show({
+              content: '<i class="icon ion-loading"></i>',
+              template: '<ion-spinner class="spinner-balanced"></ion-spinner><p style="color: white">Please wait...</p>'
+            });
+            $scope.usercheck = $rootScope.user;
+            console.log($scope.usercheck)
+            $scope.checkinData = {};
+            $scope.checkinData.location = name;
+            console.log($scope.checkinData)
+            locationService.save({UserId: $scope.usercheck.id}, $scope.checkinData, function (data) {
+              $ionicLoading.hide();
+              $ionicPopup.alert({
+                title: 'Result!',
+                template: data.result
+              }).then(function () {
+                initialize();
               })
-            } else {
-              console.log('You are not sure');
-            }
-          });
+            }, function (error) {
+              $ionicLoading.hide();
+              $ionicPopup.alert({
+                title: 'Failed!',
+                template: 'Please check your internet connection'
+              })
+            })
+          } else {
+            console.log('You are not sure');
+          }
+        });
       }
 
       function createMarker(place) {
-        var placeLoc = place.geometry.location;
-        var infoWindow2 = new google.maps.InfoWindow();
-        // var photos = place.photos;
-        var marker2 = new google.maps.Marker({
-          map: map,
-          animation: google.maps.Animation.DROP,
-          position: placeLoc
-        });
+          var placeLoc = place.geometry.location;
+          var infoWindow2 = new google.maps.InfoWindow();
+          // var photos = place.photos;
+          var marker2 = new google.maps.Marker({
+            map: map,
+            animation: google.maps.Animation.DROP,
+            position: placeLoc
+          });
 
-        google.maps.event.addListener(marker2, 'click', function () {
-          infoWindow2.setContent('<div class="infoWindowS"><p style="font-size:18px;padding-top: 20px;"> Place name : ' + place.name + '</p>' +
-            '<button class="button button-positive" style="margin: 15px" ' +
-            'onclick="CheckIn(\'' + place.name + '\')"> Clock In / Clock Out </button>' +
-            // '<button class="button button-assertive" style="margin:15px" ' +
-            // 'onclick="CheckIn(\'' + place.name + '\')"> Clock Out </button>' +
-            '</div>');
-          if ($scope.prev_infowindow) {
-            $scope.prev_infowindow.close()
+          if($scope.checkResult=='Clock in'){
+            google.maps.event.addListener(marker2, 'click', function () {
+              infoWindow2.setContent('<div class="infoWindowS"><p style="font-size:18px;padding-top: 20px;"> Place name : ' + place.name + '</p>' +
+                '<button class="button button-positive" style="margin:15px" ' +
+                'onclick="CheckIn(\'' + place.name + '\')"> Clock in</button>'+ '</div>');
+              if ($scope.prev_infowindow) {
+                $scope.prev_infowindow.close()
+              }
+              $scope.prev_infowindow = infoWindow2;
+              infoWindow2.open(map, this);
+            });
+          }else if($scope.checkResult=='Clock out'){
+            google.maps.event.addListener(marker2, 'click', function () {
+              infoWindow2.setContent('<div class="infoWindowS"><p style="font-size:18px;padding-top: 20px;"> Place name : ' + place.name + '</p>' +
+                '<button class="button button-positive" style="margin:15px" ' +
+                'onclick="CheckIn(\'' + place.name + '\')"> Clock out</button>'+ '</div>');
+              if ($scope.prev_infowindow) {
+                $scope.prev_infowindow.close()
+              }
+              $scope.prev_infowindow = infoWindow2;
+              infoWindow2.open(map, this);
+            });
+          }else{
+            google.maps.event.addListener(marker2, 'click', function () {
+              infoWindow2.setContent('<div class="infoWindowS"><p style="font-size:18px;padding-top: 20px;"> Place name : ' + place.name + '</p>' +
+                '<p>Can not check in(already Clock in & Clock out)</p>'+ '</div>');
+              if ($scope.prev_infowindow) {
+                $scope.prev_infowindow.close()
+              }
+              $scope.prev_infowindow = infoWindow2;
+              infoWindow2.open(map, this);
+            });
           }
-          $scope.prev_infowindow = infoWindow2;
-          infoWindow2.open(map, this);
-        });
       }
 
       function geocodePosition(pos) {
@@ -211,8 +233,12 @@
                 for (var i = 0; i < results.length; i++) {
                   createMarker(results[i]);
                 }
+                console.log(results[1].name)
+                $scope.Nearest = results[1].name;
               }
             })
+
+
 
             var icon = {
               url: "http://icons.iconarchive.com/icons/icons-land/vista-map-markers/256/Map-Marker-Flag-1-Right-Azure-icon.png",
@@ -293,11 +319,14 @@
       var map;
 
       $rootScope.call = function () {
-        $state.transitionTo($state.current, $stateParams, {
-          reload: true, inherit: false, notify: true
-        });
+        initialize();
       }
+
       function initialize() {
+        DailyCheckService.get({UserId: $rootScope.user.id}, function (data) {
+          console.log(data)
+          $scope.checkResult = data.result;
+        })
         var mapOptions = {
           center: new google.maps.LatLng(15.8700320, 100.9925410),
           zoom: 6,
@@ -347,7 +376,7 @@
     .controller('registerController', function ($ionicPlatform, $cordovaDevice, $timeout, $ionicLoading, DepartmentService, $scope, $rootScope, $window, UserControlService, $ionicPopup, $state, $ionicHistory, verifyEmailService) {
 
       $scope.verifyEmailResult = false;
-      try{
+      try {
         document.addEventListener("deviceready", function () {
           $scope.user = {};
           var device = $cordovaDevice.getDevice();
@@ -367,7 +396,7 @@
           var version = $cordovaDevice.getVersion();
 
         }, false);
-      }catch(error) {
+      } catch (error) {
         console.log(error)
       }
 
@@ -391,7 +420,7 @@
 
 
       $scope.sendRegister = function (flowFiles) {
-        if($scope.uuid!=undefined){
+        if ($scope.uuid != undefined) {
           $scope.user.uuid = $scope.uuid;
         }
         console.log('UUID is ... ' + $scope.user.uuid)
@@ -452,7 +481,7 @@
       };
 
       $scope.resetVerify = function () {
-        $scope.verifyEmailResult=false;
+        $scope.verifyEmailResult = false;
       }
 
       $scope.verifyEmail = function (Email) {
@@ -525,35 +554,35 @@
             roles: $rootScope.user.roles,
             tel: $scope.usernew.tel,
             department: $scope.usernew.department,
-            images:$rootScope.user.images
+            images: $rootScope.user.images
           }
           console.log($scope.usernew);
           $ionicLoading.show({
             template: '<ion-spinner class="spinner-balanced"></ion-spinner><p style="color:white">Please wait...</p>'
           });
           if ($scope.Check == $rootScope.user.password) {
-                  UserControlService.update({id: $scope.usernew.id}, $scope.usernew, function (user2) {
-                    console.log(user2)
-                    var UserId = user2.id;
-                    // set location
-                    $ionicHistory.clearHistory();
-                    $ionicHistory.clearCache();
-                    $ionicHistory.nextViewOptions({
-                      disableBack: true,
-                      historyRoot: true
-                    })
-                    $timeout(function () {
-                      $timeout(function () {
-                        $ionicLoading.hide();
-                        $ionicPopup.alert({
-                          title: 'Success',
-                          template: 'Reloading...'
-                        }).then(function () {
-                          window.location.reload(true)
-                        })
-                      }, 2000)
-                    }, 1500)
+            UserControlService.update({id: $scope.usernew.id}, $scope.usernew, function (user2) {
+              console.log(user2)
+              var UserId = user2.id;
+              // set location
+              $ionicHistory.clearHistory();
+              $ionicHistory.clearCache();
+              $ionicHistory.nextViewOptions({
+                disableBack: true,
+                historyRoot: true
+              })
+              $timeout(function () {
+                $timeout(function () {
+                  $ionicLoading.hide();
+                  $ionicPopup.alert({
+                    title: 'Success',
+                    template: 'Reloading...'
+                  }).then(function () {
+                    window.location.reload(true)
                   })
+                }, 2000)
+              }, 1500)
+            })
           } else {
             $ionicLoading.hide();
             $ionicPopup.alert({
@@ -672,5 +701,17 @@
 
     })
 
+    /**@ngInject */
+    .controller('employeeInfoController', function ($scope, $http, $routeParams, $route, UserControlService) {
+      $scope.$on('$ionicView.loaded', function (event, data) {
+        console.log("State Params: ", data.stateParams.id);
+        var UserId = data.stateParams.id
+        console.log(UserId)
+        UserControlService.get({id: UserId}, function (data) {
+          $scope.data = data;
+        })
+
+      })
+    })
 
 })();

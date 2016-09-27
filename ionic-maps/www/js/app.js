@@ -153,7 +153,7 @@
       $ionicConfigProvider.navBar.alignTitle('center')
     })
 
-    .config(function ($stateProvider, $urlRouterProvider) {
+    .config(function ($stateProvider, $urlRouterProvider,$locationProvider) {
       $stateProvider
 
         .state('login', {
@@ -187,11 +187,11 @@
           }
         })
 
-        .state('app.admin', {
-          url: '/admin',
+        .state('app.adminMenu', {
+          url: '/adminMenu',
           views: {
             'menuContent': {
-              templateUrl: 'templates/admin.html'
+              templateUrl: 'templates/adminMenu.html'
             }
           }
         })
@@ -206,12 +206,12 @@
           }
         })
 
-        .state('app.Contactlist', {
-          url: '/Contactlist',
-          views: {
-            'menuContent': {
-              templateUrl: 'templates/Contactlist.html',
-              controller: 'StafflistController'
+        .state('app.userInfo',{
+          url:'/userInfo/:id',
+          views:{
+            'menuContent':{
+              templateUrl:'templates/userInfo.html',
+              controller:'employeeInfoController'
             }
           }
         })
@@ -259,7 +259,6 @@
 
       // if none of the above states are matched, use this as the fallback
       $urlRouterProvider.otherwise("/login");
-
     })
 
 

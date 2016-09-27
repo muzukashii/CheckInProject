@@ -119,74 +119,29 @@ public class Lab11ApplicationTests {
 
     @Test
     public void testCheckIn() throws IOException, ParseException {
+
+
+    }
+
+    @Test
+    public void testGetlist() throws IOException {
         UserServiceImpl userService = mock(UserServiceImpl.class);
-        DateTimeFormatter dayFormat = DateTimeFormat
-                .forPattern("E");
-        DateTimeFormatter yearFormat = DateTimeFormat
-                .forPattern("Y");
-        DateTimeFormatter monthFormat = DateTimeFormat
-                .forPattern("M");
-        DateTimeFormatter dateFormat = DateTimeFormat
-                .forPattern("d");
-        DateTimeFormatter timeFormat = DateTimeFormat
-                .forPattern("h:m a");
-        LocalDate localDate = new LocalDate();
-        LocalDateTime localDateTime = new LocalDateTime();
-        String day = localDate.toString(dayFormat);
-        String time = timeFormat.print(localDateTime);
-
-        User user = new User(2l, "HelloWorld CallOpop", "0875404521", "user@gmail.com", "123456", "Senior Advisor");
-        Checkin checkin = new Checkin("CAMT");
-
-        //Get Check in history
-        Set<Checkin> LatestCheckin = new HashSet<Checkin>();
-        LatestCheckin = user.getCheckins();
-        System.out.println("==========================");
-        System.out.println(LatestCheckin);
-        for (Checkin s : LatestCheckin) {
-            System.out.println(s.getDate());
-            int year = s.getYear();
-            int currentYear = Integer.parseInt(yearFormat.print(localDateTime));
-            if (year == currentYear) {
-                int month = s.getMonth();
-                int currentMonth = Integer.parseInt(monthFormat.print(localDateTime));
-                if (month == currentMonth) {
-                    int date = s.getDate();
-                    int currentDate = Integer.parseInt(dateFormat.print(localDateTime));
-                    if (date == currentDate) {
-                        String type = s.getType();
-                        if (type.equals("Clock in")) {
-                            checkin.setDay(day);
-                            checkin.setYear(Integer.parseInt(yearFormat.print(localDateTime)));
-                            checkin.setMonth(Integer.parseInt(monthFormat.print(localDateTime)));
-                            checkin.setDate(Integer.parseInt(dateFormat.print(localDateTime)));
-                            checkin.setTime(time);
-                            checkin.setType("Clock out");
-                            user.getCheckins().add(checkin);
-                            when(userService.Checkin(user,checkin)).thenReturn("Clock Out");
-                            String resultClockOut = userService.Checkin(user,checkin);
-                            System.out.println(resultClockOut);
-                            assertEquals("Clock out",resultClockOut);
-                        } else if (type.equals("Clock out")) {
-                            when(userService.Checkin(user,checkin)).thenReturn("Failed");
-                            String resultFailed = userService.Checkin(user,checkin);
-                            System.out.println(resultFailed);
-                            assertEquals("Failed",resultFailed);
-                        }
-                    }
-                }
-            }
+        {
+            User[] returnMock = {
+                    new User(2l, "HelloWorld CallOpop", "0875404521", "user@gmail.com", "123456", "Senior Advisor", ImageUtil.getImage("pic/angular.png")),
+                    new User(3l, "Mustrean Guanggang", "0826483155", "user2@gmail.com", "123456", "Assurance Manager", ImageUtil.getImage("pic/bootstrap.png")),
+                    new User(4l, "Justice League", "0826483155", "user3@gmail.com", "123456", "Research and Development Manager", ImageUtil.getImage("pic/protractor.png")),
+                    new User(5l, "Beast Warfax", "0945358754", "user4@gmail.com", "123456", "Technical Manager", ImageUtil.getImage("pic/browsersync.png")),
+                    new User(6l, "Tim Wrexham", "0904123345", "user5@gmail.com", "123456", "Assurance Manager", ImageUtil.getImage("pic/gulp.png")),
+                    new User(7l, "Muchearano Altony", "0834568582", "user6@gmail.com", "123456", "Manufacturing Manager", ImageUtil.getImage("pic/jasmine.png")),
+                    new User(8l, "Winterwolf Allstar", "0865664858", "user7@gmail.com", "123456", "Assurance Manager", ImageUtil.getImage("pic/node-sass.png")),
+                    new User(9l, "King Rexar", "0915486763", "user8@gmail.com", "123456", "Technical Manager", ImageUtil.getImage("pic/karma.png"))
+            };
+            when(userService.findAll()).thenReturn(Arrays.asList(returnMock));
         }
-        checkin.setDay(day);
-        checkin.setYear(Integer.parseInt(yearFormat.print(localDateTime)));
-        checkin.setMonth(Integer.parseInt(monthFormat.print(localDateTime)));
-        checkin.setDate(Integer.parseInt(dateFormat.print(localDateTime)));
-        checkin.setTime(time);
-        checkin.setType("Clock in");
-        when(userService.Checkin(user,checkin)).thenReturn("Clock in");
-        String resultClockIn = userService.Checkin(user,checkin);
-        System.out.println(resultClockIn);
-        assertEquals("Clock in",resultClockIn);
+        List<User> user = userService.findAll();
+        assertNotNull(user);
+        System.out.println(user);
     }
 
 }

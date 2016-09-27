@@ -4,7 +4,7 @@
       <div class="list">
         <div class="item">
           <form>
-            <h2>Search for staff</h2>
+            <h2>Search for Department or Staff</h2>
             <div class="input-field col s6">
               <i class="icon ion-ios-search-outline"></i>
               <input placeholder="Search..." ng-model="UserSearch" type="text">
@@ -16,21 +16,16 @@
         <div class="item item-divider">
           Position : {{key}} ({{value.length}})
         </div>
-        <a class="item item-avatar" ng-repeat="staff in value | filter:UserSearch">
+        <a class="item item-avatar" ng-repeat="staff in value | filter:UserSearch" href="#/app/userInfo/{{staff.id}}">
           <img src="../img/ionic.png"
                ng-src="data:{{staff.images[0].contentType}};base64,{{staff.images[0].content}}">
           <h2>{{staff.name}}</h2>
-          <button ng-hide="staff.roles[0].roleName=='Admin'" class="waves-effect waves-light btn"
-                  ng-click="Addadminrole(staff)">Add to admin level
-          </button>
-          <button ng-hide="staff.name==user.name" ng-show="staff.roles[0].roleName=='Admin'" class="waves-effect red lighten-2 btn"
-                  ng-click="Removeadminrole(staff.id,staff.roles[0].id)">Remove from admin level
-          </button>
           <hr class="style-six">
           <h3 ng-hide="staff.checkins.length>0">Not check in yet..</h3>
           <div ng-repeat="time in staff.checkins | orderBy:'time':true | limitTo:1 ">
-            Latest Checkin : {{time.time | date:'yyyy-MM-dd HH:mm:ss Z'}} | At : {{time.location}} | Type :
-            {{time.type}}
+            Latest Checkin : {{time.time}} <br>
+            At : {{time.location}} <br>
+            Type :{{time.type}}
           </div>
         </a>
 
