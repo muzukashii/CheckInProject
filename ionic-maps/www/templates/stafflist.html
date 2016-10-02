@@ -16,7 +16,7 @@
         <div class="item item-divider">
           Position : {{key}} ({{value.length}})
         </div>
-        <a class="item item-avatar" ng-repeat="staff in value | filter:UserSearch" href="#/app/userInfo/{{staff.id}}">
+        <a class="item item-avatar" ng-repeat="staff in value | filter:UserSearch | limitTo : numberOfItemsToDisplay" href="#/app/userInfo/{{staff.id}}">
           <img src="../img/ionic.png"
                ng-src="data:{{staff.images[0].contentType}};base64,{{staff.images[0].content}}">
           <h2>{{staff.name}}</h2>
@@ -28,8 +28,8 @@
             Type :{{time.type}}
           </div>
         </a>
-
       </div>
     </ion-item>
+    <ion-infinite-scroll on-infinite="addMoreItem()" ng-if="stafflist.length > numberOfItemsToDisplay"></ion-infinite-scroll>
   </ion-content>
 </ion-view>

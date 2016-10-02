@@ -24,3 +24,9 @@ Coding Language
 - JAVASCRIPT
 - HTML
 - CSS
+
+If you want to try to using the app
+you can run by go to ionic-maps folder and use "ionic serve" to run the program
+ user to login > username = admin@gmail.com
+                 password = 123456
+**don't forgot to run the server

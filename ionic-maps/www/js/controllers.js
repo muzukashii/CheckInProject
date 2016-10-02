@@ -643,61 +643,68 @@
 
       $scope.Filter = 'department';
       $scope.choose = 'Position';
-      $scope.MySelected = function (select) {
-        $scope.Filter = select;
-        console.log("First..." + $scope.Filter)
-        if (select == 'department') {
-          $scope.Filter = select;
-          $scope.choose = 'Position'
-          console.log($scope.Filter)
-        } else if (select == 'id') {
-          $scope.Filter = select;
-          $scope.choose = 'Staff ID'
-          console.log($scope.Filter)
-        }
+      // $scope.MySelected = function (select) {
+      //   $scope.Filter = select;
+      //   console.log("First..." + $scope.Filter)
+      //   if (select == 'department') {
+      //     $scope.Filter = select;
+      //     $scope.choose = 'Position'
+      //     console.log($scope.Filter)
+      //   } else if (select == 'id') {
+      //     $scope.Filter = select;
+      //     $scope.choose = 'Staff ID'
+      //     console.log($scope.Filter)
+      //   }
+      // }
+
+      $scope.numberOfItemsToDisplay = 1; // Use it with limit to in ng-repeat
+      $scope.addMoreItem = function(done) {
+        if ($scope.stafflist.length > $scope.numberOfItemsToDisplay)
+          $scope.numberOfItemsToDisplay += 5; // load number of more items
+        $scope.$broadcast('scroll.infiniteScrollComplete')
       }
 
 
-      $scope.Addadminrole = function (user) {
-        $scope.staff = user
-        $ionicLoading.show({
-          content: '<i class="icon ion-loading"></i>',
-          template: '<ion-spinner class="spinner-balanced"></ion-spinner><p style="color: white">Loading..</p>'
-        });
-        UserRoleService.update($scope.staff).$promise.then(function (res) {
-          $timeout(function () {
-            UserControlService.query(function (data) {
-              $scope.stafflist = data;
-            })
-            $ionicLoading.hide();
-          }, 1500)
+      // $scope.Addadminrole = function (user) {
+      //   $scope.staff = user
+      //   $ionicLoading.show({
+      //     content: '<i class="icon ion-loading"></i>',
+      //     template: '<ion-spinner class="spinner-balanced"></ion-spinner><p style="color: white">Loading..</p>'
+      //   });
+      //   UserRoleService.update($scope.staff).$promise.then(function (res) {
+      //     $timeout(function () {
+      //       UserControlService.query(function (data) {
+      //         $scope.stafflist = data;
+      //       })
+      //       $ionicLoading.hide();
+      //     }, 1500)
+      //
+      //   }, function (error) {
+      //     console.log(error);
+      //     $ionicLoading.hide();
+      //   })
+      // }
 
-        }, function (error) {
-          console.log(error);
-          $ionicLoading.hide();
-        })
-      }
-
-      $scope.Removeadminrole = function (userId, roleId) {
-        console.log(userId)
-        console.log(roleId)
-        $ionicLoading.show({
-          content: '<i class="icon ion-loading"></i>',
-          template: '<ion-spinner class="spinner-balanced"></ion-spinner><p style="color: white">Loading..</p>'
-        });
-        UserRoleService.delete({userid: userId, roleid: roleId}).$promise.then(function (res) {
-          $timeout(function () {
-            UserControlService.query(function (data) {
-              $scope.stafflist = data;
-              console.log(res)
-            })
-            $ionicLoading.hide();
-          }, 1500)
-        }, function (error) {
-          console.log(error)
-          $ionicLoading.hide();
-        })
-      }
+      // $scope.Removeadminrole = function (userId, roleId) {
+      //   console.log(userId)
+      //   console.log(roleId)
+      //   $ionicLoading.show({
+      //     content: '<i class="icon ion-loading"></i>',
+      //     template: '<ion-spinner class="spinner-balanced"></ion-spinner><p style="color: white">Loading..</p>'
+      //   });
+      //   UserRoleService.delete({userid: userId, roleid: roleId}).$promise.then(function (res) {
+      //     $timeout(function () {
+      //       UserControlService.query(function (data) {
+      //         $scope.stafflist = data;
+      //         console.log(res)
+      //       })
+      //       $ionicLoading.hide();
+      //     }, 1500)
+      //   }, function (error) {
+      //     console.log(error)
+      //     $ionicLoading.hide();
+      //   })
+      // }
 
     })
 
