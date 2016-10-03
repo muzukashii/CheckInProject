@@ -32,7 +32,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "userControl",method = RequestMethod.GET)
-    public List<User> list(){
+    public List<User> getList(){
         return userService.findAll();
     }
 
@@ -111,6 +111,12 @@ public class UserController {
     public  User removeImage(@RequestParam("imageid") Long imageid,@RequestParam("userid") Long userId){
         User user = userService.getUser(userId);
         return userService.removeImage(user,imageid);
+    }
+
+    @RequestMapping(value = "/search",method = RequestMethod.GET)
+    @ResponseBody
+    public List<User> Search(@RequestParam("input") String input){
+        return userService.Search(input);
     }
 
 }

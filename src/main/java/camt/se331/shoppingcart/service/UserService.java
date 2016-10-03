@@ -22,4 +22,5 @@ public interface UserService {
      User RemoveRole(User user, Long roleid);
      User verifyEmail(String username);
      String dailyCheck(Long id);
+     List<User> Search(String input);
 }

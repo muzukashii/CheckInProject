@@ -7,7 +7,7 @@
             <h2>Search for Department or Staff</h2>
             <div class="input-field col s6">
               <i class="icon ion-ios-search-outline"></i>
-              <input placeholder="Search..." ng-model="UserSearch" type="text">
+              <input placeholder="Search..." ng-model="UserSearch" ng-change="search(UserSearch)" type="text">
             </div>
           </form>
         </div>
@@ -16,7 +16,7 @@
         <div class="item item-divider">
           Position : {{key}} ({{value.length}})
         </div>
-        <a class="item item-avatar" ng-repeat="staff in value | filter:UserSearch | limitTo : numberOfItemsToDisplay" href="#/app/userInfo/{{staff.id}}">
+        <a class="item item-avatar" ng-repeat="staff in value| limitTo : numberOfItemsToDisplay" href="#/app/userInfo/{{staff.id}}">
           <img src="../img/ionic.png"
                ng-src="data:{{staff.images[0].contentType}};base64,{{staff.images[0].content}}">
           <h2>{{staff.name}}</h2>

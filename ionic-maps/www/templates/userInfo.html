@@ -15,16 +15,22 @@
       <div class="item item-divider"  ng-repeat="(key1,value1) in data.checkins | groupBy : 'year'">
         <div ng-repeat="(key2,value2) in data.checkins | groupBy : 'month'">
           <div ng-repeat="(key3,value3) in data.checkins | groupBy : 'date'">
-            {{key1}} - {{key2}} - {{key3}}
-            <div ng-repeat="checkin in data.checkins | limitTo:2" ng-if="checkin.year==key1&&checkin.month==key2&&checkin.date==key3">
-              At : {{checkin.location}} | Type :{{checkin.type}} <br>
-              Time : {{checkin.time}}
-              <hr class="style-six">
+            Date {{key1}} - {{key2}} - {{key3}}
+              <table class="rwd-table">
+                <tr>
+                  <th>Time</th>
+                  <th>Location</th>
+                  <th>Type</th>
+                </tr>
+                <tr ng-repeat="checkin in data.checkins | limitTo:2" ng-if="checkin.year==key1&&checkin.month==key2&&checkin.date==key3">
+                  <td data-th="Time">{{checkin.time}}</td>
+                  <td data-th="Location">{{checkin.location}}</td>
+                  <td data-th="Type">{{checkin.type}} </td>
+                </tr>
+              </table>
             </div>
           </div>
         </div>
       </div>
-
-    </div>
   </ion-content>
 </ion-view>

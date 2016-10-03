@@ -608,8 +608,9 @@
 
 
     /**@ngInject */
-    .controller('StafflistController', function (UserRoleService, $ionicPopover, $ionicPopup, $state, $scope, $rootScope, UserControlService, $ionicHistory, $ionicLoading, $timeout) {
+    .controller('StafflistController', function (SearchStaffService,UserRoleService, $ionicPopover, $ionicPopup, $state, $scope, $rootScope, UserControlService, $ionicHistory, $ionicLoading, $timeout) {
 
+      $scope.UserSearch='';
       $scope.$on('$ionicView.enter', function () {
         $ionicLoading.show({
           content: '<i class="icon ion-loading"></i>',
@@ -665,6 +666,21 @@
       }
 
 
+      var timer=false;
+      $scope.search = function (UserSearch) {
+        console.log("Changed")
+        console.log(UserSearch);
+        console.log($scope.UserSearch+"1")
+        if(timer){
+          $timeout.cancel(timer)
+        }
+        timer= $timeout(function(){
+          SearchStaffService.query({input:UserSearch},function (result) {
+            $scope.stafflist = result;
+          })
+        },1000)
+      }
+
       // $scope.Addadminrole = function (user) {
       //   $scope.staff = user
       //   $ionicLoading.show({
@@ -717,7 +733,6 @@
         UserControlService.get({id: UserId}, function (data) {
           $scope.data = data;
         })
-
       })
     })
 

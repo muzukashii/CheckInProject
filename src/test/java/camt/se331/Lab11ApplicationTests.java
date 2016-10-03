@@ -119,8 +119,6 @@ public class Lab11ApplicationTests {
 
     @Test
     public void testCheckIn() throws IOException, ParseException {
-
-
     }
 
     @Test

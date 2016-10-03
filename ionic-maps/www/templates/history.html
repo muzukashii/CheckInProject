@@ -1,5 +1,37 @@
-<ion-view view-title="History">
+<ion-view view-title="History" ng-controller="employeeInfoController">
   <ion-content>
-    History
+    <div class="list card">
+
+      <div class="item">
+        <div class="circular" style="text-align: center;">
+          <img src="../img/ionic.png"
+               ng-src="data:{{data.images[0].contentType}};base64,{{data.images[0].content}}">
+          <h2>{{data.name}}</h2>
+          <p>Position : {{data.department}}</p>
+        </div>
+
+      </div>
+
+      <div class="item item-divider"  ng-repeat="(key1,value1) in data.checkins | groupBy : 'year'">
+        <div ng-repeat="(key2,value2) in data.checkins | groupBy : 'month'">
+          <div ng-repeat="(key3,value3) in data.checkins | groupBy : 'date'">
+            Date {{key1}} - {{key2}} - {{key3}}
+            <table class="rwd-table">
+              <tr>
+                <th>Time</th>
+                <th>Location</th>
+                <th>Type</th>
+              </tr>
+              <tr ng-repeat="checkin in data.checkins | limitTo:2" ng-if="checkin.year==key1&&checkin.month==key2&&checkin.date==key3">
+                <td data-th="Time">{{checkin.time}}</td>
+                <td data-th="Location">{{checkin.location}}</td>
+                <td data-th="Type">{{checkin.type}} </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
   </ion-content>
 </ion-view>
+

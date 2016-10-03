@@ -11,6 +11,7 @@
     .factory('UserRoleService',UserRoleService)
     .factory('verifyEmailService',verifyEmailService)
     .factory('DailyCheckService',DailyCheckService)
+    .factory('SearchStaffService',SearchStaffService)
 
 
   /** @ngInject */
@@ -18,6 +19,15 @@
     return $resource('/checkin/:id', {id: '@_id'}, {
       update: {
         method: 'PUT' // this method issues a PUT request
+      }
+    });
+  };
+
+  /** @ngInject */
+  function SearchStaffService($resource) {
+    return $resource('/search', {}, {
+      update: {
+        method: 'GET' // this method issues a PUT request
       }
     });
   };

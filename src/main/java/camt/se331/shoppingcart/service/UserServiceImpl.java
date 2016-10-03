@@ -236,8 +236,16 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
+    public List<User> Search(String input) {
+        return userRepository.findByNameOrDepartmentContainingIgnoreCase("%"+input+"%","%"+input+"%");
+    }
+
+    @Override
     public User addUser(User user) {
         return userRepository.save(user);
     }
+
+
 
 }

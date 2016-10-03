@@ -221,7 +221,6 @@
           views: {
             'menuContent': {
               templateUrl: 'templates/manageAccount.html'
-
             }
           }
         })
@@ -238,11 +237,12 @@
         })
 
         .state('app.history', {
-          url: '/history',
+          url: '/history/:id',
           cache: false,
           views: {
             'menuContent': {
-              templateUrl: 'templates/history.html'
+              templateUrl: 'templates/history.html',
+              controller:'employeeInfoController'
             }
           }
         })
