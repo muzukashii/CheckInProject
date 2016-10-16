@@ -40,6 +40,22 @@ public class Checkin {
         this.time = time;
         this.type = type;
     }
+    public Checkin(Long id,String location, String day, int year, int month, int date, String time,String type) {
+        this.location = location;
+        this.type = type;
+        this.day = day;
+        this.id = id;
+        this.year = year;
+        this.month = month;
+        this.date = date;
+        this.time = time;
+    }
+    public Checkin(int year, int month, int date, String time,String type) {
+        this.year = year;
+        this.month = month;
+        this.date = date;
+        this.time = time;
+    }
     public Checkin(Long id, String location, String type) {
         this.id = id;
         this.location = location;

@@ -10,6 +10,7 @@ import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
 import camt.se331.shoppingcart.service.ImageUtil;
+import camt.se331.shoppingcart.service.UserService;
 import camt.se331.shoppingcart.service.UserServiceImpl;
 import com.sun.org.apache.regexp.internal.RE;
 import org.joda.time.LocalDate;
@@ -43,82 +44,164 @@ import static org.mockito.Mockito.*;
 @WebAppConfiguration
 public class Lab11ApplicationTests {
 
-    @Test
-    public void testLogin() {
-        UserServiceImpl userService = mock(UserServiceImpl.class);
-        User user = new User("user@gmail.com", "123456");
-        {
-            User returnMock = new User(2l, "HelloWorld CallOpop", "0875404521", "user@gmail.com", "123456", "Senior Advisor");
-            when(userService.Login(user.getUsername(), user.getPassword())).thenReturn(returnMock);
-        }
-        User resultSuccess = userService.Login(user.getUsername(), user.getPassword());
-        assertEquals(user.getUsername(), resultSuccess.getUsername());
-        assertNotNull(resultSuccess);
-        System.out.println(resultSuccess);
-
-        System.out.println("=================================================");
-        System.out.println("In case of user input wrong password...");
-        User user1 = new User("user@gmail.com", "123456789");
-        when(userService.Login(user1.getUsername(), user1.getPassword())).thenReturn(null);
-        User resultFailed1 = userService.Login(user1.getUsername(), user1.getPassword());
-        assertNull(resultFailed1);
-        System.out.println(resultFailed1);
-
-        System.out.println("=================================================");
-        System.out.println("In case of user input wrong email...");
-        User user2 = new User("user5678@gmail.com", "123456");
-        when(userService.Login(user2.getUsername(), user2.getPassword())).thenReturn(null);
-        User resultFailed2 = userService.Login(user2.getUsername(), user2.getPassword());
-        assertNull(resultFailed2);
-        System.out.println(resultFailed2);
-
-
-    }
+//    @Test
+//    public void testLogin() {
+//        UserServiceImpl userService = mock(UserServiceImpl.class);
+//        User user = new User("user@gmail.com", "123456");
+//        {
+//            User returnMock = new User(2l, "HelloWorld CallOpop", "0875404521", "user@gmail.com", "123456", "Senior Advisor");
+//            when(userService.Login(user.getUsername(), user.getPassword())).thenReturn(returnMock);
+//        }
+//        User resultSuccess = userService.Login(user.getUsername(), user.getPassword());
+//        assertEquals(user.getUsername(), resultSuccess.getUsername());
+//        assertNotNull(resultSuccess);
+//        System.out.println(resultSuccess);
+//
+//        System.out.println("=================================================");
+//        System.out.println("In case of user input wrong password...");
+//        User user1 = new User("user@gmail.com", "123456789");
+//        when(userService.Login(user1.getUsername(), user1.getPassword())).thenReturn(null);
+//        User resultFailed1 = userService.Login(user1.getUsername(), user1.getPassword());
+//        assertNull(resultFailed1);
+//        System.out.println(resultFailed1);
+//
+//        System.out.println("=================================================");
+//        System.out.println("In case of user input wrong email...");
+//        User user2 = new User("user5678@gmail.com", "123456");
+//        when(userService.Login(user2.getUsername(), user2.getPassword())).thenReturn(null);
+//        User resultFailed2 = userService.Login(user2.getUsername(), user2.getPassword());
+//        assertNull(resultFailed2);
+//        System.out.println(resultFailed2);
+//    }
 
 
-    @Test
-    public void testAddImage() throws IOException {
-        UserServiceImpl userService = mock(UserServiceImpl.class);
-        User user = new User(10l, "King Rexar", "0915486763", "user25@gmail.com", "123456", "Technical Manager");
-        Image image = ImageUtil.getImage("pic/angular.png");
-        {
-            User returnMock = new User(10l, "King Rexar", "0915486763", "user25@gmail.com", "123456", "Technical Manager", ImageUtil.getImage("pic/angular.png"));
-            when(userService.addImage(user, image)).thenReturn(returnMock);
-        }
-        User result = userService.addImage(user, image);
-        System.out.println("First,Size of Array image is...");
-        System.out.println(user.getImages().size());
-        System.out.println(image.getFileName());
-        assertEquals(user.getImages().size(), 0);
-        System.out.println("------------------------");
-        System.out.println("Last,Size of Array image is...");
-        System.out.println(result.getImages().size());
-//        System.out.println(result.getImages().);
-        assertEquals(result.getImages().size(), 1);
-        assertNotNull(result.getImages());
-    }
+//    @Test
+//    public void testAddImage() throws IOException {
+//        UserServiceImpl userService = mock(UserServiceImpl.class);
+//        User user = new User(10l, "King Rexar", "0915486763", "user25@gmail.com", "123456", "Technical Manager");
+//        Image image = ImageUtil.getImage("pic/angular.png");
+//        {
+//            User returnMock = new User(10l, "King Rexar", "0915486763", "user25@gmail.com", "123456", "Technical Manager", ImageUtil.getImage("pic/angular.png"));
+//            when(userService.addImage(user, image)).thenReturn(returnMock);
+//        }
+//        User result = userService.addImage(user, image);
+//        System.out.println("First,Size of Array image is...");
+//        System.out.println(user.getImages().size());
+//        System.out.println(image.getFileName());
+//        assertEquals(user.getImages().size(), 0);
+//        System.out.println("------------------------");
+//        System.out.println("Last,Size of Array image is...");
+//        System.out.println(result.getImages().size());
+////        System.out.println(result.getImages().);
+//        assertEquals(result.getImages().size(), 1);
+//        assertNotNull(result.getImages());
+//    }
 
-    @Test
-    public void testRemoveImage() throws IOException {
-        UserServiceImpl userService = mock(UserServiceImpl.class);
-        User user = new User(10l, "King Rexar", "0915486763", "user25@gmail.com", "123456", "Technical Manager", ImageUtil.getImage("pic/angular.png"));
-        long id = 0l;
-        {
-            User returnMock = new User(10l, "King Rexar", "0915486763", "user25@gmail.com", "123456", "Technical Manager");
-            when(userService.removeImage(user, id)).thenReturn(returnMock);
-        }
-        User result = userService.removeImage(user, id);
-        System.out.println("First,Size of Array image is...");
-        System.out.println(user.getImages().size());
-        assertEquals(user.getImages().size(), 1);
-        System.out.println("------------------------");
-        System.out.println("Last,Size of Array image is...");
-        System.out.println(result.getImages().size());
-        assertEquals(result.getImages().size(), 0);
-    }
+//    @Test
+//    public void testRemoveImage() throws IOException {
+//        UserServiceImpl userService = mock(UserServiceImpl.class);
+//        User user = new User(10l, "King Rexar", "0915486763", "user25@gmail.com", "123456", "Technical Manager", ImageUtil.getImage("pic/angular.png"));
+//        long id = 0l;
+//        {
+//            User returnMock = new User(10l, "King Rexar", "0915486763", "user25@gmail.com", "123456", "Technical Manager");
+//            when(userService.removeImage(user, id)).thenReturn(returnMock);
+//        }
+//        User result = userService.removeImage(user, id);
+//        System.out.println("First,Size of Array image is...");
+//        System.out.println(user.getImages().size());
+//        assertEquals(user.getImages().size(), 1);
+//        System.out.println("------------------------");
+//        System.out.println("Last,Size of Array image is...");
+//        System.out.println(result.getImages().size());
+//        assertEquals(result.getImages().size(), 0);
+//    }
 
     @Test
     public void testCheckIn() throws IOException, ParseException {
+        UserServiceImpl userService = mock(UserServiceImpl.class);
+        {
+            Checkin checkinHistory = new Checkin(11l, "Building AAA", "Tuesday", 2016, 10, 10, "08.30", "Clock in");
+            User user = new User(10l, "chanakan sitthinon", "0877261275", "paitestClockin@gmail.com", "pai123", "Finance", checkinHistory);
+
+            Checkin newCheckin = new Checkin("Building AAA");
+            int year = 2016;
+            int month = 10;
+            int date = 10;
+            String time = "16.00";
+            if (checkinHistory.getYear() == year) {
+                if (checkinHistory.getMonth() == month) {
+                    if (checkinHistory.getDate() == date) {
+                        if (checkinHistory.getType().equals("Clock in")) {
+                            newCheckin.setType("Clock out");
+                            user.getCheckins().add(newCheckin);
+                            when(userService.Checkin(user, newCheckin)).thenReturn("Clock out");
+                            String result = userService.Checkin(user,newCheckin);
+                            Set<Checkin> test = user.getCheckins();
+                            System.out.println(user);
+                            System.out.println(test);
+                            System.out.println(result);
+                            assertEquals("Clock out",result);
+                            System.out.println("-----------------");
+                        }
+                    }
+                }
+            }
+        }
+
+        {
+            Checkin checkinHistory = new Checkin(11l, "Building AAA", "Tuesday", 2016, 10, 9, "08.30", "Clock out");
+            User user = new User(12l, "chanakan sitthinon", "0877261275", "paitestClockin@gmail.com", "pai123", "Finance", checkinHistory);
+
+            Checkin newCheckin = new Checkin("Building AAA");
+            int year = 2016;
+            int month = 10;
+            int date = 10;
+            String time = "16.00";
+            if (checkinHistory.getYear() == year) {
+                if (checkinHistory.getMonth() == month) {
+                    if (checkinHistory.getDate() == date) {
+                        if (checkinHistory.getType().equals("Clock in")) {
+                        }
+                    }
+                }
+            }
+            newCheckin.setType("Clock in");
+            user.getCheckins().add(newCheckin);
+            when(userService.Checkin(user, newCheckin)).thenReturn("Clock in");
+            String result = userService.Checkin(user,newCheckin);
+            Set<Checkin> test = user.getCheckins();
+            System.out.println(user);
+            System.out.println(test);
+            System.out.println(result);
+            assertEquals("Clock in",result);
+        }
+
+        {
+            Checkin checkinHistory = new Checkin(11l, "Building AAA", "Tuesday", 2016, 10, 10, "08.30", "Clock out");
+            User user = new User(12l, "chanakan sitthinon", "0877261275", "paitestClockin@gmail.com", "pai123", "Finance", checkinHistory);
+
+            Checkin newCheckin = new Checkin("Building AAA");
+            int year = 2016;
+            int month = 10;
+            int date = 10;
+            String time = "16.00";
+            if (checkinHistory.getYear() == year) {
+                if (checkinHistory.getMonth() == month) {
+                    if (checkinHistory.getDate() == date) {
+                        if (checkinHistory.getType().equals("Clock in")) {
+                        }else if(checkinHistory.getType().equals("Clock out")){
+                            when(userService.Checkin(user, newCheckin)).thenReturn("Failed");
+                            String result = userService.Checkin(user,newCheckin);
+                            Set<Checkin> test = user.getCheckins();
+                            System.out.println(user);
+                            System.out.println(test);
+                            System.out.println(result);
+                            assertEquals("Failed",result);
+                        }
+                    }
+                }
+            }
+        }
     }
 
     @Test
@@ -140,6 +223,27 @@ public class Lab11ApplicationTests {
         List<User> user = userService.findAll();
         assertNotNull(user);
         System.out.println(user);
+    }
+
+    @Test
+    public void testSearch() throws IOException{
+        UserServiceImpl userService = mock(UserServiceImpl.class);
+        {
+            User[] returnMock = {
+                    new User(1l, "Narutchai Pipatwasukun", "0946553200", "admin@gmail.com", "123456", "Human Resource", ImageUtil.getImage("pic/apocalypse.png")),
+                    new User(2l, "HelloWorld CallOpop", "0875404521", "user@gmail.com", "123456", "Senior Advisor", ImageUtil.getImage("pic/angular.png")),
+                    new User(4l, "Justice League", "0826483155", "user3@gmail.com", "123456", "Research and Development Manager", ImageUtil.getImage("pic/protractor.png")),
+                    new User(5l, "Beast Warfax", "0945358754", "user4@gmail.com", "123456", "Technical Manager", ImageUtil.getImage("pic/browsersync.png")),
+                    new User(6l, "Tim Wrexham", "0904123345", "user5@gmail.com", "123456", "Assurance Manager", ImageUtil.getImage("pic/gulp.png")),
+                    new User(7l, "Muchearano Altony", "0834568582", "user6@gmail.com", "123456", "Manufacturing Manager", ImageUtil.getImage("pic/jasmine.png")),
+                    new User(8l, "Winterwolf Allstar", "0865664858", "user7@gmail.com", "123456", "Assurance Manager", ImageUtil.getImage("pic/node-sass.png")),
+                    new User(9l, "King Rexar", "0915486763", "user8@gmail.com", "123456", "Technical Manager", ImageUtil.getImage("pic/karma.png"))
+            };
+            when(userService.Search("i")).thenReturn(Arrays.asList(returnMock));
+            List<User> users = userService.Search("i");
+            assertNotNull(users);
+            System.out.println(users);
+        }
     }
 
 }
