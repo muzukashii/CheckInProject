@@ -1,7 +1,8 @@
 <ion-view view-title="History" ng-controller="employeeInfoController">
   <ion-content>
     <div class="list card">
-
+      <button ng-click="exportData()">Export</button>
+      <br/>
       <div class="item">
         <div class="circular" style="text-align: center;">
           <img src="../img/ionic.png"
@@ -9,10 +10,8 @@
           <h2>{{data.name}}</h2>
           <p>Position : {{data.department}}</p>
         </div>
-
       </div>
-
-      <div class="item item-divider"  ng-repeat="(key1,value1) in data.checkins | groupBy : 'year'">
+      <div id="exportable" class="item item-divider" ng-repeat="(key1,value1) in data.checkins | groupBy : 'year'">
         <div ng-repeat="(key2,value2) in data.checkins | groupBy : 'month'">
           <div ng-repeat="(key3,value3) in data.checkins | groupBy : 'date'">
             Date {{key1}} - {{key2}} - {{key3}}
@@ -22,10 +21,11 @@
                 <th>Location</th>
                 <th>Type</th>
               </tr>
-              <tr ng-repeat="checkin in data.checkins | limitTo:2" ng-if="checkin.year==key1&&checkin.month==key2&&checkin.date==key3">
+              <tr ng-repeat="checkin in data.checkins | limitTo:2"
+                  ng-if="checkin.year==key1&&checkin.month==key2&&checkin.date==key3">
                 <td data-th="Time">{{checkin.time}}</td>
                 <td data-th="Location">{{checkin.location}}</td>
-                <td data-th="Type">{{checkin.type}} </td>
+                <td data-th="Type">{{checkin.type}}</td>
               </tr>
             </table>
           </div>

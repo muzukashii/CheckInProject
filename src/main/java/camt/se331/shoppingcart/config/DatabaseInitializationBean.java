@@ -49,11 +49,11 @@ public class DatabaseInitializationBean implements InitializingBean {
         User admin = new User();
         admin.setId(1l);
         admin.setName("Narutchai Pipatwasukun");
-        admin.setUsername("admin@gmail.com");
+        admin.setUsername("adminBright@gmail.com");
         admin.setPassword("123456");
         admin.setTel("0946553200");
         admin.setDepartment("Human Resource");
-        admin.getImages().add(ImageUtil.getImage("pic/apocalypse.png"));
+        admin.getImages().add(ImageUtil.getImage("pic/login-icon-png-27.png"));
         Set<Role> roles = new HashSet<>();
         roles.add(adminRole);
         admin.setRoles(roles);
@@ -62,7 +62,7 @@ public class DatabaseInitializationBean implements InitializingBean {
 
 
         User[] standardUser = {
-                new User(2l, "HelloWorld CallOpop", "0875404521", "user@gmail.com", "123456", "Senior Advisor", ImageUtil.getImage("pic/angular.png")),
+                new User(2l, "Chanakan Sitthinon", "0875404521", "userPai@gmail.com", "123456", "Senior Advisor", ImageUtil.getImage("pic/b5cdab07.png")),
                 new User(3l, "Mustrean Guanggang", "0826483155", "user2@gmail.com", "123456", "Assurance Manager", ImageUtil.getImage("pic/bootstrap.png")),
                 new User(4l, "Justice League", "0826483155", "user3@gmail.com", "123456", "Research and Development Manager", ImageUtil.getImage("pic/protractor.png")),
                 new User(5l, "Beast Warfax", "0945358754", "user4@gmail.com", "123456", "Technical Manager", ImageUtil.getImage("pic/browsersync.png")),
