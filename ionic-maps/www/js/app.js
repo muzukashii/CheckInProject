@@ -1,6 +1,6 @@
 (function () {
   'use strict';
-  var API_PREFIX = 'http://localhost:8080';
+  var API_PREFIX = 'http://139.59.253.37:8080';
   angular.module('ngResource+apiPrefix', ['ngResource'])
   angular.module('starter.controllers', [])
   angular.module('starter.services', [])

@@ -6,7 +6,7 @@
     <groupId>camt.se331</groupId>
     <artifactId>lab11</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>pom</packaging>
+    <packaging>jar</packaging>
 
     <name>lab11</name>
     <description>The demo for spring boot</description>

@@ -28,7 +28,7 @@
         $timeout(function () {
           var UserId = $scope.userMenu.id;
           // set location
-          flowFiles.opts.target = 'http://localhost:8080/userImage/add';
+          flowFiles.opts.target = 'http://139.59.253.37:8080/userImage/add';
           flowFiles.opts.testChunks = false;
           flowFiles.opts.query = {UserId: UserId};
           flowFiles.upload();
@@ -376,29 +376,6 @@
     .controller('registerController', function ($ionicPlatform, $cordovaDevice, $timeout, $ionicLoading, DepartmentService, $scope, $rootScope, $window, UserControlService, $ionicPopup, $state, $ionicHistory, verifyEmailService) {
 
       $scope.verifyEmailResult = false;
-      try {
-        document.addEventListener("deviceready", function () {
-          $scope.user = {};
-          var device = $cordovaDevice.getDevice();
-          $scope.manufacturer = device.manufacturer;
-          $scope.model = device.model;
-          $scope.platform = device.platform;
-          $scope.uuid = device.uuid;
-
-          var cordova = $cordovaDevice.getCordova();
-
-          var model = $cordovaDevice.getModel();
-
-          var platform = $cordovaDevice.getPlatform();
-
-          var uuid = $cordovaDevice.getUUID();
-
-          var version = $cordovaDevice.getVersion();
-
-        }, false);
-      } catch (error) {
-        console.log(error)
-      }
 
       $scope.form = document.getElementById("registerform");
       $scope.pic = false;
@@ -433,7 +410,7 @@
           });
           if (flowFiles.files.length != 0) {
             $timeout(function () {
-              flowFiles.opts.target = 'http://localhost:8080/userimage/add';
+              flowFiles.opts.target = 'http://139.59.253.37:8080/userimage/add';
               flowFiles.opts.testChunks = false;
               flowFiles.opts.query = {UserId: UserId};
               flowFiles.upload();

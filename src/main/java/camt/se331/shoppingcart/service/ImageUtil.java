@@ -1,6 +1,7 @@
 package camt.se331.shoppingcart.service;
 
 import camt.se331.shoppingcart.entity.Image;
+import jdk.internal.util.xml.impl.Input;
 import org.imgscalr.Scalr;
 
 import javax.imageio.ImageIO;
@@ -24,6 +25,8 @@ public class ImageUtil {
     public static Image getImage(String resourcePath){
         Image image = new Image();
         ClassLoader classLoader = ImageUtil.getInstance().getClass().getClassLoader();
+        InputStream in = classLoader.getClass().getResourceAsStream(image.getContentType());
+        BufferedReader reader = new BufferedReader(new InputStreamReader(in));
 
         File file = new File(classLoader.getResource(resourcePath).getFile());
 
